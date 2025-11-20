@@ -21,6 +21,11 @@ Most vector databases compress data using Scalar Quantization (reducing precisio
 3.  **Vector Collisions:** When two distinct concepts map to the exact same coordinate in compressed space, a "collision" occurs. This lab visually flags these catastrophic failures.
 
 ---
+###Some Results 
+
+On a mixed natural-language corpus, NeuraLogix-Mini achieves stable compression in the regime grid ∈ [0.05, 0.10], k ∈ [6,10], with LSI ≈ 0.61 and cosine ≈ 0.61 at ~70% size reduction. Beyond grid ≥ 0.25, LSI collapses toward 0 across all k, indicating a hard stability boundary where lattice quantization overwhelms semantic structure.
+Running the identical grid/k sweep on an image corpus reveals the same ridge and boundary, but at higher absolute LSI (≈0.89) and semanticEfficiency (≈3,000), suggesting that vision embeddings admit more aggressive compression before topological failure while still sharing the same continuity–abstraction landscape.
+
 “For an image dataset of N items, NeuraLogix-Mini achieved ~73% compression with LSI≈0.89 and cosine≈0.89 at grid=0.05, k=10; beyond grid≥0.25, LSI collapses, establishing a clear stability boundary.”
 
 ## 🚀 Features
