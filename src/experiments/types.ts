@@ -53,7 +53,18 @@ export type MetricType =
   | 'collapseRatio'
   | 'clusterDrift'
   | 'densityChange'
-  | 'geodesicDistortion';
+  | 'geodesicDistortion'
+  // Phase 3: Topology metrics
+  | 'triangleDistortionScore'
+  | 'approxGeodesicDistortionTSNE'
+  | 'graphGeodesicDistortion'
+  | 'clusterEntropy'
+  | 'connectedComponents'
+  | 'cycleCount'
+  | 'boundarySharpness'
+  | 'densityVariance'
+  | 'geodesicStretch'
+  | 'stabilityConfidence';
 
 export interface ExperimentMetadata {
   experimentId: string;
@@ -155,5 +166,27 @@ export const VALIDATION_EXPERIMENTS: ExperimentConfig[] = [
     detectBoundaries: true,
     detectRidge: true,
     seed: 42, // For reproducibility
+  },
+  {
+    id: 'val-005-topology-analysis',
+    name: 'Topology Structure Analysis',
+    description: 'Analyzes topological structure preservation using graph geodesics and topology indicators',
+    embeddingModel: 'gemini',
+    datasetType: 'text',
+    sampleSize: 50,
+    compressionStrategy: 'lattice-hybrid',
+    gridRange: { min: 0.05, max: 0.4, steps: 10 },
+    kRange: { min: 5, max: 12, steps: 4 },
+    metrics: [
+      'lsi',
+      'graphGeodesicDistortion',
+      'clusterEntropy',
+      'connectedComponents',
+      'boundarySharpness',
+      'geodesicStretch',
+      'stabilityConfidence'
+    ],
+    detectBoundaries: true,
+    detectRidge: true,
   },
 ];
