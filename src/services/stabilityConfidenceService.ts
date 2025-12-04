@@ -1,8 +1,10 @@
 /**
  * Stability Confidence Service
  * 
- * Computes a confidence score indicating how reliable a stability region is.
- * The system can now say: "I'm 72% confident this region is real."
+ * Computes a heuristic stability estimate for a region in parameter space.
+ * 
+ * IMPORTANT: This is a heuristic estimate, NOT a statistically grounded confidence interval.
+ * The output should be interpreted as a structural quality indicator, not a probability.
  * 
  * Components:
  * - Ridge sharpness: How pronounced is the ridge?
@@ -15,7 +17,7 @@ import { SurfaceMetricPoint, EmbeddingMap } from '../types';
 import { DistortionMetrics } from './distortionService';
 
 export interface StabilityConfidence {
-  confidenceScore: number; // 0-1, where 1 = high confidence
+  stabilityHeuristic: number; // 0-1, heuristic estimate (NOT statistically grounded)
   ridgeSharpness: number; // 0-1, how pronounced is the ridge
   cliffSteepness: number; // 0-1, how steep is the collapse
   neighborContinuity: number; // 0-1, how smooth is the surface
@@ -48,8 +50,8 @@ export function computeStabilityConfidence(
   const neighborContinuity = computeNeighborContinuity(point, allMetrics);
   const metricConsistency = computeMetricConsistency(point, distortionMetrics);
   
-  // Overall confidence is weighted average
-  const confidenceScore = (
+  // Overall heuristic is weighted average
+  const stabilityHeuristic = (
     ridgeSharpness * CONFIDENCE_WEIGHTS.RIDGE_SHARPNESS +
     cliffSteepness * CONFIDENCE_WEIGHTS.CLIFF_STEEPNESS +
     neighborContinuity * CONFIDENCE_WEIGHTS.NEIGHBOR_CONTINUITY +
@@ -58,7 +60,7 @@ export function computeStabilityConfidence(
   
   // Generate human-readable explanation
   const details = generateConfidenceExplanation(
-    confidenceScore,
+    stabilityHeuristic,
     ridgeSharpness,
     cliffSteepness,
     neighborContinuity,
@@ -66,7 +68,7 @@ export function computeStabilityConfidence(
   );
   
   return {
-    confidenceScore,
+    stabilityHeuristic,
     ridgeSharpness,
     cliffSteepness,
     neighborContinuity,
@@ -217,16 +219,16 @@ function computeMetricConsistency(
 }
 
 /**
- * Generate human-readable confidence explanation
+ * Generate human-readable heuristic explanation
  */
 function generateConfidenceExplanation(
-  confidence: number,
+  heuristic: number,
   ridgeSharpness: number,
   cliffSteepness: number,
   neighborContinuity: number,
   metricConsistency: number
 ): string {
-  const percentage = Math.round(confidence * 100);
+  const percentage = Math.round(heuristic * 100);
   
   const factors: string[] = [];
   
@@ -256,12 +258,12 @@ function generateConfidenceExplanation(
   
   const factorStr = factors.length > 0 ? ` (${factors.join(', ')})` : '';
   
-  if (confidence >= 0.7) {
-    return `High confidence (${percentage}%)${factorStr} - this stability region appears reliable.`;
-  } else if (confidence >= 0.4) {
-    return `Moderate confidence (${percentage}%)${factorStr} - some uncertainty in stability assessment.`;
+  if (heuristic >= 0.7) {
+    return `Heuristic estimate: ${percentage}%${factorStr} - this stability region appears structurally sound.`;
+  } else if (heuristic >= 0.4) {
+    return `Heuristic estimate: ${percentage}%${factorStr} - moderate structural quality, some uncertainty.`;
   } else {
-    return `Low confidence (${percentage}%)${factorStr} - stability region may not be robust.`;
+    return `Heuristic estimate: ${percentage}%${factorStr} - structural quality questionable, may not be robust.`;
   }
 }
 

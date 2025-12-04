@@ -5,13 +5,13 @@
  */
 
 import React from 'react';
-import { TopologyIndicators, TopologySignature } from '../services/topologyService';
+import { TopologyIndicators, StructuralFingerprint } from '../services/topologyService';
 import { StabilityConfidence } from '../services/stabilityConfidenceService';
 import { ChartBarIcon } from './icons';
 
 interface TopologyMetricsPanelProps {
   indicators?: TopologyIndicators | null;
-  signature?: TopologySignature | null;
+  signature?: StructuralFingerprint | null;
   confidence?: StabilityConfidence | null;
   className?: string;
 }
@@ -46,19 +46,19 @@ const TopologyMetricsPanel: React.FC<TopologyMetricsPanelProps> = ({
       {/* Stability Confidence */}
       {confidence && (
         <div className="mb-4 p-4 bg-lab-dark-2 border border-lab-dark-3 rounded-lg">
-          <h4 className="text-sm font-semibold text-lab-light mb-3">Stability Confidence</h4>
+          <h4 className="text-sm font-semibold text-lab-light mb-3">Stability Heuristic</h4>
           
           <div className="mb-3">
             <div className="flex justify-between items-center mb-2">
-              <span className="text-sm text-gray-300">Overall Confidence</span>
+              <span className="text-sm text-gray-300">Heuristic Estimate</span>
               <span className="text-2xl font-bold text-lab-accent">
-                {Math.round(confidence.confidenceScore * 100)}%
+                {Math.round(confidence.stabilityHeuristic * 100)}%
               </span>
             </div>
             <div className="bg-lab-dark-3 rounded-full h-3 overflow-hidden">
               <div
                 className="h-full bg-gradient-to-r from-red-500 via-yellow-500 to-green-500"
-                style={{ width: `${confidence.confidenceScore * 100}%` }}
+                style={{ width: `${confidence.stabilityHeuristic * 100}%` }}
               />
             </div>
           </div>
@@ -152,10 +152,10 @@ const TopologyMetricsPanel: React.FC<TopologyMetricsPanelProps> = ({
         </div>
       )}
 
-      {/* Topology Signature */}
+      {/* Structural Fingerprint */}
       {signature && (
         <div>
-          <h4 className="text-sm font-semibold text-lab-light mb-3">Topology Signature</h4>
+          <h4 className="text-sm font-semibold text-lab-light mb-3">Structural Fingerprint</h4>
           <div className="grid grid-cols-1 gap-2">
             <div className="bg-lab-dark-2 p-2 rounded-md border border-lab-dark-3 flex justify-between items-center">
               <span className="text-xs text-gray-300">Ridge Sharpness</span>
@@ -165,9 +165,9 @@ const TopologyMetricsPanel: React.FC<TopologyMetricsPanelProps> = ({
             </div>
 
             <div className="bg-lab-dark-2 p-2 rounded-md border border-lab-dark-3 flex justify-between items-center">
-              <span className="text-xs text-gray-300">Geodesic Stretch</span>
+              <span className="text-xs text-gray-300">Graph Path Stretch</span>
               <span className="text-sm font-semibold text-purple-400">
-                {signature.geodesicStretch.toFixed(3)}
+                {signature.graphPathStretch.toFixed(3)}
               </span>
             </div>
 
