@@ -34,6 +34,7 @@ Running the identical grid/k sweep on an image corpus reveals the same ridge and
 
 ## 🚀 Features
 
+### Phase 1: Core Compression & Visualization
 *   **Multi-Modal Analysis:** Embed **Text** (with noise injection) or **Images** (via Vision models).
 *   **Dual AI Engine:**
     *   ☁️ **Google Gemini:** High-speed, high-quality embeddings via the Cloud.
@@ -41,6 +42,33 @@ Running the identical grid/k sweep on an image corpus reveals the same ridge and
 *   **3D Topology Surface:** A dynamic 3D plot visualizing the trade-off between Continuity (Grid Step) and Abstraction (K-Means Clusters).
 *   **Collision Detection:** Automatically detects and lists items that have lost their distinctiveness.
 *   **Mobile Lab:** Fully responsive design allowing you to control the experiment from a phone while running the compute on a laptop.
+
+### Phase 2: Semantic Stability Engine 🆕
+*   **Baseline Compression Comparison:** 
+    *   Scalar Quantization (4-bit, 8-bit)
+    *   Product Quantization (PQ) with configurable subvectors
+    *   Side-by-side performance comparison with lattice-based methods
+*   **Advanced Distortion Analytics:**
+    *   Pairwise distance distortion measurement
+    *   k-NN neighborhood overlap preservation
+    *   Collapse ratio tracking (points beyond tolerance)
+    *   Cluster drift scoring
+    *   Local density change detection
+    *   Geodesic distortion proxy
+*   **Stability Boundary Detection:**
+    *   Automatic ridge line detection (local maxima in parameter space)
+    *   Collapse cliff identification (where LSI → 0)
+    *   Three-zone classification: Stable / Degradation / Collapse
+    *   Visual heatmap with overlay annotations
+*   **Validation Experiment Pipeline:**
+    *   Pre-configured validation experiments
+    *   Batch parameter sweep execution
+    *   JSON/CSV export for reproducibility
+    *   Metadata tracking and result persistence
+*   **Scientific Export Tools:**
+    *   Replayable experiment configurations
+    *   Structured data export (JSON, CSV)
+    *   Complete metadata preservation
 
 ---
 
@@ -177,6 +205,109 @@ Check your terminal for the Network URL (e.g., `http://192.168.1.5:5173`)
 
 ---
 
+## 🎯 How to Use Phase 2 Features
+
+### Running Validation Experiments
+
+1. **Generate embeddings** for your dataset (Text or Image)
+2. Scroll to the **"Validation Experiments"** panel
+3. Select one of the pre-configured experiments:
+   - **Stability Region Existence**: Tests for stable compression zones
+   - **Aggressive Grid Forcing Failure**: Demonstrates collapse under extreme settings
+   - **Modality Comparison**: Compares text vs. vision embedding behavior
+4. Click **"Run Experiment"** to execute the batch sweep
+5. Export results as **JSON** or **CSV** for external analysis
+
+### Comparing Compression Methods
+
+1. After generating embeddings, navigate to **"Compression Method Comparison"**
+2. Select compression methods to compare (mix of NeuraLogix lattice methods and baselines)
+3. Click **"Run Comparison"** to execute all methods
+4. Review the comparison table showing LSI, cosine similarity, kNN overlap, and collapse ratio
+5. The best-performing method is automatically highlighted
+
+### Analyzing Distortion Metrics
+
+The **Distortion Metrics Panel** automatically computes six complementary metrics whenever you compress embeddings:
+
+- **Lower is better**: Pairwise Distortion, Collapse Ratio, Cluster Drift, Density Change, Geodesic Distortion
+- **Higher is better**: Neighborhood Overlap (aim for >90%)
+
+Use these metrics to understand **where** and **how** compression fails, not just that it fails.
+
+### Stability Zone Visualization
+
+After running the **"Continuity-Abstraction Surface"** sweep:
+
+1. The **Stability Heatmap** automatically appears
+2. Three zones are color-coded:
+   - 🟢 **Green (Stable)**: LSI ≥ 0.5 - Safe compression range
+   - 🟠 **Orange (Degradation)**: 0.2 ≤ LSI < 0.5 - Quality loss acceptable for some use cases
+   - 🔴 **Red (Collapse)**: LSI < 0.2 - Semantic structure destroyed
+3. The **blue ridge line** shows optimal parameters across grid steps
+4. **Red ✕** markers indicate the collapse cliff where all configurations fail
+
+### Ridge Line Overlay on 3D Surface
+
+The LSI surface plot now includes an **automatic ridge line overlay** (blue line):
+
+- Ridge points are **local maxima** of LSI for each grid step
+- Follow the ridge to find the efficiency frontier
+- Peaks indicate parameter combinations with best quality/compression tradeoff
+
+---
+
+## 🔬 Phase 2: Scientific Methodology
+
+Phase 2 transforms NeuraLogix from a visualization tool into a rigorous scientific experimentation platform. The focus is on **measurable structure deformation** and **boundary detection**.
+
+### Distortion Metrics
+
+NeuraLogix Phase 2 implements six complementary distortion metrics to capture different aspects of semantic collapse:
+
+1. **Pairwise Distance Distortion**: Measures average relative change in distances between all point pairs. Lower values indicate better distance preservation.
+
+2. **Neighborhood Overlap**: Computes Jaccard similarity of k-nearest neighbors before and after compression. Values close to 1.0 indicate strong topological preservation.
+
+3. **Collapse Ratio**: Fraction of points that moved beyond tolerance threshold (ε). Detects catastrophic local failures even when global metrics look acceptable.
+
+4. **Cluster Drift Score**: Normalized displacement of the data centroid. Measures whether compression introduces systematic bias.
+
+5. **Local Density Change**: Tracks changes in average k-NN distances per point. Reveals whether compression artificially densifies or spreads the space.
+
+6. **Geodesic Distortion**: Uses triangle inequality violations as a proxy for geodesic path distortion. Critical for understanding manifold deformation.
+
+### Stability Boundary Detection
+
+The system automatically identifies three regions in parameter space:
+
+- **Stable Zone** (LSI ≥ 0.5): Compression preserves semantic structure with minimal distortion
+- **Degradation Zone** (0.2 ≤ LSI < 0.5): Noticeable quality loss but usable compression
+- **Collapse Zone** (LSI < 0.2): Semantic structure has collapsed; compression unusable
+
+The **ridge line** represents local maxima of LSI across grid steps—the efficiency frontier where compression achieves optimal quality/size tradeoff.
+
+### Validation Experiments
+
+Three pre-configured validation experiments verify the scientific rigor of the platform:
+
+1. **Stability Region Existence**: Proves that a stable compression region exists in parameter space
+2. **Aggressive Grid Forcing Failure**: Demonstrates failure modes under extreme compression
+3. **Modality Comparison**: Shows different stability thresholds between text and vision embeddings
+
+All experiments are **deterministic** and **reproducible** with complete metadata tracking.
+
+### Compression Baseline Comparison
+
+Phase 2 includes standard compression baselines for scientific comparison:
+
+- **Scalar Quantization**: Reduces precision uniformly across all dimensions (4-bit, 8-bit)
+- **Product Quantization (PQ)**: Splits vectors into subvectors and quantizes each separately (8×256, 16×256)
+
+These baselines allow objective evaluation of whether lattice-based methods offer advantages in specific regimes.
+
+---
+
 ## 📊 Understanding the Charts
 
 ### 1. PCA Projection (Scatter Plot)
@@ -204,19 +335,23 @@ The master control for compression research.
 NUERALOGIX-MINI/
 ├── .github/
 │   └── workflows/
-│       └── deploy.yml          # GitHub Pages deployment
+│       └── deploy.yml              # GitHub Pages deployment
 ├── src/
-│   ├── components/             # React components
+│   ├── components/                 # React components
 │   │   ├── AnalysisPanel.tsx
-│   │   ├── ContinuityAbstractionSurface.tsx
+│   │   ├── ContinuityAbstractionSurface.tsx  # 3D surface with ridge overlay
 │   │   ├── EmbeddingChart.tsx
 │   │   ├── EmbeddingTable.tsx
 │   │   ├── ExperimentResults.tsx
 │   │   ├── ImageUploader.tsx
 │   │   ├── SettingsModal.tsx
 │   │   ├── WelcomeModal.tsx
+│   │   ├── DistortionMetricsPanel.tsx      # Phase 2: Distortion analytics UI
+│   │   ├── CompressionComparisonPanel.tsx  # Phase 2: Baseline comparison UI
+│   │   ├── StabilityHeatmapPanel.tsx       # Phase 2: Stability zones visualization
+│   │   ├── ExperimentRunnerPanel.tsx       # Phase 2: Validation experiments UI
 │   │   └── icons.tsx
-│   ├── services/               # Core business logic
+│   ├── services/                   # Core business logic
 │   │   ├── providers/
 │   │   │   ├── GoogleProvider.ts
 │   │   │   ├── OllamaProvider.ts
@@ -225,19 +360,31 @@ NUERALOGIX-MINI/
 │   │   ├── analysisService.ts
 │   │   ├── compressionService.ts
 │   │   ├── embeddingService.ts
-│   │   └── mathService.ts
-│   ├── App.tsx                 # Main application component
-│   ├── constants.ts            # App-wide constants
-│   ├── index.css               # Global styles
-│   ├── index.tsx               # Application entry point
-│   └── types.ts                # TypeScript type definitions
-├── .env.example                # Environment variables template
-├── .gitignore                  # Git ignore rules
-├── index.html                  # HTML template
-├── package.json                # npm dependencies and scripts
-├── tsconfig.json               # TypeScript configuration
-├── vite.config.ts              # Vite build configuration
-└── README.md                   # This file
+│   │   ├── mathService.ts
+│   │   ├── baselineCompressionService.ts   # Phase 2: Scalar/PQ baselines
+│   │   ├── distortionService.ts            # Phase 2: Six distortion metrics
+│   │   └── stabilityBoundaryService.ts     # Phase 2: Ridge/boundary detection
+│   ├── experiments/                # Phase 2: Experiment pipeline
+│   │   ├── types.ts                # Experiment configuration types
+│   │   └── experimentRunner.ts     # Batch sweep execution & export
+│   ├── data/                       # Phase 2: Persistent storage
+│   │   ├── runs/                   # Experiment run data
+│   │   ├── experiments/            # Experiment configurations
+│   │   └── results/                # Exported results
+│   ├── features/                   # Feature modules
+│   │   └── semanticMesh/           # Semantic mesh visualization
+│   ├── App.tsx                     # Main application component
+│   ├── constants.ts                # App-wide constants
+│   ├── index.css                   # Global styles
+│   ├── index.tsx                   # Application entry point
+│   └── types.ts                    # TypeScript type definitions
+├── .env.example                    # Environment variables template
+├── .gitignore                      # Git ignore rules
+├── index.html                      # HTML template
+├── package.json                    # npm dependencies and scripts
+├── tsconfig.json                   # TypeScript configuration
+├── vite.config.ts                  # Vite build configuration
+└── README.md                       # This file
 ```
 
 ---
