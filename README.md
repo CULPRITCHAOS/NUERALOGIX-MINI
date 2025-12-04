@@ -21,12 +21,6 @@ Most vector databases compress data using Scalar Quantization (reducing precisio
 3.  **Vector Collisions:** When two distinct concepts map to the exact same coordinate in compressed space, a "collision" occurs. This lab visually flags these catastrophic failures.
 
 ---
-###Some Results 
-
-On a mixed natural-language corpus, NeuraLogix-Mini achieves stable compression in the regime grid ∈ [0.05, 0.10], k ∈ [6,10], with LSI ≈ 0.61 and cosine ≈ 0.61 at ~70% size reduction. Beyond grid ≥ 0.25, LSI collapses toward 0 across all k, indicating a hard stability boundary where lattice quantization overwhelms semantic structure.
-Running the identical grid/k sweep on an image corpus reveals the same ridge and boundary, but at higher absolute LSI (≈0.89) and semanticEfficiency (≈3,000), suggesting that vision embeddings admit more aggressive compression before topological failure while still sharing the same continuity–abstraction landscape.
-
-“For an image dataset of N items, NeuraLogix-Mini achieved ~73% compression with LSI≈0.89 and cosine≈0.89 at grid=0.05, k=10; beyond grid≥0.25, LSI collapses, establishing a clear stability boundary.”
 
 ## 🚀 Features
 
@@ -52,79 +46,90 @@ Running the identical grid/k sweep on an image corpus reveals the same ridge and
 git clone https://github.com/your-username/neuralogix-mini-lab.git
 cd neuralogix-mini-lab
 npm install
+```
 
-Environment Configuration
-Create a .env file in the root directory:
-code
-Env
+### 2. Environment Configuration
+Create a `.env` file in the root directory:
+```env
 # Required for Google Provider
 API_KEY=your_google_gemini_api_key_here
-3. Run Development Server
-code
-Bash
+```
+
+### 3. Run Development Server
+```bash
 npm run dev
-Open http://localhost:5173 in your browser.
-🏠 Using Local AI (Ollama)
+```
+Open `http://localhost:5173` in your browser.
+
+---
+
+## 🏠 Using Local AI (Ollama)
+
 You can run this lab entirely offline using Ollama.
-Install Ollama from ollama.com.
-Pull Models:
-code
-Bash
-ollama pull nomic-embed-text  # For Text Embeddings
-ollama pull llava             # For Vision/Image Description
-Enable CORS:
-By default, browser security blocks websites from talking to local servers. You must run Ollama with CORS enabled.
-Mac/Linux:
-code
-Bash
-OLLAMA_ORIGINS="*" ollama serve
-Windows (PowerShell):
-code
-Powershell
-$env:OLLAMA_ORIGINS="*"; ollama serve
-Connect in App:
-Open the Lab settings (Gear Icon), select Ollama, and click "Test Connection".
 
-Connect in App:
-Open the Lab settings (Gear Icon), select Ollama, and click "Test Connection".
-📱 Mobile / LAN Access
+1.  **Install Ollama** from [ollama.com](https://ollama.com).
+2.  **Pull Models:**
+    ```bash
+    ollama pull nomic-embed-text  # For Text Embeddings
+    ollama pull llava             # For Vision/Image Description
+    ```
+3.  **Enable CORS:**
+    By default, browser security blocks websites from talking to local servers. You must run Ollama with CORS enabled.
+    
+    *Mac/Linux:*
+    ```bash
+    OLLAMA_ORIGINS="*" ollama serve
+    ```
+    
+    *Windows (PowerShell):*
+    ```powershell
+    $env:OLLAMA_ORIGINS="*"; ollama serve
+    ```
+4.  **Connect in App:**
+    Open the Lab settings (Gear Icon), select **Ollama**, and click "Test Connection".
+
+---
+
+## 📱 Mobile / LAN Access
+
 To access the lab from your phone (on the same Wi-Fi):
-Run with Host flag:
-code
-Bash
-npm run dev -- --host
-Check Terminal: Note the Network URL (e.g., http://192.168.1.5:5173).
-Phone Setup:
-Open that URL on your phone.
-If using Ollama, go to Settings.
-Change Base URL from localhost to your computer's IP (e.g., http://192.168.1.5:11434).
 
-📊 Understanding the Charts
-1. PCA Projection (Scatter Plot)
+1.  **Run with Host flag:**
+    ```bash
+    npm run dev -- --host
+    ```
+2.  **Check Terminal:** Note the Network URL (e.g., `http://192.168.1.5:5173`).
+3.  **Phone Setup:**
+    *   Open that URL on your phone.
+    *   If using Ollama, go to Settings.
+    *   Change Base URL from `localhost` to your computer's IP (e.g., `http://192.168.1.5:11434`).
+
+---
+
+## 📊 Understanding the Charts
+
+### 1. PCA Projection (Scatter Plot)
 A 2D simplification of the 768-dimensional space.
-Dots: Data points (Concepts).
-Colors: In the compressed view, dots snap to a grid.
-Goal: Keep the "shape" of the cluster similar between Original and Compressed.
-2. Continuity-Abstraction Surface (3D Map)
+*   **Dots:** Data points (Concepts).
+*   **Colors:** In the compressed view, dots snap to a grid.
+*   **Goal:** Keep the "shape" of the cluster similar between Original and Compressed.
+
+### 2. Continuity-Abstraction Surface (3D Map)
 This is the master control for the research.
-X-Axis (Grid Step): How coarse the lattice is.
-Y-Axis (K-Value): How aggressively we group concepts.
-Z-Axis (Height): The LSI score.
-Ridge Line: The green peaks represent the most efficient compression settings.
-🤝 Contributing
+*   **X-Axis (Grid Step):** How coarse the lattice is.
+*   **Y-Axis (K-Value):** How aggressively we group concepts.
+*   **Z-Axis (Height):** The **LSI** score.
+*   **Ridge Line:** The green peaks represent the most efficient compression settings.
+
+---
+
+## 🤝 Contributing
+
 This is a research project. We welcome contributions regarding:
-New mathematical metrics for semantic fidelity.
-Support for additional Vector Stores (Pinecone, Milvus).
-Visualization improvements.
+*   New mathematical metrics for semantic fidelity.
+*   Support for additional Vector Stores (Pinecone, Milvus).
+*   Visualization improvements.
 
-MIT License
+## 📄 License
 
-Copyright (c) 2025 Robert Culp (CULPRITCHAOS)
-
-Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
-
-The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-
-Commercial use beyond prototyping or research requires explicit written permission from the author.
-
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND...
+MIT License.

@@ -1,0 +1,5 @@
+{
+  "name": "NeuraLogix Mini Lab",
+  "description": "Interactive research sandbox for visualizing Semantic Compression, Vector Collisions, and Lattice Stability in AI embeddings.",
+  "requestFramePermissions": []
+}
