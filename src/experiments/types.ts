@@ -141,4 +141,19 @@ export const VALIDATION_EXPERIMENTS: ExperimentConfig[] = [
     detectBoundaries: true,
     detectRidge: true,
   },
+  {
+    id: 'val-004-noise-sensitivity',
+    name: 'Noise Sensitivity Test',
+    description: 'Injects noise into embeddings and verifies ridge stability, threshold drift, and metric monotonicity',
+    embeddingModel: 'gemini',
+    datasetType: 'text',
+    sampleSize: 40,
+    compressionStrategy: 'lattice-hybrid',
+    gridRange: { min: 0.05, max: 0.3, steps: 8 },
+    kRange: { min: 5, max: 12, steps: 4 },
+    metrics: ['lsi', 'neighborhoodOverlap', 'pairwiseDistortion', 'collapseRatio'],
+    detectBoundaries: true,
+    detectRidge: true,
+    seed: 42, // For reproducibility
+  },
 ];

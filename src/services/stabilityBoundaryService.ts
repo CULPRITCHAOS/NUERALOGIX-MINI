@@ -29,13 +29,16 @@ export interface StabilityBoundary {
 
 /**
  * Detect ridge line (local maxima) in the parameter space
- * Uses a simple gradient-based approach
+ * Uses a simple gradient-based approach with dynamic threshold classification
  */
 export function detectRidgeLine(
   metrics: SurfaceMetricPoint[],
   metricName: 'lsi' | 'semanticEfficiency' = 'lsi'
 ): RidgePoint[] {
   if (metrics.length === 0) return [];
+  
+  // Compute dynamic thresholds for the dataset
+  const thresholds = computeDynamicThresholds(metrics);
   
   // Group metrics by grid step
   const byGrid = new Map<number, SurfaceMetricPoint[]>();
@@ -60,7 +63,7 @@ export function detectRidgeLine(
       k: maxPoint.k,
       lsi: maxPoint.lsi,
       semanticEfficiency: maxPoint.semanticEfficiency,
-      zone: classifyStabilityZone(maxPoint)
+      zone: classifyStabilityZone(maxPoint, thresholds)
     });
   });
   
@@ -104,16 +107,92 @@ export function detectCollapseCliff(
 }
 
 /**
- * Classify a point into stability zone
+ * Compute dynamic thresholds using inflection point analysis and standard deviation clustering
  * 
- * Thresholds based on empirical observations:
- * - LSI >= 0.5: Stable zone (good preservation of semantic structure)
- * - 0.2 <= LSI < 0.5: Degradation zone (noticeable quality loss)
- * - LSI < 0.2: Collapse zone (semantic structure destroyed)
+ * Instead of using constant thresholds, this function analyzes the LSI distribution to find
+ * natural breakpoints based on:
+ * 1. Inflection points in the sorted LSI curve
+ * 2. Standard deviation clustering to identify distinct performance tiers
+ * 
+ * Returns thresholds for stable/degradation/collapse classification
  */
-export function classifyStabilityZone(point: SurfaceMetricPoint): StabilityZone {
-  const STABLE_LSI_THRESHOLD = 0.5;
-  const DEGRADATION_LSI_THRESHOLD = 0.2;
+export function computeDynamicThresholds(metrics: SurfaceMetricPoint[]): {
+  stableThreshold: number;
+  degradationThreshold: number;
+} {
+  if (metrics.length === 0) {
+    // Fallback to empirical defaults
+    return { stableThreshold: 0.5, degradationThreshold: 0.2 };
+  }
+  
+  // Extract LSI values and sort
+  const lsiValues = metrics.map(m => m.lsi).sort((a, b) => a - b);
+  const n = lsiValues.length;
+  
+  if (n < 3) {
+    return { stableThreshold: 0.5, degradationThreshold: 0.2 };
+  }
+  
+  // Compute mean and standard deviation
+  const mean = lsiValues.reduce((sum, val) => sum + val, 0) / n;
+  const variance = lsiValues.reduce((sum, val) => sum + Math.pow(val - mean, 2), 0) / n;
+  const stdDev = Math.sqrt(variance);
+  
+  // Find inflection points using second derivative approximation
+  const inflectionPoints: number[] = [];
+  for (let i = 1; i < n - 1; i++) {
+    const leftSlope = lsiValues[i] - lsiValues[i - 1];
+    const rightSlope = lsiValues[i + 1] - lsiValues[i];
+    const curvature = rightSlope - leftSlope;
+    
+    // Significant change in slope indicates inflection
+    if (Math.abs(curvature) > stdDev * 0.1) {
+      inflectionPoints.push(lsiValues[i]);
+    }
+  }
+  
+  // Standard deviation clustering: identify natural tiers
+  // Stable region: mean + stdDev to max
+  // Degradation region: mean - stdDev to mean + stdDev
+  // Collapse region: min to mean - stdDev
+  
+  let stableThreshold = Math.max(0.3, mean + stdDev * 0.5);
+  let degradationThreshold = Math.max(0.1, mean - stdDev * 0.5);
+  
+  // Refine using inflection points if available
+  if (inflectionPoints.length >= 2) {
+    // Sort inflection points
+    inflectionPoints.sort((a, b) => a - b);
+    
+    // Use upper inflection as stable threshold
+    stableThreshold = inflectionPoints[inflectionPoints.length - 1];
+    
+    // Use middle or lower inflection as degradation threshold
+    const midIdx = Math.floor(inflectionPoints.length / 2);
+    degradationThreshold = inflectionPoints[midIdx];
+  }
+  
+  // Ensure thresholds are sensible
+  stableThreshold = Math.min(0.9, Math.max(0.3, stableThreshold));
+  degradationThreshold = Math.min(stableThreshold - 0.1, Math.max(0.05, degradationThreshold));
+  
+  return { stableThreshold, degradationThreshold };
+}
+
+/**
+ * Classify a point into stability zone using dynamic thresholds
+ * 
+ * This function now uses dynamic thresholds computed from the entire dataset
+ * rather than hardcoded constants. Call computeDynamicThresholds first to get
+ * appropriate thresholds for your data.
+ */
+export function classifyStabilityZone(
+  point: SurfaceMetricPoint,
+  thresholds?: { stableThreshold: number; degradationThreshold: number }
+): StabilityZone {
+  // Use provided thresholds or fall back to empirical defaults
+  const STABLE_LSI_THRESHOLD = thresholds?.stableThreshold ?? 0.5;
+  const DEGRADATION_LSI_THRESHOLD = thresholds?.degradationThreshold ?? 0.2;
   
   if (point.lsi >= STABLE_LSI_THRESHOLD) {
     return 'stable';
@@ -125,7 +204,7 @@ export function classifyStabilityZone(point: SurfaceMetricPoint): StabilityZone 
 }
 
 /**
- * Compute full stability boundary analysis
+ * Compute full stability boundary analysis with dynamic thresholds
  */
 export function computeStabilityBoundary(
   metrics: SurfaceMetricPoint[]
@@ -148,7 +227,7 @@ export function computeStabilityBoundary(
 }
 
 /**
- * Detect local maxima in 2D surface
+ * Detect local maxima in 2D surface with dynamic threshold classification
  * A point is a local maximum if it's greater than all 8 neighbors
  */
 export function detectLocalMaxima(
@@ -156,6 +235,9 @@ export function detectLocalMaxima(
   metricName: 'lsi' | 'semanticEfficiency' = 'lsi'
 ): RidgePoint[] {
   if (metrics.length === 0) return [];
+  
+  // Compute dynamic thresholds for the dataset
+  const thresholds = computeDynamicThresholds(metrics);
   
   // Create a grid lookup
   const grid = new Map<string, SurfaceMetricPoint>();
@@ -207,7 +289,7 @@ export function detectLocalMaxima(
           k: point.k,
           lsi: point.lsi,
           semanticEfficiency: point.semanticEfficiency,
-          zone: classifyStabilityZone(point)
+          zone: classifyStabilityZone(point, thresholds)
         });
       }
     });
@@ -217,13 +299,16 @@ export function detectLocalMaxima(
 }
 
 /**
- * Compute efficiency frontier
+ * Compute efficiency frontier with dynamic threshold classification
  * Returns points that are Pareto-optimal in terms of compression vs quality
  */
 export function computeEfficiencyFrontier(
   metrics: SurfaceMetricPoint[]
 ): RidgePoint[] {
   if (metrics.length === 0) return [];
+  
+  // Compute dynamic thresholds for the dataset
+  const thresholds = computeDynamicThresholds(metrics);
   
   // Sort by grid step (higher grid = more compression)
   const sorted = [...metrics].sort((a, b) => b.grid - a.grid);
@@ -240,7 +325,7 @@ export function computeEfficiencyFrontier(
         k: point.k,
         lsi: point.lsi,
         semanticEfficiency: point.semanticEfficiency,
-        zone: classifyStabilityZone(point)
+        zone: classifyStabilityZone(point, thresholds)
       });
     }
   });
