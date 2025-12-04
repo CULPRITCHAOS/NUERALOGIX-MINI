@@ -39,7 +39,7 @@ export function useSemanticMeshData(
       })
       .catch((err) => {
         console.error(err);
-        setError(err.message ?? 'Failed to load semantic mesh dataset');
+        setError(err.message ?? `Failed to load semantic mesh dataset '${datasetId}'`);
         setLoading(false);
       });
   }, [datasetId]);

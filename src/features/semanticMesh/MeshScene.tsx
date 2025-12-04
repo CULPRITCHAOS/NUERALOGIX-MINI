@@ -45,11 +45,14 @@ export const MeshScene: React.FC<MeshSceneProps> = ({
   // Edges (optional)
   const lineSegments = useMemo(() => {
     if (!mesh?.edges) return null;
-    const arr = new Float32Array(mesh.edges.length * 6);
-    mesh.edges.forEach(([a, b], i) => {
+    // Filter valid edges first
+    const validEdges = mesh.edges.filter(([a, b]) => points[a] && points[b]);
+    if (validEdges.length === 0) return null;
+    
+    const arr = new Float32Array(validEdges.length * 6);
+    validEdges.forEach(([a, b], i) => {
       const pa = points[a];
       const pb = points[b];
-      if (!pa || !pb) return; // Safety check
       arr[i * 6 + 0] = pa.x;
       arr[i * 6 + 1] = pa.y;
       arr[i * 6 + 2] = pa.z;

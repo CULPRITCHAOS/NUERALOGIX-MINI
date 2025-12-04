@@ -12,7 +12,7 @@ function normalize(value: number, min: number, max: number): number {
 
 /**
  * Convert a normalized value [0, 1] to an RGB color using a gradient
- * Uses a blue -> cyan -> green -> yellow -> red gradient (Viridis-like)
+ * Uses a blue -> green -> red gradient for clear distinction
  */
 function valueToRGB(t: number): [number, number, number] {
   // Clamp t to [0, 1]
