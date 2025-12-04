@@ -228,10 +228,14 @@ export function computeLocalDensityChange(
 /**
  * Compute geodesic distortion proxy
  * Uses triangle inequality violations as a proxy for geodesic distortion
+ * 
+ * Note: Full computation is O(n^3), so we sample a subset for efficiency.
+ * Sample size of 20 provides good coverage while maintaining reasonable performance.
  */
 export function computeGeodesicDistortion(
   original: EmbeddingMap,
-  compressed: EmbeddingMap
+  compressed: EmbeddingMap,
+  sampleSize: number = 20
 ): number {
   const items = Array.from(original.keys());
   const n = items.length;
@@ -241,9 +245,9 @@ export function computeGeodesicDistortion(
   let totalViolation = 0;
   let tripleCount = 0;
   
-  // Sample subset of triples for efficiency (full computation is O(n^3))
-  const sampleSize = Math.min(n, 20);
-  const sampledItems = items.slice(0, sampleSize);
+  // Sample subset of triples for efficiency
+  const maxSampleSize = Math.min(n, sampleSize);
+  const sampledItems = items.slice(0, maxSampleSize);
   
   for (let i = 0; i < sampledItems.length; i++) {
     for (let j = i + 1; j < sampledItems.length; j++) {

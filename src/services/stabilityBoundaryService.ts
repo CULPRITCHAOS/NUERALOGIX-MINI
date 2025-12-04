@@ -105,9 +105,13 @@ export function detectCollapseCliff(
 
 /**
  * Classify a point into stability zone
+ * 
+ * Thresholds based on empirical observations:
+ * - LSI >= 0.5: Stable zone (good preservation of semantic structure)
+ * - 0.2 <= LSI < 0.5: Degradation zone (noticeable quality loss)
+ * - LSI < 0.2: Collapse zone (semantic structure destroyed)
  */
 export function classifyStabilityZone(point: SurfaceMetricPoint): StabilityZone {
-  // Thresholds based on empirical observations
   const STABLE_LSI_THRESHOLD = 0.5;
   const DEGRADATION_LSI_THRESHOLD = 0.2;
   

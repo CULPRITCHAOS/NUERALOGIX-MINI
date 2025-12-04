@@ -111,10 +111,13 @@ export const productQuantization = (
 
 /**
  * K-means clustering for a subspace
+ * 
+ * @param maxIterations Maximum iterations for convergence (default: 20)
  */
 function kMeansSubspace(
   vectors: Embedding[],
-  k: number
+  k: number,
+  maxIterations: number = 20
 ): { centroids: Embedding[]; labels: number[] } {
   if (vectors.length <= k) {
     return {
@@ -130,9 +133,7 @@ function kMeansSubspace(
   let centroids = vectors.slice(0, k).map(v => [...v]);
   let labels = new Array(n).fill(0);
   
-  const MAX_ITERATIONS = 20;
-  
-  for (let iter = 0; iter < MAX_ITERATIONS; iter++) {
+  for (let iter = 0; iter < maxIterations; iter++) {
     // Assignment step
     let changed = false;
     vectors.forEach((vector, i) => {

@@ -6,7 +6,7 @@
 
 import React, { useState } from 'react';
 import { EmbeddingMap } from '../types';
-import { runExperiment, exportToCSV, saveExperimentResult } from '../experiments/experimentRunner';
+import { runExperiment, exportToCSV, serializeExperimentResult } from '../experiments/experimentRunner';
 import { VALIDATION_EXPERIMENTS, ExperimentConfig, ExperimentResult } from '../experiments/types';
 import { ProcessIcon, DownloadIcon } from './icons';
 
@@ -59,7 +59,7 @@ const ExperimentRunnerPanel: React.FC<ExperimentRunnerPanelProps> = ({
   const handleExportJSON = () => {
     if (!currentResult) return;
     
-    const json = saveExperimentResult(currentResult);
+    const json = serializeExperimentResult(currentResult);
     const blob = new Blob([json], { type: 'application/json' });
     const url = URL.createObjectURL(blob);
     const a = document.createElement('a');

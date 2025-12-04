@@ -244,14 +244,13 @@ function generateRangeInt(min: number, max: number, steps: number): number[] {
 }
 
 /**
- * Save experiment result to file
+ * Serialize experiment result to JSON string
+ * 
+ * Note: This function returns a JSON string representation.
+ * Actual file saving should be handled by the caller (browser download or Node.js fs).
  */
-export function saveExperimentResult(result: ExperimentResult): string {
-  const filename = `experiment-${result.metadata.experimentId}-${Date.now()}.json`;
-  const json = JSON.stringify(result, null, 2);
-  
-  // Return JSON string (actual file saving would be handled by the caller)
-  return json;
+export function serializeExperimentResult(result: ExperimentResult): string {
+  return JSON.stringify(result, null, 2);
 }
 
 /**

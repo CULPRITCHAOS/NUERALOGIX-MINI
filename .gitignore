@@ -22,6 +22,12 @@ dist-ssr
 *.tar.gz
 *.rar
 
+# Phase 2: Experiment data and results
+src/data/runs/*.json
+src/data/experiments/*.json
+src/data/results/*.json
+src/data/results/*.csv
+
 # Editor directories and files
 .vscode/*
 !.vscode/extensions.json

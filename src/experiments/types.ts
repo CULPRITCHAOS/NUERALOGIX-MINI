@@ -103,7 +103,7 @@ export const VALIDATION_EXPERIMENTS: ExperimentConfig[] = [
   {
     id: 'val-001-stability-region',
     name: 'Stability Region Existence',
-    description: 'Proves that a stable compression region exists in parameter space',
+    description: 'Tests for evidence that a stable compression region exists in parameter space',
     embeddingModel: 'gemini',
     datasetType: 'text',
     sampleSize: 50,
