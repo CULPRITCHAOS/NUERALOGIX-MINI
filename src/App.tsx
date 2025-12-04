@@ -4,6 +4,7 @@ import { SAMPLE_TEXTS, SAMPLE_IMAGES } from './constants';
 import { generateEmbeddings } from './services/embeddingService';
 import { compressEmbeddings } from './services/compressionService';
 import { analyzeSingleSet, analyzeCompression } from './services/analysisService';
+import { computeAllDistortionMetrics, DistortionMetrics } from './services/distortionService';
 import { ItemType, EmbeddingMap, CompressionOptions, SingleSetAnalysis, CompressionAnalysis, CompressionMethod, ExperimentPoint, SurfaceData, SurfaceMetricPoint } from './types';
 import EmbeddingTable from './components/EmbeddingTable';
 import AnalysisPanel from './components/AnalysisPanel';
@@ -13,6 +14,10 @@ import ContinuityAbstractionSurface from './components/ContinuityAbstractionSurf
 import ImageUploader from './components/ImageUploader';
 import SettingsModal from './components/SettingsModal';
 import WelcomeModal from './components/WelcomeModal';
+import DistortionMetricsPanel from './components/DistortionMetricsPanel';
+import CompressionComparisonPanel from './components/CompressionComparisonPanel';
+import StabilityHeatmapPanel from './components/StabilityHeatmapPanel';
+import ExperimentRunnerPanel from './components/ExperimentRunnerPanel';
 import { LabIcon, TextIcon, ProcessIcon, ApiIcon, ResetIcon, DownloadIcon, UploadIcon, ChartBarIcon, TargetIcon, GearIcon, HelpIcon, InfoIcon } from './components/icons';
 import { SemanticMeshPanel } from './features/semanticMesh/SemanticMeshPanel';
 
@@ -148,6 +153,7 @@ const App: React.FC = () => {
     const [originalAnalysis, setOriginalAnalysis] = useState<SingleSetAnalysis | null>(null);
     const [compressedAnalysis, setCompressedAnalysis] = useState<SingleSetAnalysis | null>(null);
     const [compressionAnalysis, setCompressionAnalysis] = useState<CompressionAnalysis | null>(null);
+    const [distortionMetrics, setDistortionMetrics] = useState<DistortionMetrics | null>(null);
     const [experimentResults, setExperimentResults] = useState<{ points: ExperimentPoint[], paramName: string } | null>(null);
     const [surfaceData, setSurfaceData] = useState<SurfaceData | null>(null);
 
@@ -236,11 +242,16 @@ const App: React.FC = () => {
             setOriginalAnalysis(analyzeSingleSet(embeddings));
             setCompressedAnalysis(analyzeSingleSet(compressed, true));
             setCompressionAnalysis(analyzeCompression(embeddings, compressed));
+            
+            // Compute distortion metrics
+            const distortion = computeAllDistortionMetrics(embeddings, compressed);
+            setDistortionMetrics(distortion);
         } else {
             setCompressedEmbeddings(new Map());
             setOriginalAnalysis(null);
             setCompressedAnalysis(null);
             setCompressionAnalysis(null);
+            setDistortionMetrics(null);
         }
     }, [embeddings, compressionOptions]);
     
@@ -633,8 +644,8 @@ const App: React.FC = () => {
                         </div>
 
                         <div>
-                            {activeSurfaceTab === 'lsi' && <ContinuityAbstractionSurface kValues={surfaceData.kValues} stepValues={surfaceData.stepValues} zValues={surfaceData.zValues.lsi} titleText="Continuity-Abstraction Surface (LSI)" zAxisTitle="LSI" />}
-                            {activeSurfaceTab === 'efficiency' && <ContinuityAbstractionSurface kValues={surfaceData.kValues} stepValues={surfaceData.stepValues} zValues={surfaceData.zValues.semanticEfficiency} titleText="Semantic Efficiency Surface (LSI / Energy)" zAxisTitle="Efficiency" />}
+                            {activeSurfaceTab === 'lsi' && <ContinuityAbstractionSurface kValues={surfaceData.kValues} stepValues={surfaceData.stepValues} zValues={surfaceData.zValues.lsi} titleText="Continuity-Abstraction Surface (LSI)" zAxisTitle="LSI" metrics={surfaceData.metrics} showRidge={true} />}
+                            {activeSurfaceTab === 'efficiency' && <ContinuityAbstractionSurface kValues={surfaceData.kValues} stepValues={surfaceData.stepValues} zValues={surfaceData.zValues.semanticEfficiency} titleText="Semantic Efficiency Surface (LSI / Energy)" zAxisTitle="Efficiency" metrics={surfaceData.metrics} showRidge={false} />}
                             {activeSurfaceTab === 'contour' && <ContourPlot data={surfaceData} />}
                         </div>
                         
@@ -704,6 +715,35 @@ const App: React.FC = () => {
                          </div>
                     </div>
                 </section>
+                
+                {/* Phase 2 Enhanced Analytics */}
+                {embeddings.size > 0 && (
+                    <>
+                        {/* Distortion Metrics Panel */}
+                        <section>
+                            <DistortionMetricsPanel metrics={distortionMetrics} />
+                        </section>
+
+                        {/* Compression Comparison Panel */}
+                        <section>
+                            <CompressionComparisonPanel embeddings={embeddings} />
+                        </section>
+                    </>
+                )}
+
+                {/* Stability Heatmap (when surface data is available) */}
+                {surfaceData && (
+                    <section>
+                        <StabilityHeatmapPanel data={surfaceData} />
+                    </section>
+                )}
+
+                {/* Experiment Runner Panel */}
+                {embeddings.size > 0 && (
+                    <section>
+                        <ExperimentRunnerPanel embeddings={embeddings} />
+                    </section>
+                )}
                 
                 <section className="grid grid-cols-1 xl:grid-cols-2 gap-8">
                     {embeddings.size > 0 ? (

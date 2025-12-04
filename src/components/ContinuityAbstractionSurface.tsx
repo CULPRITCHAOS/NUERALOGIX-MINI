@@ -1,5 +1,6 @@
 import React, { useEffect, useRef } from 'react';
-import { SurfaceData } from '../types';
+import { SurfaceData, SurfaceMetricPoint } from '../types';
+import { detectRidgeLine } from '../services/stabilityBoundaryService';
 
 // Make Plotly available on the window object
 declare global {
@@ -14,9 +15,19 @@ interface ContinuityAbstractionSurfaceProps {
     zValues: number[][];
     titleText: string;
     zAxisTitle: string;
+    metrics?: SurfaceMetricPoint[];
+    showRidge?: boolean;
 }
 
-const ContinuityAbstractionSurface: React.FC<ContinuityAbstractionSurfaceProps> = ({ kValues, stepValues, zValues, titleText, zAxisTitle }) => {
+const ContinuityAbstractionSurface: React.FC<ContinuityAbstractionSurfaceProps> = ({ 
+    kValues, 
+    stepValues, 
+    zValues, 
+    titleText, 
+    zAxisTitle,
+    metrics,
+    showRidge = true
+}) => {
     const chartRef = useRef<HTMLDivElement>(null);
 
     useEffect(() => {
@@ -24,7 +35,7 @@ const ContinuityAbstractionSurface: React.FC<ContinuityAbstractionSurfaceProps> 
             return;
         }
 
-        const plotData = [{
+        const plotData: any[] = [{
             z: zValues,
             x: stepValues,
             y: kValues,
@@ -59,6 +70,33 @@ const ContinuityAbstractionSurface: React.FC<ContinuityAbstractionSurfaceProps> 
                 }
             } : {}
         }];
+
+        // Add ridge line overlay if metrics are available
+        if (showRidge && metrics && metrics.length > 0 && zAxisTitle === 'LSI') {
+            const ridgeLine = detectRidgeLine(metrics, 'lsi');
+            
+            if (ridgeLine.length > 0) {
+                // Add ridge line as a 3D scatter trace
+                plotData.push({
+                    x: ridgeLine.map(p => p.grid),
+                    y: ridgeLine.map(p => p.k),
+                    z: ridgeLine.map(p => p.lsi),
+                    mode: 'lines+markers',
+                    type: 'scatter3d',
+                    name: 'Ridge Line',
+                    line: {
+                        color: '#60A5FA',
+                        width: 6,
+                    },
+                    marker: {
+                        color: '#3B82F6',
+                        size: 6,
+                        symbol: 'circle',
+                    },
+                    hovertemplate: 'Ridge: Grid=%{x:.3f}, K=%{y}, LSI=%{z:.3f}<extra></extra>',
+                });
+            }
+        }
 
         const layout = {
             title: {
@@ -95,6 +133,14 @@ const ContinuityAbstractionSurface: React.FC<ContinuityAbstractionSurfaceProps> 
             plot_bgcolor: 'transparent',
             font: {
                 color: '#edf2f7'
+            },
+            showlegend: showRidge && metrics && metrics.length > 0,
+            legend: {
+                x: 0.02,
+                y: 0.98,
+                bgcolor: 'rgba(26, 32, 44, 0.8)',
+                bordercolor: '#4a5568',
+                borderwidth: 1,
             }
         };
 
@@ -107,7 +153,7 @@ const ContinuityAbstractionSurface: React.FC<ContinuityAbstractionSurfaceProps> 
             }
         };
 
-    }, [kValues, stepValues, zValues, titleText, zAxisTitle]);
+    }, [kValues, stepValues, zValues, titleText, zAxisTitle, metrics, showRidge]);
 
     return (
         <div className="bg-lab-dark-2 rounded-lg overflow-hidden">
