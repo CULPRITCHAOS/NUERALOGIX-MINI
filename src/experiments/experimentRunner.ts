@@ -10,6 +10,7 @@ import { analyzeCompression } from '../services/analysisService';
 import { computeAllDistortionMetrics } from '../services/distortionService';
 import { computeStabilityBoundary } from '../services/stabilityBoundaryService';
 import { BASELINE_METHODS } from '../services/baselineCompressionService';
+import { computeBoundaryMetrics } from '../services/boundaryMetricsService';
 import {
   ExperimentConfig,
   ExperimentResult,
@@ -200,6 +201,31 @@ async function runSinglePoint(
     }
     if (metricTypes.includes('geodesicDistortion')) {
       metrics.geodesicDistortion = distortionMetrics.geodesicDistortion;
+    }
+  }
+
+  // Boundary geometry metrics
+  const boundaryMetricTypes = [
+    'mse_global',
+    'mse_boundary',
+    'mse_bulk',
+    'delta_boundary'
+  ];
+  
+  if (metricTypes.some(m => boundaryMetricTypes.includes(m))) {
+    const boundaryMetrics = computeBoundaryMetrics(embeddings, compressed);
+    
+    if (metricTypes.includes('mse_global')) {
+      metrics.mse_global = boundaryMetrics.mse_global;
+    }
+    if (metricTypes.includes('mse_boundary')) {
+      metrics.mse_boundary = boundaryMetrics.mse_boundary;
+    }
+    if (metricTypes.includes('mse_bulk')) {
+      metrics.mse_bulk = boundaryMetrics.mse_bulk;
+    }
+    if (metricTypes.includes('delta_boundary')) {
+      metrics.delta_boundary = boundaryMetrics.delta_boundary;
     }
   }
 

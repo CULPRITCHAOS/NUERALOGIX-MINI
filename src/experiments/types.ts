@@ -64,7 +64,12 @@ export type MetricType =
   | 'boundarySharpness'
   | 'densityVariance'
   | 'geodesicStretch'
-  | 'stabilityConfidence';
+  | 'stabilityConfidence'
+  // Boundary geometry metrics
+  | 'mse_global'
+  | 'mse_boundary'
+  | 'mse_bulk'
+  | 'delta_boundary';
 
 export interface ExperimentMetadata {
   experimentId: string;
@@ -185,6 +190,26 @@ export const VALIDATION_EXPERIMENTS: ExperimentConfig[] = [
       'boundarySharpness',
       'geodesicStretch',
       'stabilityConfidence'
+    ],
+    detectBoundaries: true,
+    detectRidge: true,
+  },
+  {
+    id: 'val-006-boundary-geometry',
+    name: 'Boundary Geometry Analysis',
+    description: 'Measures boundary vs bulk error to detect whether boundary vectors degrade earlier than bulk under compression',
+    embeddingModel: 'gemini',
+    datasetType: 'text',
+    sampleSize: 50,
+    compressionStrategy: 'lattice-hybrid',
+    gridRange: { min: 0.01, max: 0.5, steps: 15 },
+    kRange: { min: 3, max: 15, steps: 5 },
+    metrics: [
+      'lsi',
+      'mse_global',
+      'mse_boundary',
+      'mse_bulk',
+      'delta_boundary'
     ],
     detectBoundaries: true,
     detectRidge: true,
