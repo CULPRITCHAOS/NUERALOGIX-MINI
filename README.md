@@ -54,7 +54,7 @@ Running the identical grid/k sweep on an image corpus reveals the same ridge and
     *   Collapse ratio tracking (points beyond tolerance)
     *   Cluster drift scoring
     *   Local density change detection
-    *   Geodesic distortion proxy
+    *   Triangle distortion score (geodesic proxy)
 *   **Stability Boundary Detection:**
     *   Automatic ridge line detection (local maxima in parameter space)
     *   Collapse cliff identification (where LSI → 0)
@@ -69,6 +69,46 @@ Running the identical grid/k sweep on an image corpus reveals the same ridge and
     *   Replayable experiment configurations
     *   Structured data export (JSON, CSV)
     *   Complete metadata preservation
+
+### Phase 3: Topological Collapse Engine 🚀🆕
+*   **Dynamic Thresholding:**
+    *   Inflection point analysis for automatic threshold detection
+    *   Standard deviation clustering for natural tier identification
+    *   No more hardcoded constants—adapts to each dataset
+*   **Advanced Geodesic Metrics:**
+    *   Triangle Distortion Score: Triangle inequality violations
+    *   t-SNE Geodesic Distortion: Local neighborhood preservation
+    *   Graph Geodesic Distortion: True manifold distance analysis via k-NN graphs
+*   **Topology Analysis:**
+    *   Cluster entropy (Shannon entropy of density distribution)
+    *   Connected components detection
+    *   Cycle counting (loop detection in graphs)
+    *   Boundary sharpness measurement
+    *   Density variance analysis
+*   **Stability Confidence Scoring:**
+    *   **"I'm 72% confident this region is real"**
+    *   Ridge sharpness analysis
+    *   Cliff steepness measurement
+    *   Neighbor continuity scoring
+    *   Metric consistency validation
+*   **Collapse Phase Detection:**
+    *   Slope change detection (first derivative)
+    *   Curvature analysis (second derivative)
+    *   Phase transition identification (ridge → degradation → collapse)
+    *   No thresholds—physics-style analysis
+*   **Topology Signature Vectors:**
+    *   Structural fingerprints for each compression method
+    *   Enables method comparison and dataset characterization
+    *   Includes: ridge sharpness, geodesic stretch, cluster entropy, boundary variance, collapse slope, neighbor volatility
+*   **Synthetic Shape Testbed:**
+    *   Rings, spirals, Swiss rolls, layered manifolds
+    *   Known topology for validation
+    *   Noise injection for robustness testing
+*   **Noise Sensitivity Testing:**
+    *   Gaussian, uniform, and salt-pepper noise injection
+    *   Ridge stability verification
+    *   Threshold drift detection
+    *   Metric monotonicity validation
 
 ---
 
@@ -308,6 +348,126 @@ These baselines allow objective evaluation of whether lattice-based methods offe
 
 ---
 
+## 🧬 Phase 3: Topology Laboratory
+
+Phase 3 elevates NeuraLogix from **metric analysis** to **topology analysis**. Instead of just measuring numeric degradation, Phase 3 reveals the **topological structure** of embedding spaces and detects **phase transitions** in compression quality.
+
+### Core Philosophy: No ML, No Heuristics
+
+Phase 3 uses pure mathematics, statistics, and computational geometry:
+- **Dijkstra's algorithm** for geodesic distances
+- **Shannon entropy** for cluster analysis  
+- **Numerical derivatives** for phase detection
+- **Graph theory** for connectivity analysis
+
+### Key Features
+
+#### 1. Dynamic Thresholding
+
+Replaces hardcoded LSI thresholds (0.5, 0.2) with **adaptive thresholds** computed for each dataset:
+
+- **Inflection Point Analysis**: Uses second derivative to find natural breakpoints in LSI curves
+- **Standard Deviation Clustering**: Identifies performance tiers based on data distribution
+
+**Result**: Thresholds adapt to your data instead of using one-size-fits-all values.
+
+#### 2. Graph-Based Geodesic Analysis
+
+True manifold distance measurement via k-nearest neighbor graphs:
+
+- **Triangle Distortion Score**: Triangle inequality violations (proxy for geodesic distortion)
+- **t-SNE Geodesic Distortion**: Local neighborhood preservation (inspired by t-SNE)
+- **Graph Geodesic Distortion**: Shortest path distances on k-NN graphs compared to Euclidean distances
+
+**Why it matters**: Reveals whether compression breaks the manifold structure, not just point positions.
+
+#### 3. Topology Indicators
+
+Structural properties of the embedding space:
+
+- **Cluster Entropy**: Shannon entropy of density distribution
+- **Connected Components**: Number of disconnected subgraphs  
+- **Cycle Count**: Approximate loop detection
+- **Boundary Sharpness**: How well-defined are cluster boundaries
+- **Density Variance**: Uniformity of point distribution
+
+#### 4. Stability Confidence Score
+
+The system now says: **"I'm 72% confident this region is real."**
+
+Combines four factors:
+1. **Ridge Sharpness** (0-1): How pronounced is the peak?
+2. **Cliff Steepness** (0-1): How rapidly does LSI drop?
+3. **Neighbor Continuity** (0-1): Is the surface smooth?
+4. **Metric Consistency** (0-1): Do different metrics agree?
+
+**Output**: Confidence percentage + human-readable explanation
+
+#### 5. Collapse Phase Detection
+
+Physics-style **phase transition** detection instead of thresholds:
+
+- **Slope Change Detection**: First derivative of LSI curve
+- **Curvature Analysis**: Second derivative (three-point stencil)
+- **Transition Classification**:
+  - `ridge-to-degradation`: Gentle decline
+  - `degradation-to-collapse`: Moderate decline  
+  - `cliff`: Rapid collapse
+
+**Advantage**: Detects phase transitions automatically without arbitrary cutoffs.
+
+#### 6. Topology Signature Vectors
+
+A **structural fingerprint** for each compression run:
+
+```
+TopologySignature = {
+  ridgeSharpness: 0.83,      // Peak prominence
+  geodesicStretch: 1.42,     // Manifold distortion
+  clusterEntropy: 2.15,      // Density distribution
+  boundaryVariance: 0.0032,  // Point spread
+  collapseSlope: 0.18,       // Degradation rate
+  neighborVolatility: 0.21   // Neighborhood stability
+}
+```
+
+**Use cases**:
+- Compare compression methods
+- Fingerprint datasets
+- Detect model style
+
+#### 7. Synthetic Shape Testbed
+
+Generate datasets with **known topology** for validation:
+
+- **Rings**: 1D circular manifolds (one loop)
+- **Spirals**: 1D helical curves (no loops)
+- **Swiss Roll**: 2D manifold in 3D (classic benchmark)
+- **Layered Manifolds**: Stacked 2D planes (multiple components)
+- **Clusters**: Gaussian clusters (discrete structure)
+
+**Purpose**: Verify metrics correctly identify known topological structures.
+
+#### 8. Noise Sensitivity Testing
+
+Tests whether your results are **robust**:
+
+- Inject Gaussian, uniform, or salt-pepper noise
+- Verify ridge positions remain stable
+- Check threshold drift is minimal
+- Confirm metric monotonicity
+
+**Critical**: If noise breaks the ridge → model is not robust.
+
+### Validation Experiments
+
+Phase 3 adds two new validation experiments:
+
+1. **val-004-noise-sensitivity**: Tests robustness under controlled noise injection
+2. **val-005-topology-analysis**: Comprehensive topology indicators and geodesic analysis
+
+---
+
 ## 📊 Understanding the Charts
 
 ### 1. PCA Projection (Scatter Plot)
@@ -350,6 +510,7 @@ NUERALOGIX-MINI/
 │   │   ├── CompressionComparisonPanel.tsx  # Phase 2: Baseline comparison UI
 │   │   ├── StabilityHeatmapPanel.tsx       # Phase 2: Stability zones visualization
 │   │   ├── ExperimentRunnerPanel.tsx       # Phase 2: Validation experiments UI
+│   │   ├── TopologyMetricsPanel.tsx        # Phase 3: Topology indicators & confidence UI
 │   │   └── icons.tsx
 │   ├── services/                   # Core business logic
 │   │   ├── providers/
@@ -362,8 +523,13 @@ NUERALOGIX-MINI/
 │   │   ├── embeddingService.ts
 │   │   ├── mathService.ts
 │   │   ├── baselineCompressionService.ts   # Phase 2: Scalar/PQ baselines
-│   │   ├── distortionService.ts            # Phase 2: Six distortion metrics
-│   │   └── stabilityBoundaryService.ts     # Phase 2: Ridge/boundary detection
+│   │   ├── distortionService.ts            # Phase 2/3: Distortion & geodesic metrics
+│   │   ├── stabilityBoundaryService.ts     # Phase 2/3: Dynamic thresholds & ridge detection
+│   │   ├── stabilityConfidenceService.ts   # Phase 3: Confidence scoring
+│   │   ├── topologyService.ts              # Phase 3: Graph geodesics & topology indicators
+│   │   ├── collapsePhaseService.ts         # Phase 3: Phase transition detection
+│   │   ├── syntheticDataService.ts         # Phase 3: Synthetic shape datasets
+│   │   └── noiseService.ts                 # Phase 3: Noise injection & SNR
 │   ├── experiments/                # Phase 2: Experiment pipeline
 │   │   ├── types.ts                # Experiment configuration types
 │   │   └── experimentRunner.ts     # Batch sweep execution & export
@@ -384,6 +550,8 @@ NUERALOGIX-MINI/
 ├── package.json                    # npm dependencies and scripts
 ├── tsconfig.json                   # TypeScript configuration
 ├── vite.config.ts                  # Vite build configuration
+├── PHASE2_IMPLEMENTATION.md        # Phase 2 technical documentation
+├── PHASE3_IMPLEMENTATION.md        # Phase 3 technical documentation
 └── README.md                       # This file
 ```
 

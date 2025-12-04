@@ -53,7 +53,18 @@ export type MetricType =
   | 'collapseRatio'
   | 'clusterDrift'
   | 'densityChange'
-  | 'geodesicDistortion';
+  | 'geodesicDistortion'
+  // Phase 3: Topology metrics
+  | 'triangleDistortionScore'
+  | 'approxGeodesicDistortionTSNE'
+  | 'graphGeodesicDistortion'
+  | 'clusterEntropy'
+  | 'connectedComponents'
+  | 'cycleCount'
+  | 'boundarySharpness'
+  | 'densityVariance'
+  | 'geodesicStretch'
+  | 'stabilityConfidence';
 
 export interface ExperimentMetadata {
   experimentId: string;
@@ -138,6 +149,43 @@ export const VALIDATION_EXPERIMENTS: ExperimentConfig[] = [
     gridRange: { min: 0.02, max: 0.3, steps: 8 },
     kRange: { min: 5, max: 12, steps: 4 },
     metrics: ['lsi', 'semanticEfficiency', 'neighborhoodOverlap', 'clusterDrift'],
+    detectBoundaries: true,
+    detectRidge: true,
+  },
+  {
+    id: 'val-004-noise-sensitivity',
+    name: 'Noise Sensitivity Test',
+    description: 'Injects noise into embeddings and verifies ridge stability, threshold drift, and metric monotonicity',
+    embeddingModel: 'gemini',
+    datasetType: 'text',
+    sampleSize: 40,
+    compressionStrategy: 'lattice-hybrid',
+    gridRange: { min: 0.05, max: 0.3, steps: 8 },
+    kRange: { min: 5, max: 12, steps: 4 },
+    metrics: ['lsi', 'neighborhoodOverlap', 'pairwiseDistortion', 'collapseRatio'],
+    detectBoundaries: true,
+    detectRidge: true,
+    seed: 42, // For reproducibility
+  },
+  {
+    id: 'val-005-topology-analysis',
+    name: 'Topology Structure Analysis',
+    description: 'Analyzes topological structure preservation using graph geodesics and topology indicators',
+    embeddingModel: 'gemini',
+    datasetType: 'text',
+    sampleSize: 50,
+    compressionStrategy: 'lattice-hybrid',
+    gridRange: { min: 0.05, max: 0.4, steps: 10 },
+    kRange: { min: 5, max: 12, steps: 4 },
+    metrics: [
+      'lsi',
+      'graphGeodesicDistortion',
+      'clusterEntropy',
+      'connectedComponents',
+      'boundarySharpness',
+      'geodesicStretch',
+      'stabilityConfidence'
+    ],
     detectBoundaries: true,
     detectRidge: true,
   },
