@@ -14,6 +14,7 @@ import ImageUploader from './components/ImageUploader';
 import SettingsModal from './components/SettingsModal';
 import WelcomeModal from './components/WelcomeModal';
 import { LabIcon, TextIcon, ProcessIcon, ApiIcon, ResetIcon, DownloadIcon, UploadIcon, ChartBarIcon, TargetIcon, GearIcon, HelpIcon, InfoIcon } from './components/icons';
+import { SemanticMeshPanel } from './features/semanticMesh/SemanticMeshPanel';
 
 // Make Plotly available on the window object
 declare global {
@@ -729,6 +730,10 @@ const App: React.FC = () => {
                         <EmbeddingTable title="Compressed Embeddings" embeddings={compressedEmbeddings} itemType={itemType} />
                     </section>
                 )}
+
+                <section>
+                    <SemanticMeshPanel datasetId="mini_sts_e8_v1" />
+                </section>
 
             </main>
         </div>
