@@ -64,13 +64,36 @@ const DistortionMetricsPanel: React.FC<DistortionMetricsPanelProps> = ({ metrics
       color: 'text-purple-400',
     },
     {
-      label: 'Geodesic Distortion',
-      value: metrics.geodesicDistortion,
-      description: 'Triangle inequality violations',
+      label: 'Triangle Distortion Score',
+      value: metrics.triangleDistortionScore,
+      description: 'Triangle inequality violations (proxy for geodesic distortion)',
       format: (v: number) => `${(v * 100).toFixed(2)}%`,
       color: 'text-orange-400',
     },
   ];
+
+  // Add advanced metrics if available
+  const advancedMetrics = [];
+  if (metrics.approxGeodesicDistortionTSNE !== undefined) {
+    advancedMetrics.push({
+      label: 't-SNE Geodesic Distortion',
+      value: metrics.approxGeodesicDistortionTSNE,
+      description: 'Local neighborhood geodesic preservation (t-SNE style)',
+      format: (v: number) => v.toFixed(4),
+      color: 'text-cyan-400',
+    });
+  }
+  if (metrics.graphGeodesicDistortion !== undefined) {
+    advancedMetrics.push({
+      label: 'Graph Geodesic Distortion',
+      value: metrics.graphGeodesicDistortion,
+      description: 'Manifold distance distortion via k-NN graph',
+      format: (v: number) => v.toFixed(4),
+      color: 'text-pink-400',
+    });
+  }
+
+  const allMetrics = [...metricItems, ...advancedMetrics];
 
   return (
     <div className={`bg-lab-dark-1 border border-lab-dark-3 rounded-lg p-4 ${className}`}>
@@ -80,7 +103,7 @@ const DistortionMetricsPanel: React.FC<DistortionMetricsPanelProps> = ({ metrics
       </h3>
       
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-        {metricItems.map((item, index) => (
+        {allMetrics.map((item, index) => (
           <div key={index} className="bg-lab-dark-2 p-3 rounded-md border border-lab-dark-3">
             <div className="flex justify-between items-start mb-1">
               <span className="text-sm font-medium text-gray-300">{item.label}</span>
