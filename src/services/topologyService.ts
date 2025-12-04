@@ -16,11 +16,15 @@ import { Embedding, EmbeddingMap } from '../types';
 import { euclideanDistance } from './mathService';
 
 /**
- * Topology Signature - a structural fingerprint for embeddings
+ * Structural Fingerprint - a quantitative profile for embeddings
+ * 
+ * Note: This is NOT a topological signature in the mathematical sense
+ * (which would require persistent homology or spectral methods).
+ * It's a collection of structural heuristics.
  */
-export interface TopologySignature {
+export interface StructuralFingerprint {
   ridgeSharpness: number;      // 0-1, how pronounced are peaks
-  geodesicStretch: number;      // How much geodesic != Euclidean
+  graphPathStretch: number;     // How much graph paths != Euclidean (NOT geodesic)
   clusterEntropy: number;       // Shannon entropy of cluster distribution
   boundaryVariance: number;     // Variance at stability boundaries
   collapseSlope: number;        // Rate of quality degradation
@@ -387,10 +391,12 @@ export function computeTopologyIndicators(
 }
 
 /**
- * Compute geodesic stretch factor
- * Ratio of geodesic to Euclidean distance
+ * Compute graph path stretch factor
+ * Ratio of k-NN graph path distance to Euclidean distance
+ * 
+ * Note: This is NOT a geodesic metric. It uses k-NN graph paths, not true manifold geodesics.
  */
-export function computeGeodesicStretch(
+export function computeGraphPathStretch(
   embeddings: EmbeddingMap,
   k: number = 5,
   sampleSize: number = 20
@@ -411,11 +417,11 @@ export function computeGeodesicStretch(
       const node1 = sampledNodes[i];
       const node2 = sampledNodes[j];
       
-      const geoDist = computeShortestPath(graph, node1, node2);
+      const pathDist = computeShortestPath(graph, node1, node2);
       const eucDist = euclideanDistance(embeddings.get(node1)!, embeddings.get(node2)!);
       
-      if (eucDist > 0 && geoDist < Infinity) {
-        totalStretch += geoDist / eucDist;
+      if (eucDist > 0 && pathDist < Infinity) {
+        totalStretch += pathDist / eucDist;
         pairCount++;
       }
     }
@@ -477,9 +483,11 @@ export function computeNeighborVolatility(
 }
 
 /**
- * Compute topology signature for an embedding space
+ * Compute structural fingerprint for an embedding space
+ * 
+ * Note: This is a collection of structural heuristics, not a true topological signature.
  */
-export function computeTopologySignature(
+export function computeStructuralFingerprint(
   embeddings: EmbeddingMap,
   options: {
     k?: number;
@@ -488,11 +496,11 @@ export function computeTopologySignature(
     ridgeSharpness?: number;
     collapseSlope?: number;
   } = {}
-): TopologySignature {
+): StructuralFingerprint {
   const k = options.k || 5;
   const sampleSize = options.sampleSize || 20;
   
-  const geodesicStretch = computeGeodesicStretch(embeddings, k, sampleSize);
+  const graphPathStretch = computeGraphPathStretch(embeddings, k, sampleSize);
   const clusterEntropy = computeClusterEntropy(embeddings, k);
   const boundaryVariance = computeDensityVariance(embeddings, k);
   
@@ -502,10 +510,14 @@ export function computeTopologySignature(
   
   return {
     ridgeSharpness: options.ridgeSharpness || 0,
-    geodesicStretch,
+    graphPathStretch,
     clusterEntropy,
     boundaryVariance,
     collapseSlope: options.collapseSlope || 0,
     neighborVolatility,
   };
 }
+
+// Legacy alias for backward compatibility
+/** @deprecated Use computeStructuralFingerprint instead */
+export const computeTopologySignature = computeStructuralFingerprint;

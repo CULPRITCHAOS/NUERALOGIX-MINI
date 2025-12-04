@@ -17,9 +17,9 @@ export interface DistortionMetrics {
   collapseRatio: number;
   clusterDriftScore: number;
   localDensityChange: number;
-  triangleDistortionScore: number; // Renamed from geodesicDistortion
-  approxGeodesicDistortionTSNE?: number; // New: t-SNE based geodesic approximation
-  graphGeodesicDistortion?: number; // New: Graph-based geodesic distortion
+  triangleDistortionScore: number; // Triangle inequality violations (proxy metric)
+  localNeighborhoodDistortionTSNE?: number; // t-SNE-style local preservation
+  graphPathDistortion?: number; // k-NN graph path distortion (NOT true geodesics)
 }
 
 /**
@@ -294,13 +294,15 @@ export function computeTriangleDistortionScore(
 export const computeGeodesicDistortion = computeTriangleDistortionScore;
 
 /**
- * Compute approximate geodesic distortion using t-SNE style local preservation
+ * Compute local neighborhood distortion using t-SNE-style analysis
  * 
- * This metric measures how well local neighborhoods preserve their geodesic structure
- * by examining the preservation of relative distances within k-nearest neighborhoods.
+ * This metric measures how well local neighborhoods preserve their relative structure
+ * by examining distance preservation within k-nearest neighborhoods.
  * Inspired by t-SNE's focus on local structure preservation.
+ * 
+ * Note: This is NOT a geodesic metric - it's a local distance preservation heuristic.
  */
-export function computeApproxGeodesicDistortionTSNE(
+export function computeLocalNeighborhoodDistortionTSNE(
   original: EmbeddingMap,
   compressed: EmbeddingMap,
   k: number = 10
@@ -350,13 +352,15 @@ export function computeApproxGeodesicDistortionTSNE(
 }
 
 /**
- * Compute graph-based geodesic distortion
+ * Compute graph-based path distortion
  * 
- * Builds a k-nearest neighbor graph and computes approximate geodesic distances
- * using shortest paths on the graph. Measures how compression distorts these
- * manifold distances compared to Euclidean distances.
+ * Builds a k-nearest neighbor graph and computes shortest path distances
+ * on the graph (NOT true manifold geodesics). Measures how compression distorts these
+ * graph path distances compared to Euclidean distances.
+ * 
+ * Note: This is a k-NN graph approximation, not true manifold geometry.
  */
-export function computeGraphGeodesicDistortion(
+export function computeGraphPathDistortion(
   original: EmbeddingMap,
   compressed: EmbeddingMap,
   k: number = 5,
@@ -378,23 +382,23 @@ export function computeGraphGeodesicDistortion(
   let totalDistortion = 0;
   let pairCount = 0;
   
-  // Compute geodesic distortion for sampled pairs
+  // Compute graph path distortion for sampled pairs
   for (let i = 0; i < sampledItems.length; i++) {
     for (let j = i + 1; j < sampledItems.length; j++) {
       const item1 = sampledItems[i];
       const item2 = sampledItems[j];
       
-      // Compute approximate geodesic distance on original graph
-      const origGeoDist = approximateGeodesicDistance(origGraph, item1, item2);
-      const compGeoDist = approximateGeodesicDistance(compGraph, item1, item2);
+      // Compute approximate graph path distance on k-NN graphs
+      const origPathDist = approximateGraphPathDistance(origGraph, item1, item2);
+      const compPathDist = approximateGraphPathDistance(compGraph, item1, item2);
       
       // Compute Euclidean distances
       const origEucDist = euclideanDistance(original.get(item1)!, original.get(item2)!);
       const compEucDist = euclideanDistance(compressed.get(item1)!, compressed.get(item2)!);
       
-      // Measure how compression affects the geodesic-to-Euclidean ratio
-      const origRatio = origGeoDist / (origEucDist + 1e-10);
-      const compRatio = compGeoDist / (compEucDist + 1e-10);
+      // Measure how compression affects the graph-path-to-Euclidean ratio
+      const origRatio = origPathDist / (origEucDist + 1e-10);
+      const compRatio = compPathDist / (compEucDist + 1e-10);
       
       totalDistortion += Math.abs(compRatio - origRatio) / (origRatio + 1e-10);
       pairCount++;
@@ -441,10 +445,10 @@ function buildKNNGraph(
 }
 
 /**
- * Approximate geodesic distance using Dijkstra's algorithm
- * Returns shortest path distance on the k-NN graph
+ * Approximate graph path distance using Dijkstra's algorithm
+ * Returns shortest path distance on the k-NN graph (NOT true geodesic)
  */
-function approximateGeodesicDistance(
+function approximateGraphPathDistance(
   graph: Map<string, Map<string, number>>,
   source: string,
   target: string
