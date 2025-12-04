@@ -205,6 +205,12 @@ export function computeClusterEntropy(
   const numBins = Math.min(10, Math.ceil(Math.sqrt(n)));
   const minDensity = Math.min(...densities);
   const maxDensity = Math.max(...densities);
+  
+  // Handle edge case where all densities are identical
+  if (Math.abs(maxDensity - minDensity) < 1e-10) {
+    return 0; // Perfect uniformity, zero entropy
+  }
+  
   const binWidth = (maxDensity - minDensity) / numBins;
   
   const histogram = new Array(numBins).fill(0);

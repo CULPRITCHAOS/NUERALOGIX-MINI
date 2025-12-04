@@ -24,6 +24,17 @@ export interface StabilityConfidence {
 }
 
 /**
+ * Weights for stability confidence score components
+ * These can be adjusted based on empirical observations
+ */
+const CONFIDENCE_WEIGHTS = {
+  RIDGE_SHARPNESS: 0.3,
+  CLIFF_STEEPNESS: 0.3,
+  NEIGHBOR_CONTINUITY: 0.2,
+  METRIC_CONSISTENCY: 0.2,
+};
+
+/**
  * Compute stability confidence score for a point in parameter space
  */
 export function computeStabilityConfidence(
@@ -39,10 +50,10 @@ export function computeStabilityConfidence(
   
   // Overall confidence is weighted average
   const confidenceScore = (
-    ridgeSharpness * 0.3 +
-    cliffSteepness * 0.3 +
-    neighborContinuity * 0.2 +
-    metricConsistency * 0.2
+    ridgeSharpness * CONFIDENCE_WEIGHTS.RIDGE_SHARPNESS +
+    cliffSteepness * CONFIDENCE_WEIGHTS.CLIFF_STEEPNESS +
+    neighborContinuity * CONFIDENCE_WEIGHTS.NEIGHBOR_CONTINUITY +
+    metricConsistency * CONFIDENCE_WEIGHTS.METRIC_CONSISTENCY
   );
   
   // Generate human-readable explanation

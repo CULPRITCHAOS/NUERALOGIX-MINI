@@ -287,6 +287,10 @@ export function computeTriangleDistortionScore(
 }
 
 // Legacy alias for backward compatibility
+/**
+ * @deprecated Use computeTriangleDistortionScore instead.
+ * This alias is provided for backward compatibility only.
+ */
 export const computeGeodesicDistortion = computeTriangleDistortionScore;
 
 /**

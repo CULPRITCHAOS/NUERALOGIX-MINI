@@ -28,6 +28,17 @@ export interface CollapsePhase {
 }
 
 /**
+ * Curvature threshold multiplier for phase transition detection
+ * Transitions are detected when curvature exceeds threshold * multiplier
+ */
+const CURVATURE_THRESHOLD_MULTIPLIER = 1.5;
+
+/**
+ * Cliff detection multiplier (steeper than normal transitions)
+ */
+const CLIFF_CURVATURE_MULTIPLIER = 2.0;
+
+/**
  * Detect phase transitions in LSI curve
  */
 export function detectPhaseTransitions(
@@ -68,7 +79,7 @@ export function detectPhaseTransitions(
   );
   
   // Detect transitions where curvature exceeds threshold
-  const threshold = Math.abs(stdCurvature) * 1.5;
+  const threshold = Math.abs(stdCurvature) * CURVATURE_THRESHOLD_MULTIPLIER;
   
   for (let i = 0; i < curvatures.length; i++) {
     if (Math.abs(curvatures[i]) > threshold) {
@@ -77,7 +88,7 @@ export function detectPhaseTransitions(
       
       // Classify transition type
       let type: PhaseTransition['type'];
-      if (slope < -0.5 && Math.abs(curvatures[i]) > threshold * 2) {
+      if (slope < -0.5 && Math.abs(curvatures[i]) > threshold * CLIFF_CURVATURE_MULTIPLIER) {
         type = 'cliff'; // Rapid collapse
       } else if (slope < -0.2) {
         type = 'degradation-to-collapse';
