@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>NeuraLogix Mini Lab | Semantic Topology Research</title>
+    <meta name="description" content="Interactive research sandbox for visualizing Semantic Compression, Vector Collisions, and Lattice Stability in AI embeddings. Powered by Gemini & Ollama." />
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="NeuraLogix Mini Lab" />
+    <meta property="og:description" content="Visualize AI vector embeddings, test compression efficiency, and detect semantic collisions in real-time." />
+    <meta property="og:image" content="https://images.unsplash.com/photo-1620712943543-bcc4688e7485?auto=format&fit=crop&w=1200&h=630" />
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image" />
+    <meta property="twitter:title" content="NeuraLogix Mini Lab" />
+    <meta property="twitter:description" content="Visualize AI vector embeddings, test compression efficiency, and detect semantic collisions in real-time." />
+    <meta property="twitter:image" content="https://images.unsplash.com/photo-1620712943543-bcc4688e7485?auto=format&fit=crop&w=1200&h=630" />
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              'lab-dark': '#1a202c',
+              'lab-dark-2': '#2d3748',
+              'lab-dark-3': '#4a5568',
+              'lab-light': '#edf2f7',
+              'lab-accent': '#38b2ac',
+              'lab-accent-hover': '#4fd1c5',
+              'lab-red': '#f56565',
+            }
+          }
+        }
+      }
+    </script>
+  <link rel="stylesheet" href="/src/index.css">
+</head>
+  <body class="bg-lab-dark text-lab-light">
+    <div id="root"></div>
+    <script type="module" src="/src/index.tsx"></script>
+  </body>
+</html>
