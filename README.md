@@ -78,7 +78,8 @@ Then edit `.env` and add your Google Gemini API key:
 
 ```env
 # Required for Google Gemini Provider
-GEMINI_API_KEY=your_google_gemini_api_key_here
+# Note: VITE_ prefix is required for Vite to expose the variable to the client
+VITE_GEMINI_API_KEY=your_google_gemini_api_key_here
 ```
 
 > **Note:** If you only plan to use Ollama (local AI), you can skip the API key configuration.
