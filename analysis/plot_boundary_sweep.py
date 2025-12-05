@@ -24,6 +24,10 @@ import matplotlib.pyplot as plt
 from pathlib import Path
 from typing import Dict, List, Tuple, Optional
 
+# Constants for analysis
+EPSILON_SMALL = 1e-10  # Small value to avoid division by zero
+SHARP_INCREASE_THRESHOLD_MULTIPLIER = 2.0  # Multiplier for detecting sharp increases in derivative
+
 
 def load_experiment_data(filepath: str) -> Dict:
     """Load experiment result from JSON file."""
@@ -258,10 +262,11 @@ def print_summary(
         # Compute finite differences
         delta_diff = np.diff(valid_delta)
         grid_diff = np.diff(valid_grid)
-        derivatives = delta_diff / (grid_diff + 1e-10)
+        derivatives = delta_diff / (grid_diff + EPSILON_SMALL)
         
-        # Find where derivative is significantly large (heuristic: > 2 * median)
-        threshold = 2 * np.abs(np.median(derivatives))
+        # Find where derivative is significantly large
+        # Heuristic: derivative > SHARP_INCREASE_THRESHOLD_MULTIPLIER * median
+        threshold = SHARP_INCREASE_THRESHOLD_MULTIPLIER * np.abs(np.median(derivatives))
         sharp_increases = derivatives > threshold
         
         if np.any(sharp_increases):

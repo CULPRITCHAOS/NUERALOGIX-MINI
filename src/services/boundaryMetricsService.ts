@@ -56,6 +56,12 @@ function computeTopKDistances(
 
 /**
  * Get unique centroids from compressed embeddings
+ * 
+ * Note: Uses JSON.stringify for vector comparison. While not the most efficient
+ * for large datasets, it's acceptable here since:
+ * 1. The number of unique centroids is typically small (k clusters)
+ * 2. The comparison happens once per compression sweep
+ * 3. Floating-point precision is maintained by JSON serialization
  */
 function getUniqueCentroids(compressed: EmbeddingMap): Embedding[] {
   const uniqueVectorsSet = new Set<string>();
@@ -74,13 +80,19 @@ function getUniqueCentroids(compressed: EmbeddingMap): Embedding[] {
 
 /**
  * Compute quantile value from array
+ * 
+ * @param arr - Array of numbers
+ * @param q - Quantile value (0 to 1)
+ * @returns The quantile value, or NaN if array is empty or q is invalid
  */
 function quantile(arr: number[], q: number): number {
   if (arr.length === 0) return NaN;
+  if (q < 0 || q > 1) return NaN;
   
   const sorted = [...arr].sort((a, b) => a - b);
-  const index = Math.floor(sorted.length * q);
-  return sorted[Math.min(index, sorted.length - 1)];
+  // Use Math.max to ensure we don't get negative indices
+  const index = Math.max(0, Math.min(Math.floor(sorted.length * q), sorted.length - 1));
+  return sorted[index];
 }
 
 /**
