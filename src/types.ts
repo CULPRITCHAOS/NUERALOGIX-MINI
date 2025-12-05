@@ -4,12 +4,13 @@ export type EmbeddingMap = Map<string, Embedding>;
 
 export type ItemType = 'text' | 'image';
 
-export type CompressionMethod = 'grid' | 'kmeans' | 'kmeans-grid';
+export type CompressionMethod = 'grid' | 'kmeans' | 'kmeans-grid' | 'boundary-aware';
 
 export interface CompressionOptions {
     method: CompressionMethod;
     step?: number;
     k?: number;
+    boundaryAwareMode?: boolean; // Toggle for boundary-aware treatment
 }
 
 export interface CompressionResult {

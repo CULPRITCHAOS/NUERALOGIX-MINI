@@ -13,6 +13,7 @@ export type CompressionStrategy =
   | 'lattice-grid' 
   | 'lattice-kmeans' 
   | 'lattice-hybrid'
+  | 'boundary-aware'
   | BaselineMethod;
 
 export interface ExperimentConfig {

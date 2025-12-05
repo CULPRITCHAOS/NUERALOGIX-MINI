@@ -153,6 +153,8 @@ async function runSinglePoint(
     // Lattice-based compression
     const method = strategy === 'lattice-grid' ? 'grid' 
                  : strategy === 'lattice-kmeans' ? 'kmeans'
+                 : strategy === 'lattice-hybrid' ? 'kmeans-grid'
+                 : strategy === 'boundary-aware' ? 'boundary-aware'
                  : 'kmeans-grid';
     
     const result = compressEmbeddings(embeddings, {
@@ -219,7 +221,11 @@ async function runSinglePoint(
   ];
   
   if (metricTypes.some(m => boundaryMetricTypes.includes(m))) {
-    const boundaryMetrics = computeBoundaryMetrics(embeddings, compressed, centroids);
+    // Check if we need extended metrics (kNN overlap, compression ratio)
+    const needExtendedMetrics = metricTypes.includes('neighborhoodOverlap') || 
+                                 metricTypes.some(m => boundaryMetricTypes.includes(m));
+    
+    const boundaryMetrics = computeBoundaryMetrics(embeddings, compressed, centroids, needExtendedMetrics);
     
     if (metricTypes.includes('mse_global')) {
       metrics.mse_global = boundaryMetrics.mse_global;
@@ -232,6 +238,11 @@ async function runSinglePoint(
     }
     if (metricTypes.includes('delta_boundary')) {
       metrics.delta_boundary = boundaryMetrics.delta_boundary;
+    }
+    
+    // Add extended metrics if computed
+    if (boundaryMetrics.knn_overlap !== undefined) {
+      metrics.neighborhoodOverlap = boundaryMetrics.knn_overlap;
     }
   }
 
