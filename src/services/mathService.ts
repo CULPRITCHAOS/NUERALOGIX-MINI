@@ -37,8 +37,11 @@ export const meanSquaredError = (vec1: Embedding, vec2: Embedding): number => {
  * 
  * Note: This uses JSON.stringify for vector comparison, which is acceptable for:
  * - Grid-quantized vectors (deterministic values)
- * - Small sets of centroids
+ * - Small sets of centroids (typically < 100)
  * - Scenarios where exact floating-point equality is desired
+ * 
+ * Performance: For large datasets (>1000 vectors), consider using a hash-based
+ * approach or floating-point tolerant comparison for better performance.
  * 
  * @param vectors - Array of vectors to deduplicate
  * @returns Array of unique vectors
