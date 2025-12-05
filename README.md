@@ -139,6 +139,18 @@ See [NOVEL_FINDINGS.md](NOVEL_FINDINGS.md) for detailed experimental log.
     *   Threshold drift detection
     *   Metric monotonicity validation
 
+### Boundary Geometry Diagnostic
+*   **Boundary vs Bulk Error Analysis:**
+    *   Classifies vectors as boundary (ambiguous) or bulk (clear cluster membership)
+    *   Measures differential degradation under compression
+    *   Key metric: Δ_boundary = MSE_boundary - MSE_bulk
+    *   Detects whether boundary vectors collapse earlier than bulk
+*   **Analysis Tools:**
+    *   Python plotting script for visualizing boundary sweep results
+    *   Automated detection of boundary collapse onset
+    *   Export to standard formats (JSON) for external analysis
+    *   See [docs/BOUNDARY_GEOMETRY_EXPERIMENT.md](docs/BOUNDARY_GEOMETRY_EXPERIMENT.md) for details
+
 ---
 
 ## 🛠️ Installation & Setup
