@@ -160,7 +160,7 @@ function computeCompressionMetrics(
   // - Codebook: centroids.length * dimension * 32 bits
   // - Indices: numVectors * log2(centroids.length) bits
   const codebookBits = centroids.length * dimension * 32;
-  const indexBits = Math.ceil(Math.log2(centroids.length));
+  const indexBits = centroids.length > 0 ? Math.ceil(Math.log2(Math.max(1, centroids.length))) : 0;
   const indicesBits = numVectors * indexBits;
   const compressedBits = codebookBits + indicesBits;
 

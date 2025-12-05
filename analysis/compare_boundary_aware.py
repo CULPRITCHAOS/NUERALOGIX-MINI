@@ -147,6 +147,10 @@ def print_comparison_table(rows: List[Dict]):
     print()
 
 
+# Verdict thresholds
+MODERATE_IMPROVEMENT_THRESHOLD = 0.5  # 50% of cases
+HIGH_IMPROVEMENT_THRESHOLD = 0.7       # 70% of cases
+
 def compute_verdict(rows: List[Dict]) -> Dict:
     """
     Compute verdict: Is boundary geometry exploitable or observational only?
@@ -200,8 +204,8 @@ def compute_verdict(rows: List[Dict]) -> Dict:
     
     # Determine verdict
     any_improvement = any(count > 0 for count in improvements.values())
-    consistent_improvement = any(count >= total_comparisons * 0.5 for count in improvements.values())
-    strong_improvement = any(count >= total_comparisons * 0.7 for count in improvements.values())
+    consistent_improvement = any(count >= total_comparisons * MODERATE_IMPROVEMENT_THRESHOLD for count in improvements.values())
+    strong_improvement = any(count >= total_comparisons * HIGH_IMPROVEMENT_THRESHOLD for count in improvements.values())
     
     verdict['improvements'] = improvements
     verdict['total_comparisons'] = total_comparisons
@@ -209,11 +213,11 @@ def compute_verdict(rows: List[Dict]) -> Dict:
     if strong_improvement:
         verdict['exploitable'] = True
         verdict['confidence'] = 'high'
-        verdict['summary'] = 'Boundary-aware treatment shows consistent, measurable improvement (≥70% of cases)'
+        verdict['summary'] = f'Boundary-aware treatment shows consistent, measurable improvement (≥{int(HIGH_IMPROVEMENT_THRESHOLD*100)}% of cases)'
     elif consistent_improvement:
         verdict['exploitable'] = True
         verdict['confidence'] = 'moderate'
-        verdict['summary'] = 'Boundary-aware treatment shows moderate improvement (≥50% of cases)'
+        verdict['summary'] = f'Boundary-aware treatment shows moderate improvement (≥{int(MODERATE_IMPROVEMENT_THRESHOLD*100)}% of cases)'
     elif any_improvement:
         verdict['exploitable'] = True
         verdict['confidence'] = 'low'

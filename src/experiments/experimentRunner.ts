@@ -151,11 +151,24 @@ async function runSinglePoint(
     }
   } else {
     // Lattice-based compression
-    const method = strategy === 'lattice-grid' ? 'grid' 
-                 : strategy === 'lattice-kmeans' ? 'kmeans'
-                 : strategy === 'lattice-hybrid' ? 'kmeans-grid'
-                 : strategy === 'boundary-aware' ? 'boundary-aware'
-                 : 'kmeans-grid';
+    let method: 'grid' | 'kmeans' | 'kmeans-grid' | 'boundary-aware';
+    
+    switch (strategy) {
+      case 'lattice-grid':
+        method = 'grid';
+        break;
+      case 'lattice-kmeans':
+        method = 'kmeans';
+        break;
+      case 'lattice-hybrid':
+        method = 'kmeans-grid';
+        break;
+      case 'boundary-aware':
+        method = 'boundary-aware';
+        break;
+      default:
+        method = 'kmeans-grid';
+    }
     
     const result = compressEmbeddings(embeddings, {
       method,

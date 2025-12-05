@@ -158,21 +158,6 @@ describe('Boundary-Aware Compression', () => {
       // Metrics should be computed successfully
       expect(Number.isFinite(baselineMetrics.delta_boundary)).toBe(true);
       expect(Number.isFinite(boundaryMetrics.delta_boundary)).toBe(true);
-      
-      // Log for manual inspection (will show in test output)
-      console.log('\nBaseline metrics:', {
-        mse_global: baselineMetrics.mse_global,
-        mse_boundary: baselineMetrics.mse_boundary,
-        mse_bulk: baselineMetrics.mse_bulk,
-        delta_boundary: baselineMetrics.delta_boundary
-      });
-      
-      console.log('\nBoundary-aware metrics:', {
-        mse_global: boundaryMetrics.mse_global,
-        mse_boundary: boundaryMetrics.mse_boundary,
-        mse_bulk: boundaryMetrics.mse_bulk,
-        delta_boundary: boundaryMetrics.delta_boundary
-      });
     });
   });
 
