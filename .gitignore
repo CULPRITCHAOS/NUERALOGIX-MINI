@@ -36,6 +36,9 @@ plots/*.svg
 __pycache__/
 .pytest_cache/
 
+# Boundary evaluation results (generated outputs)
+results/boundary_eval/
+
 # Editor directories and files
 .vscode/*
 !.vscode/extensions.json
