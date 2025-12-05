@@ -61,13 +61,13 @@ function getUniqueCentroids(compressed: EmbeddingMap): Embedding[] {
   const uniqueVectorsSet = new Set<string>();
   const uniqueCentroids: Embedding[] = [];
   
-  for (const vector of compressed.values()) {
+  compressed.forEach(vector => {
     const key = JSON.stringify(vector);
     if (!uniqueVectorsSet.has(key)) {
       uniqueVectorsSet.add(key);
       uniqueCentroids.push(vector);
     }
-  }
+  });
   
   return uniqueCentroids;
 }

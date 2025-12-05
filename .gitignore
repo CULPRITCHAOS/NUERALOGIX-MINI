@@ -28,6 +28,14 @@ src/data/experiments/*.json
 src/data/results/*.json
 src/data/results/*.csv
 
+# Analysis outputs
+plots/*.png
+plots/*.jpg
+plots/*.svg
+*.pyc
+__pycache__/
+.pytest_cache/
+
 # Editor directories and files
 .vscode/*
 !.vscode/extensions.json
