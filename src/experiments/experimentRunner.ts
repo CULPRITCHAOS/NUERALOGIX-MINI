@@ -4,7 +4,7 @@
  * Executes batch sweeps over parameter space and saves results
  */
 
-import { EmbeddingMap, SurfaceMetricPoint } from '../types';
+import { EmbeddingMap, SurfaceMetricPoint, Embedding } from '../types';
 import { compressEmbeddings } from '../services/compressionService';
 import { analyzeCompression } from '../services/analysisService';
 import { computeAllDistortionMetrics } from '../services/distortionService';
@@ -136,12 +136,22 @@ async function runSinglePoint(
 ): Promise<ExperimentPoint> {
   // Determine compression method
   let compressed: EmbeddingMap;
+  let centroids: Embedding[] = [];
   
   if (strategy.startsWith('scalar-') || strategy.startsWith('pq-')) {
     // Baseline compression
     const baselineMethod = strategy as keyof typeof BASELINE_METHODS;
     if (BASELINE_METHODS[baselineMethod]) {
       compressed = BASELINE_METHODS[baselineMethod](embeddings);
+      // For baseline methods, extract unique centroids from compressed vectors
+      const uniqueVectorsSet = new Set<string>();
+      compressed.forEach(vector => {
+        const key = JSON.stringify(vector);
+        if (!uniqueVectorsSet.has(key)) {
+          uniqueVectorsSet.add(key);
+          centroids.push(vector);
+        }
+      });
     } else {
       throw new Error(`Unknown baseline method: ${strategy}`);
     }
@@ -151,11 +161,13 @@ async function runSinglePoint(
                  : strategy === 'lattice-kmeans' ? 'kmeans'
                  : 'kmeans-grid';
     
-    compressed = compressEmbeddings(embeddings, {
+    const result = compressEmbeddings(embeddings, {
       method,
       step: params.grid,
       k: params.k,
     });
+    compressed = result.compressed;
+    centroids = result.centroids;
   }
 
   // Compute requested metrics
@@ -213,7 +225,7 @@ async function runSinglePoint(
   ];
   
   if (metricTypes.some(m => boundaryMetricTypes.includes(m))) {
-    const boundaryMetrics = computeBoundaryMetrics(embeddings, compressed);
+    const boundaryMetrics = computeBoundaryMetrics(embeddings, compressed, centroids);
     
     if (metricTypes.includes('mse_global')) {
       metrics.mse_global = boundaryMetrics.mse_global;
