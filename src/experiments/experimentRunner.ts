@@ -11,6 +11,7 @@ import { computeAllDistortionMetrics } from '../services/distortionService';
 import { computeStabilityBoundary } from '../services/stabilityBoundaryService';
 import { BASELINE_METHODS } from '../services/baselineCompressionService';
 import { computeBoundaryMetrics } from '../services/boundaryMetricsService';
+import { extractUniqueVectors } from '../services/mathService';
 import {
   ExperimentConfig,
   ExperimentResult,
@@ -144,14 +145,7 @@ async function runSinglePoint(
     if (BASELINE_METHODS[baselineMethod]) {
       compressed = BASELINE_METHODS[baselineMethod](embeddings);
       // For baseline methods, extract unique centroids from compressed vectors
-      const uniqueVectorsSet = new Set<string>();
-      compressed.forEach(vector => {
-        const key = JSON.stringify(vector);
-        if (!uniqueVectorsSet.has(key)) {
-          uniqueVectorsSet.add(key);
-          centroids.push(vector);
-        }
-      });
+      centroids = extractUniqueVectors(Array.from(compressed.values()));
     } else {
       throw new Error(`Unknown baseline method: ${strategy}`);
     }

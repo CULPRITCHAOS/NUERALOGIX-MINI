@@ -1,7 +1,6 @@
 
-
 import { EmbeddingMap, CompressionOptions, Embedding, CompressionResult } from '../types';
-import { euclideanDistance } from './mathService';
+import { euclideanDistance, extractUniqueVectors } from './mathService';
 
 const snapToGrid = (vector: Embedding, step: number): Embedding => {
     return vector.map(component => Math.round(component / step) * step);
@@ -80,18 +79,9 @@ export const compressEmbeddings = (embeddings: EmbeddingMap, options: Compressio
             compressed.set(item, snapToGrid(originalVectors[i], step));
         });
         // For grid method, centroids are the unique grid points
-        // Extract unique compressed vectors as centroids
-        const uniqueVectorsSet = new Set<string>();
-        const uniqueCentroids: Embedding[] = [];
-        
-        compressed.forEach(vector => {
-            const key = JSON.stringify(vector);
-            if (!uniqueVectorsSet.has(key)) {
-                uniqueVectorsSet.add(key);
-                uniqueCentroids.push(vector);
-            }
-        });
-        centroids = uniqueCentroids;
+        // Using extractUniqueVectors is appropriate here because grid points
+        // are deterministic and JSON.stringify preserves exact values
+        centroids = extractUniqueVectors(Array.from(compressed.values()));
     } else if (options.method === 'kmeans') {
         const k = options.k || 3;
         const result = runKMeansLite(originalVectors, k);
