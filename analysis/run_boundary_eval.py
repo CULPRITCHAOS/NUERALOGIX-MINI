@@ -120,21 +120,39 @@ def load_text_embeddings(path: str) -> Optional[List[Dict]]:
         
         # Convert to expected format
         embeddings = []
+        
+        # Check for semantic mesh format (fp16 with points)
+        if isinstance(data, dict) and 'fp16' in data and 'points' in data['fp16']:
+            points = data['fp16']['points']
+            for point in points:
+                # Extract x, y, z as a 3D embedding
+                if 'x' in point and 'y' in point and 'z' in point:
+                    embedding = [point['x'], point['y'], point['z']]
+                    item_id = point.get('id', point.get('label', f"point_{point.get('index', 0)}"))
+                    embeddings.append({
+                        'item': item_id,
+                        'embedding': embedding
+                    })
+            return embeddings if embeddings else None
+        
+        # Check for direct list format
         if isinstance(data, list):
-            # Already in list format
             for item in data:
                 if 'embedding' in item:
                     embeddings.append(item)
-        elif isinstance(data, dict):
-            # Convert dict format to list
+            return embeddings if embeddings else None
+        
+        # Check for dict format
+        if isinstance(data, dict):
             for key, value in data.items():
                 if isinstance(value, list):
                     embeddings.append({
                         'item': key,
                         'embedding': value
                     })
+            return embeddings if embeddings else None
         
-        return embeddings if embeddings else None
+        return None
     except Exception as e:
         print(f"Warning: Could not load text embeddings from {path}: {e}")
         return None
