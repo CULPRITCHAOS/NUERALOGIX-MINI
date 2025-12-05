@@ -99,14 +99,17 @@ export const compressEmbeddings = (embeddings: EmbeddingMap, options: Compressio
 
         // 2. Snap these unique centroids to the grid.
         const snappedCentroids = idealCentroids.map(centroid => snapToGrid(centroid, step));
+        
+        // 3. Deduplicate snapped centroids (grid snapping may create duplicates)
+        const uniqueSnappedCentroids = extractUniqueVectors(snappedCentroids);
 
-        // 3. For each original vector, find the closest snapped centroid and assign it.
+        // 4. For each original vector, find the closest snapped centroid and assign it.
         items.forEach((item: string, i: number) => {
             const originalVector = originalVectors[i];
-            let bestCentroid = snappedCentroids[0];
+            let bestCentroid = uniqueSnappedCentroids[0];
             let minDistance = Infinity;
 
-            for (const snappedCentroid of snappedCentroids) {
+            for (const snappedCentroid of uniqueSnappedCentroids) {
                 const distance = euclideanDistance(originalVector, snappedCentroid);
                 if (distance < minDistance) {
                     minDistance = distance;
@@ -115,7 +118,7 @@ export const compressEmbeddings = (embeddings: EmbeddingMap, options: Compressio
             }
             compressed.set(item, bestCentroid);
         });
-        centroids = snappedCentroids;
+        centroids = uniqueSnappedCentroids;
     }
 
     return { compressed, centroids };
