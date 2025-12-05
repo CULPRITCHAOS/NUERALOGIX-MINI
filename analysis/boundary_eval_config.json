@@ -1,0 +1,74 @@
+{
+  "description": "Configuration for boundary geometry evaluation datasets",
+  "datasets": [
+    {
+      "name": "synthetic_rings",
+      "modality": "synthetic",
+      "generator": "ring",
+      "params": {
+        "numPoints": 500,
+        "dimension": 8,
+        "radius": 1.0,
+        "noise": 0.05
+      },
+      "description": "Circular manifold with known boundary structure"
+    },
+    {
+      "name": "synthetic_swiss_roll",
+      "modality": "synthetic",
+      "generator": "swiss-roll",
+      "params": {
+        "numPoints": 500,
+        "dimension": 8,
+        "turns": 1.5,
+        "noise": 0.05
+      },
+      "description": "2D manifold in 3D space, classic non-linear dataset"
+    },
+    {
+      "name": "synthetic_clusters",
+      "modality": "synthetic",
+      "generator": "clusters",
+      "params": {
+        "numPoints": 500,
+        "dimension": 8,
+        "numClusters": 5,
+        "spread": 0.5
+      },
+      "description": "Gaussian clusters with clear boundaries between them"
+    },
+    {
+      "name": "text_real_sts",
+      "modality": "text",
+      "path": "public/semantic_mesh/mini_sts_e8_v1.json",
+      "embeddingModel": "text-embedding",
+      "description": "Real text embeddings from STS dataset"
+    },
+    {
+      "name": "image_real_placeholder",
+      "modality": "image",
+      "path": null,
+      "embeddingModel": "clip-style",
+      "description": "Placeholder for image embeddings (to be implemented with actual data)"
+    }
+  ],
+  "experiment_defaults": {
+    "gridRange": {
+      "min": 0.01,
+      "max": 0.5,
+      "steps": 15
+    },
+    "kRange": {
+      "min": 3,
+      "max": 15,
+      "steps": 5
+    },
+    "metrics": [
+      "lsi",
+      "mse_global",
+      "mse_boundary",
+      "mse_bulk",
+      "delta_boundary"
+    ]
+  }
+}
