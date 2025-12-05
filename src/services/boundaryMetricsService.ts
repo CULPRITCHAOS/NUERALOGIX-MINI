@@ -31,6 +31,7 @@ export interface BoundaryMetrics {
   mse_boundary: number;
   mse_bulk: number;
   delta_boundary: number;
+  ambiguity_scores?: number[];  // xi values for each vector
 }
 
 /**
@@ -55,31 +56,10 @@ function computeTopKDistances(
 }
 
 /**
- * Get unique centroids from compressed embeddings
+ * Compute quantile value from array using linear interpolation
  * 
- * Note: Uses JSON.stringify for vector comparison. While not the most efficient
- * for large datasets, it's acceptable here since:
- * 1. The number of unique centroids is typically small (k clusters)
- * 2. The comparison happens once per compression sweep
- * 3. Floating-point precision is maintained by JSON serialization
- */
-function getUniqueCentroids(compressed: EmbeddingMap): Embedding[] {
-  const uniqueVectorsSet = new Set<string>();
-  const uniqueCentroids: Embedding[] = [];
-  
-  compressed.forEach(vector => {
-    const key = JSON.stringify(vector);
-    if (!uniqueVectorsSet.has(key)) {
-      uniqueVectorsSet.add(key);
-      uniqueCentroids.push(vector);
-    }
-  });
-  
-  return uniqueCentroids;
-}
-
-/**
- * Compute quantile value from array
+ * This implements PERCENTILE_CONT style interpolation between nearest ranks
+ * for more accurate and numerically stable quantile estimation.
  * 
  * @param arr - Array of numbers
  * @param q - Quantile value (0 to 1)
@@ -90,9 +70,25 @@ function quantile(arr: number[], q: number): number {
   if (q < 0 || q > 1) return NaN;
   
   const sorted = [...arr].sort((a, b) => a - b);
-  // Use Math.max to ensure we don't get negative indices
-  const index = Math.max(0, Math.min(Math.floor(sorted.length * q), sorted.length - 1));
-  return sorted[index];
+  const n = sorted.length;
+  
+  // Handle edge cases
+  if (q === 0) return sorted[0];
+  if (q === 1) return sorted[n - 1];
+  
+  // Linear interpolation between ranks
+  // Using (n - 1) * q to get proper position in 0-indexed array
+  const position = (n - 1) * q;
+  const lower = Math.floor(position);
+  const upper = Math.ceil(position);
+  
+  if (lower === upper) {
+    return sorted[lower];
+  }
+  
+  // Linear interpolation between lower and upper values
+  const weight = position - lower;
+  return sorted[lower] * (1 - weight) + sorted[upper] * weight;
 }
 
 /**
@@ -100,18 +96,17 @@ function quantile(arr: number[], q: number): number {
  * 
  * @param original - Original embeddings before compression
  * @param compressed - Compressed embeddings
+ * @param centroids - Actual codebook centroids from the quantizer
  * @returns Boundary metrics including global, boundary, bulk MSE and delta
  */
 export function computeBoundaryMetrics(
   original: EmbeddingMap,
-  compressed: EmbeddingMap
+  compressed: EmbeddingMap,
+  centroids: Embedding[]
 ): BoundaryMetrics {
   const items = Array.from(original.keys());
   const originalVectors = items.map(item => original.get(item)!);
   const compressedVectors = items.map(item => compressed.get(item)!);
-  
-  // Get unique centroids from compressed vectors
-  const centroids = getUniqueCentroids(compressed);
   
   // Need at least 2 centroids for boundary analysis
   if (centroids.length < 2 || items.length === 0) {
@@ -120,6 +115,7 @@ export function computeBoundaryMetrics(
       mse_boundary: NaN,
       mse_bulk: NaN,
       delta_boundary: NaN,
+      ambiguity_scores: [],
     };
   }
   
@@ -174,5 +170,6 @@ export function computeBoundaryMetrics(
     mse_boundary,
     mse_bulk,
     delta_boundary,
+    ambiguity_scores: ambiguityScores,
   };
 }

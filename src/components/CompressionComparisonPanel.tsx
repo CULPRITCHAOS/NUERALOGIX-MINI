@@ -73,7 +73,8 @@ const CompressionComparisonPanel: React.FC<CompressionComparisonPanelProps> = ({
           const baselineMethod = methodId as BaselineMethod;
           compressed = BASELINE_METHODS[baselineMethod](embeddings);
         } else {
-          compressed = compressEmbeddings(embeddings, method.config);
+          const result = compressEmbeddings(embeddings, method.config);
+          compressed = result.compressed;
         }
 
         const basicMetrics = analyzeCompression(embeddings, compressed);

@@ -1,15 +1,17 @@
 
-
-import { EmbeddingMap, CompressionOptions, Embedding } from '../types';
-import { euclideanDistance } from './mathService';
+import { EmbeddingMap, CompressionOptions, Embedding, CompressionResult } from '../types';
+import { euclideanDistance, extractUniqueVectors } from './mathService';
 
 const snapToGrid = (vector: Embedding, step: number): Embedding => {
     return vector.map(component => Math.round(component / step) * step);
 };
 
-const runKMeansLite = (vectors: Embedding[], k: number): Embedding[] => {
+const runKMeansLite = (vectors: Embedding[], k: number): { compressed: Embedding[], centroids: Embedding[] } => {
     if (vectors.length <= k) {
-        return vectors;
+        return {
+            compressed: vectors,
+            centroids: vectors.map(v => [...v])
+        };
     }
 
     // 1. Initialize centroids by picking k random vectors
@@ -53,17 +55,22 @@ const runKMeansLite = (vectors: Embedding[], k: number): Embedding[] => {
     }
 
     // 4. Return the centroid for each vector's final assignment
-    return assignments.map(clusterIndex => centroids[clusterIndex]);
+    const compressed = assignments.map(clusterIndex => centroids[clusterIndex]);
+    return {
+        compressed,
+        centroids
+    };
 };
 
 
-export const compressEmbeddings = (embeddings: EmbeddingMap, options: CompressionOptions): EmbeddingMap => {
+export const compressEmbeddings = (embeddings: EmbeddingMap, options: CompressionOptions): CompressionResult => {
     const compressed = new Map<string, Embedding>();
     const items: string[] = Array.from(embeddings.keys());
     const originalVectors: Embedding[] = Array.from(embeddings.values());
+    let centroids: Embedding[] = [];
 
     if (originalVectors.length === 0) {
-        return compressed;
+        return { compressed, centroids };
     }
 
     if (options.method === 'grid') {
@@ -71,30 +78,38 @@ export const compressEmbeddings = (embeddings: EmbeddingMap, options: Compressio
         items.forEach((item: string, i: number) => {
             compressed.set(item, snapToGrid(originalVectors[i], step));
         });
+        // For grid method, centroids are the unique grid points
+        // Using extractUniqueVectors is appropriate here because grid points
+        // are deterministic and JSON.stringify preserves exact values
+        centroids = extractUniqueVectors(Array.from(compressed.values()));
     } else if (options.method === 'kmeans') {
         const k = options.k || 3;
-        const compressedVectors = runKMeansLite(originalVectors, k);
+        const result = runKMeansLite(originalVectors, k);
         items.forEach((item: string, i: number) => {
-            compressed.set(item, compressedVectors[i]);
+            compressed.set(item, result.compressed[i]);
         });
+        centroids = result.centroids;
     } else if (options.method === 'kmeans-grid') {
         const k = options.k || 3;
         const step = options.step || 0.25;
 
         // 1. Run KMeans on all vectors to find the ideal centroids.
-        const kMeansResultVectors = runKMeansLite(originalVectors, k);
-        const uniqueCentroids = [...new Set(kMeansResultVectors.map(v => JSON.stringify(v)))].map(s => JSON.parse(s));
+        const kMeansResult = runKMeansLite(originalVectors, k);
+        const idealCentroids = kMeansResult.centroids;
 
         // 2. Snap these unique centroids to the grid.
-        const snappedCentroids = uniqueCentroids.map(centroid => snapToGrid(centroid, step));
+        const snappedCentroids = idealCentroids.map(centroid => snapToGrid(centroid, step));
+        
+        // 3. Deduplicate snapped centroids (grid snapping may create duplicates)
+        const uniqueSnappedCentroids = extractUniqueVectors(snappedCentroids);
 
-        // 3. For each original vector, find the closest snapped centroid and assign it.
+        // 4. For each original vector, find the closest snapped centroid and assign it.
         items.forEach((item: string, i: number) => {
             const originalVector = originalVectors[i];
-            let bestCentroid = snappedCentroids[0];
+            let bestCentroid = uniqueSnappedCentroids[0];
             let minDistance = Infinity;
 
-            for (const snappedCentroid of snappedCentroids) {
+            for (const snappedCentroid of uniqueSnappedCentroids) {
                 const distance = euclideanDistance(originalVector, snappedCentroid);
                 if (distance < minDistance) {
                     minDistance = distance;
@@ -103,7 +118,8 @@ export const compressEmbeddings = (embeddings: EmbeddingMap, options: Compressio
             }
             compressed.set(item, bestCentroid);
         });
+        centroids = uniqueSnappedCentroids;
     }
 
-    return compressed;
+    return { compressed, centroids };
 };

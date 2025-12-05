@@ -32,6 +32,35 @@ export const meanSquaredError = (vec1: Embedding, vec2: Embedding): number => {
     return sum / vec1.length;
 };
 
+/**
+ * Extract unique vectors from a collection using JSON serialization
+ * 
+ * Note: This uses JSON.stringify for vector comparison, which is acceptable for:
+ * - Grid-quantized vectors (deterministic values)
+ * - Small sets of centroids (typically < 100)
+ * - Scenarios where exact floating-point equality is desired
+ * 
+ * Performance: For large datasets (>1000 vectors), consider using a hash-based
+ * approach or floating-point tolerant comparison for better performance.
+ * 
+ * @param vectors - Array of vectors to deduplicate
+ * @returns Array of unique vectors
+ */
+export const extractUniqueVectors = (vectors: Embedding[]): Embedding[] => {
+    const uniqueVectorsSet = new Set<string>();
+    const uniqueVectors: Embedding[] = [];
+    
+    vectors.forEach(vector => {
+        const key = JSON.stringify(vector);
+        if (!uniqueVectorsSet.has(key)) {
+            uniqueVectorsSet.add(key);
+            uniqueVectors.push(vector);
+        }
+    });
+    
+    return uniqueVectors;
+};
+
 // Simplified PCA implementation for 2D visualization
 export const pca = (vectors: Embedding[]): { x: number, y: number }[] => {
     if (vectors.length === 0 || vectors[0].length < 2) {

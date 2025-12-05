@@ -11,6 +11,11 @@ It loads the exported experiment results (JSON format) and generates plots showi
 The key signal we're looking for is whether boundary vectors degrade earlier
 than bulk vectors as compression increases.
 
+Boundary/bulk classification is performed using robust quantile calculation:
+- The TypeScript code now uses linear interpolation for quantiles (PERCENTILE_CONT style)
+- This provides more accurate and numerically stable 10%/90% splits
+- Centroids are now the actual codebook centroids from the quantizer (not JSON-derived)
+
 Usage:
     python analysis/plot_boundary_sweep.py <experiment_result.json>
     python analysis/plot_boundary_sweep.py path/to/experiment_results.json --output-dir plots
@@ -38,6 +43,10 @@ def load_experiment_data(filepath: str) -> Dict:
 def extract_boundary_metrics(data: Dict) -> Tuple[np.ndarray, np.ndarray, np.ndarray, np.ndarray, np.ndarray]:
     """
     Extract boundary metrics from experiment data.
+    
+    If ambiguity scores (xi) are available in the data, use them for 
+    boundary/bulk classification. Otherwise, fall back to using the
+    pre-computed boundary/bulk metrics from TypeScript.
     
     Returns:
         Tuple of (grid, k, mse_global, mse_boundary, mse_bulk, delta_boundary)

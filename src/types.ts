@@ -12,6 +12,11 @@ export interface CompressionOptions {
     k?: number;
 }
 
+export interface CompressionResult {
+    compressed: EmbeddingMap;
+    centroids: Embedding[];
+}
+
 export interface PairwiseDistance {
     pair: [string, string];
     distance: number;
