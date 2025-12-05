@@ -35,7 +35,7 @@ For each compression setting (grid step, k-means clusters), we compute:
 
 ## How to Run
 
-### 1. Run the Experiment
+### Option A: Web UI (Single Dataset)
 
 The boundary geometry experiment is available as a pre-configured validation experiment:
 
@@ -48,6 +48,25 @@ The boundary geometry experiment is available as a pre-configured validation exp
 7. Click **"Export JSON"** to save the results
 
 This will save a file like: `experiment_val-006-boundary-geometry_[timestamp].json`
+
+### Option B: Evaluation Suite (Multiple Datasets, Stability Analysis)
+
+For comprehensive evaluation across multiple datasets, runs, and backends, use the evaluation harness:
+
+```bash
+# Run on all configured datasets with 3 runs each
+python analysis/run_boundary_eval.py --datasets all --runs 3 --backend internal
+
+# Run specific datasets only
+python analysis/run_boundary_eval.py --datasets synthetic_rings,text_real_sts --runs 5
+
+# Compare backends
+python analysis/run_boundary_eval.py --datasets all --runs 3 --backend faiss_like
+```
+
+See **[docs/BOUNDARY_EVAL_GUIDE.md](BOUNDARY_EVAL_GUIDE.md)** for detailed documentation on the evaluation suite.
+
+### 1. Run the Experiment (Single Dataset - Web UI)
 
 ### 2. Analyze Results with Python Script
 
