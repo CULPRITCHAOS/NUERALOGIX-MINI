@@ -39,6 +39,10 @@ __pycache__/
 # Boundary evaluation results (generated outputs)
 results/boundary_eval/
 
+# MS MARCO benchmark data (large files - generated locally)
+data/msmarco_subset/
+results/msmarco/
+
 # Editor directories and files
 .vscode/*
 !.vscode/extensions.json
