@@ -1,0 +1,150 @@
+{
+  "validation_id": "real_world_validation_v1",
+  "description": "Real-world validation of boundary-aware compression on text and image embeddings",
+  "timestamp": "2025-12-05T00:00:00Z",
+  
+  "datasets": {
+    "text_embeddings": {
+      "wikipedia_sts": {
+        "type": "text",
+        "source": "sentence-transformers",
+        "model": "all-MiniLM-L6-v2",
+        "dimension": 384,
+        "sample_size": 1000,
+        "description": "Wikipedia sentences with STS similarity annotations",
+        "enabled": false,
+        "note": "Requires pre-computed embeddings from sentence-transformers library"
+      },
+      "beir_scidocs": {
+        "type": "text",
+        "source": "BEIR",
+        "model": "all-MiniLM-L6-v2",
+        "dimension": 384,
+        "sample_size": 500,
+        "description": "Scientific paper abstracts from BEIR benchmark",
+        "enabled": false,
+        "note": "Requires BEIR dataset download"
+      }
+    },
+    
+    "image_embeddings": {
+      "imagenet_clip": {
+        "type": "image",
+        "source": "CLIP",
+        "model": "ViT-B/32",
+        "dimension": 512,
+        "sample_size": 1000,
+        "description": "ImageNet validation subset with CLIP embeddings",
+        "enabled": false,
+        "note": "Requires CLIP model and ImageNet dataset"
+      },
+      "cifar10_clip": {
+        "type": "image",
+        "source": "CLIP",
+        "model": "ViT-B/32",
+        "dimension": 512,
+        "sample_size": 500,
+        "description": "CIFAR-10 test set with CLIP embeddings",
+        "enabled": false,
+        "note": "Requires CLIP model and CIFAR-10 dataset"
+      }
+    },
+    
+    "synthetic_validation": {
+      "clusters_500": {
+        "type": "synthetic",
+        "generator": "clusters",
+        "dimension": 8,
+        "sample_size": 500,
+        "params": {
+          "numClusters": 5,
+          "spread": 0.5,
+          "noise": 0.05
+        },
+        "description": "5 gaussian clusters for validation",
+        "enabled": true
+      },
+      "rings_500": {
+        "type": "synthetic",
+        "generator": "ring",
+        "dimension": 8,
+        "sample_size": 500,
+        "params": {
+          "radius": 1.0,
+          "noise": 0.05
+        },
+        "description": "Ring structure for topological validation",
+        "enabled": true
+      },
+      "swiss_roll_500": {
+        "type": "synthetic",
+        "generator": "swiss-roll",
+        "dimension": 8,
+        "sample_size": 500,
+        "params": {
+          "turns": 1.5,
+          "noise": 0.05
+        },
+        "description": "Swiss roll manifold for geometry validation",
+        "enabled": true
+      }
+    }
+  },
+  
+  "compression_configs": {
+    "grid_sweep": {
+      "min": 0.01,
+      "max": 0.5,
+      "steps": 15
+    },
+    "k_sweep": {
+      "min": 3,
+      "max": 15,
+      "steps": 5
+    },
+    "methods": [
+      "lattice-hybrid",
+      "boundary-aware"
+    ]
+  },
+  
+  "evaluation_metrics": {
+    "retrieval": {
+      "enabled": true,
+      "metrics": ["recall_at_10", "recall_at_100", "mrr", "ndcg_at_10"]
+    },
+    "clustering": {
+      "enabled": true,
+      "metrics": ["silhouette", "nmi", "ari"]
+    },
+    "boundary_analysis": {
+      "enabled": true,
+      "metrics": ["mse_global", "mse_boundary", "mse_bulk", "delta_boundary"]
+    },
+    "performance": {
+      "enabled": true,
+      "metrics": ["compression_time", "query_latency", "memory_footprint"]
+    }
+  },
+  
+  "execution": {
+    "runs_per_config": 3,
+    "random_seeds": [42, 123, 456],
+    "parallel_execution": false,
+    "verbose": true
+  },
+  
+  "output": {
+    "base_dir": "results/real_world_validation",
+    "save_embeddings": true,
+    "save_compressed": true,
+    "save_metrics": true,
+    "export_formats": ["json", "csv"]
+  },
+  
+  "quality_thresholds": {
+    "min_recall_improvement": 0.02,
+    "max_overhead_percent": 0.20,
+    "min_significance_level": 0.05
+  }
+}

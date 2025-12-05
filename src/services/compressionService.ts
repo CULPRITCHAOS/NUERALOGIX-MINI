@@ -7,6 +7,10 @@ const snapToGrid = (vector: Embedding, step: number): Embedding => {
 };
 
 const runKMeansLite = (vectors: Embedding[], k: number): { compressed: Embedding[], centroids: Embedding[] } => {
+    // Handle edge cases
+    if (k <= 0) {
+        k = 1; // Minimum 1 cluster
+    }
     if (vectors.length <= k) {
         return {
             compressed: vectors,
@@ -102,6 +106,38 @@ const classifyBoundaryVectors = (
         .map(({ i }) => i);
 };
 
+/**
+ * Validate embedding vectors for NaN, Infinity, and dimension consistency
+ */
+const validateEmbeddings = (vectors: Embedding[]): void => {
+    if (vectors.length === 0) {
+        return; // Empty is valid
+    }
+
+    const expectedDim = vectors[0].length;
+
+    for (let i = 0; i < vectors.length; i++) {
+        const vec = vectors[i];
+        
+        // Check dimension consistency
+        if (vec.length !== expectedDim) {
+            throw new Error(
+                `Dimension mismatch: vector at index ${i} has dimension ${vec.length}, expected ${expectedDim}`
+            );
+        }
+
+        // Check for NaN and Infinity
+        for (let j = 0; j < vec.length; j++) {
+            const val = vec[j];
+            if (!isFinite(val)) {
+                throw new Error(
+                    `Invalid value in vector at index ${i}, dimension ${j}: ${val}`
+                );
+            }
+        }
+    }
+};
+
 export const compressEmbeddings = (embeddings: EmbeddingMap, options: CompressionOptions): CompressionResult => {
     const compressed = new Map<string, Embedding>();
     const items: string[] = Array.from(embeddings.keys());
@@ -111,6 +147,9 @@ export const compressEmbeddings = (embeddings: EmbeddingMap, options: Compressio
     if (originalVectors.length === 0) {
         return { compressed, centroids };
     }
+
+    // Validate inputs
+    validateEmbeddings(originalVectors);
 
     if (options.method === 'grid') {
         const step = options.step || 0.25;

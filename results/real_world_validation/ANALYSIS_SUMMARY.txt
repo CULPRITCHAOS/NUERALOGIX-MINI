@@ -1,0 +1,59 @@
+================================================================================
+REAL-WORLD VALIDATION SUMMARY
+================================================================================
+
+Datasets Evaluated: 3
+  - clusters_500
+  - rings_500
+  - swiss_roll_500
+
+Total Experiments: 270
+
+VERDICT: ❌ REJECTED
+
+KEY FINDINGS:
+
+Baseline (lattice-hybrid) vs Boundary-Aware:
+
+  [✓] compression_time_seconds:
+      Baseline:       0.0036
+      Boundary-Aware: 0.0077
+      Improvement:    -114.17%
+
+  [✓] mrr:
+      Baseline:       0.0410
+      Boundary-Aware: 0.0535
+      Improvement:    +30.59%
+
+  [ ] mse_global:
+      Baseline:       0.3691
+      Boundary-Aware: 0.3691
+      Improvement:    -0.00%
+
+  [✓] ndcg_at_10:
+      Baseline:       0.3390
+      Boundary-Aware: 0.3539
+      Improvement:    +4.40%
+
+  [✓] recall_at_10:
+      Baseline:       0.1326
+      Boundary-Aware: 0.1486
+      Improvement:    +12.10%
+
+  [ ] recall_at_100:
+      Baseline:       0.7104
+      Boundary-Aware: 0.7078
+      Improvement:    -0.36%
+
+Performance Overhead: +114.2%
+  Status: ❌ High (>100%)
+
+RECOMMENDATIONS:
+
+  1. No significant benefit observed
+  2. Focus on alternative approaches
+  3. Document failure modes for future reference
+
+================================================================================
+See docs/REAL_WORLD_VALIDATION_REPORT.md for full details
+================================================================================
