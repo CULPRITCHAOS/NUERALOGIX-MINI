@@ -151,6 +151,21 @@ See [NOVEL_FINDINGS.md](NOVEL_FINDINGS.md) for detailed experimental log.
     *   Export to standard formats (JSON) for external analysis
     *   See [docs/BOUNDARY_GEOMETRY_EXPERIMENT.md](docs/BOUNDARY_GEOMETRY_EXPERIMENT.md) for details
 
+### Boundary-Aware Compression (NEW)
+*   **Experimental Compression Mode:**
+    *   Applies **differential treatment** to boundary vs bulk vectors
+    *   Boundary vectors (near cluster boundaries): finer quantization grid
+    *   Bulk vectors (clearly within clusters): standard quantization
+    *   Toggle-controlled comparison against vanilla quantization
+*   **Direct Comparison Framework:**
+    *   Side-by-side metrics: Global MSE, Boundary MSE, Δ_boundary, k-NN overlap, LSI
+    *   Automated verdict: ✅ **Exploitable** or ❌ **Observational Only**
+    *   Structured comparison table and charts
+    *   Determines if boundary geometry treatment measurably improves compression
+*   **Quick Start:**
+    *   See [QUICKSTART_BOUNDARY_AWARE.md](QUICKSTART_BOUNDARY_AWARE.md) for 15-minute experiment
+    *   Full documentation: [docs/BOUNDARY_AWARE_EXPERIMENT.md](docs/BOUNDARY_AWARE_EXPERIMENT.md)
+
 ---
 
 ## 🛠️ Installation & Setup

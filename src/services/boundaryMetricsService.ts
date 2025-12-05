@@ -32,6 +32,9 @@ export interface BoundaryMetrics {
   mse_bulk: number;
   delta_boundary: number;
   ambiguity_scores?: number[];  // xi values for each vector
+  knn_overlap?: number;  // k-NN overlap preservation
+  compression_ratio?: number;  // Compression ratio (original size / compressed size)
+  memory_bits?: number;  // Estimated bits per vector in compressed representation
 }
 
 /**
@@ -92,17 +95,95 @@ function quantile(arr: number[], q: number): number {
 }
 
 /**
+ * Compute k-NN overlap between original and compressed embeddings
+ * Returns Jaccard similarity of k-nearest neighbor sets
+ */
+function computeKNNOverlap(
+  original: EmbeddingMap,
+  compressed: EmbeddingMap,
+  k: number = 5
+): number {
+  const items = Array.from(original.keys());
+  if (items.length < k + 1) {
+    return 1.0; // If not enough items for k-NN, consider perfect overlap
+  }
+
+  const originalVectors = items.map(item => original.get(item)!);
+  const compressedVectors = items.map(item => compressed.get(item)!);
+
+  let totalOverlap = 0;
+
+  // For each vector, compute k-NN in both spaces
+  for (let i = 0; i < items.length; i++) {
+    // Compute distances in original space
+    const originalDistances = originalVectors.map((vec, j) => ({
+      index: j,
+      distance: i === j ? Infinity : euclideanDistance(originalVectors[i], vec)
+    }));
+    originalDistances.sort((a, b) => a.distance - b.distance);
+    const originalKNN = new Set(originalDistances.slice(0, k).map(d => d.index));
+
+    // Compute distances in compressed space
+    const compressedDistances = compressedVectors.map((vec, j) => ({
+      index: j,
+      distance: i === j ? Infinity : euclideanDistance(compressedVectors[i], vec)
+    }));
+    compressedDistances.sort((a, b) => a.distance - b.distance);
+    const compressedKNN = new Set(compressedDistances.slice(0, k).map(d => d.index));
+
+    // Compute Jaccard similarity
+    const intersection = new Set([...originalKNN].filter(x => compressedKNN.has(x)));
+    const union = new Set([...originalKNN, ...compressedKNN]);
+    const jaccard = intersection.size / union.size;
+    totalOverlap += jaccard;
+  }
+
+  return totalOverlap / items.length;
+}
+
+/**
+ * Compute compression ratio and memory usage
+ */
+function computeCompressionMetrics(
+  centroids: Embedding[],
+  numVectors: number,
+  dimension: number
+): { compression_ratio: number; memory_bits: number } {
+  if (numVectors === 0 || centroids.length === 0) {
+    return { compression_ratio: 1.0, memory_bits: 0 };
+  }
+
+  // Original: numVectors * dimension * 32 bits (float32)
+  const originalBits = numVectors * dimension * 32;
+
+  // Compressed: 
+  // - Codebook: centroids.length * dimension * 32 bits
+  // - Indices: numVectors * log2(centroids.length) bits
+  const codebookBits = centroids.length * dimension * 32;
+  const indexBits = centroids.length > 0 ? Math.ceil(Math.log2(Math.max(1, centroids.length))) : 0;
+  const indicesBits = numVectors * indexBits;
+  const compressedBits = codebookBits + indicesBits;
+
+  const compression_ratio = originalBits / compressedBits;
+  const memory_bits = compressedBits / numVectors; // Bits per vector
+
+  return { compression_ratio, memory_bits };
+}
+
+/**
  * Compute boundary vs bulk MSE metrics
  * 
  * @param original - Original embeddings before compression
  * @param compressed - Compressed embeddings
  * @param centroids - Actual codebook centroids from the quantizer
+ * @param computeExtendedMetrics - Whether to compute kNN overlap and compression metrics
  * @returns Boundary metrics including global, boundary, bulk MSE and delta
  */
 export function computeBoundaryMetrics(
   original: EmbeddingMap,
   compressed: EmbeddingMap,
-  centroids: Embedding[]
+  centroids: Embedding[],
+  computeExtendedMetrics: boolean = false
 ): BoundaryMetrics {
   const items = Array.from(original.keys());
   const originalVectors = items.map(item => original.get(item)!);
@@ -164,12 +245,26 @@ export function computeBoundaryMetrics(
   
   // Compute delta
   const delta_boundary = mse_boundary - mse_bulk;
-  
-  return {
+
+  const result: BoundaryMetrics = {
     mse_global,
     mse_boundary,
     mse_bulk,
     delta_boundary,
     ambiguity_scores: ambiguityScores,
   };
+
+  // Optionally compute extended metrics
+  if (computeExtendedMetrics) {
+    result.knn_overlap = computeKNNOverlap(original, compressed);
+    const compressionMetrics = computeCompressionMetrics(
+      centroids,
+      items.length,
+      originalVectors[0]?.length || 0
+    );
+    result.compression_ratio = compressionMetrics.compression_ratio;
+    result.memory_bits = compressionMetrics.memory_bits;
+  }
+  
+  return result;
 }

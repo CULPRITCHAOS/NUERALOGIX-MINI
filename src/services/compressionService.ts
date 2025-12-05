@@ -63,6 +63,45 @@ const runKMeansLite = (vectors: Embedding[], k: number): { compressed: Embedding
 };
 
 
+/**
+ * Classify vectors as boundary or bulk based on ambiguity scores
+ * Returns indices of boundary vectors (bottom 10% by xi = d2 - d1)
+ */
+const classifyBoundaryVectors = (
+    vectors: Embedding[],
+    centroids: Embedding[]
+): number[] => {
+    if (centroids.length < 2) {
+        return [];
+    }
+
+    // Compute ambiguity scores for each vector
+    const ambiguityScores = vectors.map(vector => {
+        // Find distances to nearest and 2nd nearest centroids
+        const distances = centroids.map(c => euclideanDistance(vector, c)).sort((a, b) => a - b);
+        const d1 = distances[0];
+        const d2 = distances.length > 1 ? distances[1] : distances[0];
+        return d2 - d1; // xi = d2 - d1
+    });
+
+    // Find 10th percentile threshold
+    const sortedScores = [...ambiguityScores].sort((a, b) => a - b);
+    const n = sortedScores.length;
+    const q10Position = (n - 1) * 0.10;
+    const lower = Math.floor(q10Position);
+    const upper = Math.ceil(q10Position);
+    const weight = q10Position - lower;
+    const threshold = lower === upper 
+        ? sortedScores[lower]
+        : sortedScores[lower] * (1 - weight) + sortedScores[upper] * weight;
+
+    // Return indices of boundary vectors (those with xi <= threshold)
+    return ambiguityScores
+        .map((score, i) => ({ score, i }))
+        .filter(({ score }) => score <= threshold)
+        .map(({ i }) => i);
+};
+
 export const compressEmbeddings = (embeddings: EmbeddingMap, options: CompressionOptions): CompressionResult => {
     const compressed = new Map<string, Embedding>();
     const items: string[] = Array.from(embeddings.keys());
@@ -119,6 +158,48 @@ export const compressEmbeddings = (embeddings: EmbeddingMap, options: Compressio
             compressed.set(item, bestCentroid);
         });
         centroids = uniqueSnappedCentroids;
+    } else if (options.method === 'boundary-aware') {
+        // Boundary-aware compression: differential treatment for boundary vs bulk vectors
+        const k = options.k || 3;
+        const step = options.step || 0.25;
+        const boundaryStep = step * 0.5; // Lower quantization aggressiveness for boundary vectors
+
+        // 1. Run KMeans to get initial centroids
+        const kMeansResult = runKMeansLite(originalVectors, k);
+        const idealCentroids = kMeansResult.centroids;
+
+        // 2. Classify boundary vectors using initial centroids
+        const boundaryIndices = new Set(classifyBoundaryVectors(originalVectors, idealCentroids));
+
+        // 3. Snap centroids to grid
+        const snappedCentroids = idealCentroids.map(centroid => snapToGrid(centroid, step));
+        const uniqueSnappedCentroids = extractUniqueVectors(snappedCentroids);
+
+        // 4. For boundary vectors, create finer-grained centroids
+        const boundaryCentroids = idealCentroids.map(centroid => snapToGrid(centroid, boundaryStep));
+        const uniqueBoundaryCentroids = extractUniqueVectors(boundaryCentroids);
+
+        // 5. Compress: use finer grid for boundary, coarser for bulk
+        items.forEach((item: string, i: number) => {
+            const originalVector = originalVectors[i];
+            const isBoundary = boundaryIndices.has(i);
+            const centroidsToUse = isBoundary ? uniqueBoundaryCentroids : uniqueSnappedCentroids;
+
+            let bestCentroid = centroidsToUse[0];
+            let minDistance = Infinity;
+
+            for (const centroid of centroidsToUse) {
+                const distance = euclideanDistance(originalVector, centroid);
+                if (distance < minDistance) {
+                    minDistance = distance;
+                    bestCentroid = centroid;
+                }
+            }
+            compressed.set(item, bestCentroid);
+        });
+
+        // Combine all unique centroids for metrics computation
+        centroids = extractUniqueVectors([...uniqueSnappedCentroids, ...uniqueBoundaryCentroids]);
     }
 
     return { compressed, centroids };

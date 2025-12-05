@@ -151,9 +151,24 @@ async function runSinglePoint(
     }
   } else {
     // Lattice-based compression
-    const method = strategy === 'lattice-grid' ? 'grid' 
-                 : strategy === 'lattice-kmeans' ? 'kmeans'
-                 : 'kmeans-grid';
+    let method: 'grid' | 'kmeans' | 'kmeans-grid' | 'boundary-aware';
+    
+    switch (strategy) {
+      case 'lattice-grid':
+        method = 'grid';
+        break;
+      case 'lattice-kmeans':
+        method = 'kmeans';
+        break;
+      case 'lattice-hybrid':
+        method = 'kmeans-grid';
+        break;
+      case 'boundary-aware':
+        method = 'boundary-aware';
+        break;
+      default:
+        method = 'kmeans-grid';
+    }
     
     const result = compressEmbeddings(embeddings, {
       method,
@@ -219,7 +234,11 @@ async function runSinglePoint(
   ];
   
   if (metricTypes.some(m => boundaryMetricTypes.includes(m))) {
-    const boundaryMetrics = computeBoundaryMetrics(embeddings, compressed, centroids);
+    // Check if we need extended metrics (kNN overlap, compression ratio)
+    const needExtendedMetrics = metricTypes.includes('neighborhoodOverlap') || 
+                                 metricTypes.some(m => boundaryMetricTypes.includes(m));
+    
+    const boundaryMetrics = computeBoundaryMetrics(embeddings, compressed, centroids, needExtendedMetrics);
     
     if (metricTypes.includes('mse_global')) {
       metrics.mse_global = boundaryMetrics.mse_global;
@@ -232,6 +251,11 @@ async function runSinglePoint(
     }
     if (metricTypes.includes('delta_boundary')) {
       metrics.delta_boundary = boundaryMetrics.delta_boundary;
+    }
+    
+    // Add extended metrics if computed
+    if (boundaryMetrics.knn_overlap !== undefined) {
+      metrics.neighborhoodOverlap = boundaryMetrics.knn_overlap;
     }
   }
 
