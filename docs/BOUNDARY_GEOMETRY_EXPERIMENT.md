@@ -157,11 +157,21 @@ The validation experiment `val-006-boundary-geometry` is defined in:
 ### Data Flow
 
 1. **Compression:** Vectors are compressed using lattice-hybrid method
-2. **Centroid Extraction:** Unique centroids extracted from compressed vectors
-3. **Distance Computation:** For each original vector, compute d1, d2 to centroids
-4. **Classification:** Compute ambiguity scores (xi = d2 - d1), identify boundary/bulk
+2. **Centroid Extraction:** Actual codebook centroids are extracted from the quantizer (k-means/grid)
+3. **Distance Computation:** For each original vector, compute d1, d2 to true centroids
+4. **Classification:** Compute ambiguity scores (xi = d2 - d1) using robust linear interpolation quantiles, identify boundary/bulk at 10%/90%
 5. **MSE Computation:** Calculate per-vector MSE, aggregate by class
 6. **Export:** Results saved to JSON with metadata
+
+### Implementation Improvements (2025-01-04)
+
+The boundary metrics implementation has been enhanced for accuracy:
+
+1. **True Centroids:** The compression service now returns actual codebook centroids from the quantizer, not JSON-derived reconstructions. This ensures d1 and d2 distances are computed against the same centroids used by the compression algorithm.
+
+2. **Robust Quantiles:** The quantile calculation now uses linear interpolation between nearest ranks (PERCENTILE_CONT style) for more accurate and numerically stable 10%/90% boundary/bulk splits.
+
+3. **Backwards Compatible:** All changes maintain the existing experiment API and JSON export format.
 
 ## Limitations
 
