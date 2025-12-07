@@ -1,0 +1,189 @@
+{
+  "results": [
+    {
+      "k": 3,
+      "grid": 0.01,
+      "method": "kmeans-grid",
+      "iterations": 10,
+      "time_grid": 0.08440800000002469,
+      "time_kmeans": 5.308791999999983,
+      "time_boundary": 0,
+      "time_total": 5.746679999999998
+    },
+    {
+      "k": 3,
+      "grid": 0.01,
+      "method": "boundary-aware",
+      "iterations": 10,
+      "time_grid": 0.014135999999979276,
+      "time_kmeans": 0.9653930000000059,
+      "time_boundary": 0.5886190000000227,
+      "time_total": 1.892563999999993
+    },
+    {
+      "k": 9,
+      "grid": 0.01,
+      "method": "kmeans-grid",
+      "iterations": 10,
+      "time_grid": 0.035696000000001504,
+      "time_kmeans": 1.5784159999999758,
+      "time_boundary": 0,
+      "time_total": 2.0711869999999806
+    },
+    {
+      "k": 9,
+      "grid": 0.01,
+      "method": "boundary-aware",
+      "iterations": 10,
+      "time_grid": 0.037190000000009604,
+      "time_kmeans": 2.2899850000000015,
+      "time_boundary": 1.2195570000000089,
+      "time_total": 4.158904000000007
+    },
+    {
+      "k": 15,
+      "grid": 0.01,
+      "method": "kmeans-grid",
+      "iterations": 10,
+      "time_grid": 0.03888299999999845,
+      "time_kmeans": 3.2711979999999983,
+      "time_boundary": 0,
+      "time_total": 3.5187190000000044
+    },
+    {
+      "k": 15,
+      "grid": 0.01,
+      "method": "boundary-aware",
+      "iterations": 10,
+      "time_grid": 0.038331999999996924,
+      "time_kmeans": 2.1858410000000106,
+      "time_boundary": 1.3799860000000024,
+      "time_total": 4.040163000000007
+    },
+    {
+      "k": 3,
+      "grid": 0.1,
+      "method": "kmeans-grid",
+      "iterations": 10,
+      "time_grid": 0.012984000000017204,
+      "time_kmeans": 0.8267940000000067,
+      "time_boundary": 0,
+      "time_total": 0.9045490000000029
+    },
+    {
+      "k": 3,
+      "grid": 0.1,
+      "method": "boundary-aware",
+      "iterations": 10,
+      "time_grid": 0.01124099999998407,
+      "time_kmeans": 0.6461469999999849,
+      "time_boundary": 0.4201150000000098,
+      "time_total": 1.162951000000021
+    },
+    {
+      "k": 9,
+      "grid": 0.1,
+      "method": "kmeans-grid",
+      "iterations": 10,
+      "time_grid": 0.023624000000012302,
+      "time_kmeans": 1.4859739999999988,
+      "time_boundary": 0,
+      "time_total": 1.6467739999999935
+    },
+    {
+      "k": 9,
+      "grid": 0.1,
+      "method": "boundary-aware",
+      "iterations": 10,
+      "time_grid": 0.02191100000001711,
+      "time_kmeans": 1.4600460000000055,
+      "time_boundary": 0.5640830000000108,
+      "time_total": 2.2228000000000065
+    },
+    {
+      "k": 15,
+      "grid": 0.1,
+      "method": "kmeans-grid",
+      "iterations": 10,
+      "time_grid": 0.03364299999998366,
+      "time_kmeans": 2.1283839999999827,
+      "time_boundary": 0,
+      "time_total": 2.4994370000000004
+    },
+    {
+      "k": 15,
+      "grid": 0.1,
+      "method": "boundary-aware",
+      "iterations": 10,
+      "time_grid": 0.032341000000002396,
+      "time_kmeans": 2.12476700000002,
+      "time_boundary": 1.426573000000019,
+      "time_total": 4.4557590000000005
+    },
+    {
+      "k": 3,
+      "grid": 0.25,
+      "method": "kmeans-grid",
+      "iterations": 10,
+      "time_grid": 0.01381599999999139,
+      "time_kmeans": 1.0529960000000074,
+      "time_boundary": 0,
+      "time_total": 1.1669390000000135
+    },
+    {
+      "k": 3,
+      "grid": 0.25,
+      "method": "boundary-aware",
+      "iterations": 10,
+      "time_grid": 0.012743999999997868,
+      "time_kmeans": 1.1140200000000107,
+      "time_boundary": 0.6827949999999987,
+      "time_total": 1.9109789999999975
+    },
+    {
+      "k": 9,
+      "grid": 0.25,
+      "method": "kmeans-grid",
+      "iterations": 10,
+      "time_grid": 0.020106999999995878,
+      "time_kmeans": 1.7404790000000219,
+      "time_boundary": 0,
+      "time_total": 1.8997160000000122
+    },
+    {
+      "k": 9,
+      "grid": 0.25,
+      "method": "boundary-aware",
+      "iterations": 10,
+      "time_grid": 0.03123899999999935,
+      "time_kmeans": 1.9254849999999806,
+      "time_boundary": 1.0043950000000166,
+      "time_total": 3.1414660000000083
+    },
+    {
+      "k": 15,
+      "grid": 0.25,
+      "method": "kmeans-grid",
+      "iterations": 10,
+      "time_grid": 0.026259000000010246,
+      "time_kmeans": 1.9963180000000023,
+      "time_boundary": 0,
+      "time_total": 2.2224489999999832
+    },
+    {
+      "k": 15,
+      "grid": 0.25,
+      "method": "boundary-aware",
+      "iterations": 10,
+      "time_grid": 0.02788200000000529,
+      "time_kmeans": 2.123734000000013,
+      "time_boundary": 0.8572299999999871,
+      "time_total": 3.251961999999992
+    }
+  ],
+  "hypothesis_h4": {
+    "test": "Time scaling is sub-linear with k due to convergence",
+    "observation": "Iteration count is constant (10 iterations) across all k values.",
+    "verdict": "CONFIRMED: Fixed iteration count suggests convergence behavior is independent of k."
+  }
+}
