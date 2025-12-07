@@ -1,0 +1,22 @@
+{
+  "results": [
+    {
+      "method": "lattice-hybrid",
+      "local_distortion": 0.7205666801287831,
+      "global_distortion": 0.5719973755441903,
+      "ratio": 0.7938160219148076
+    },
+    {
+      "method": "boundary-aware",
+      "local_distortion": 0.7160183714750938,
+      "global_distortion": 0.5690172405818341,
+      "ratio": 0.7946964257489404
+    }
+  ],
+  "hypothesis_h1": {
+    "test": "Boundary-aware optimizes local geometry, sacrifices global",
+    "expected": "Lower local_distortion, higher global_distortion for boundary-aware",
+    "observation": "Boundary-aware shows LOWER local distortion but also LOWER global distortion",
+    "verdict": "FALSIFIED: H1 does not hold. Boundary-aware improves both local AND global geometry."
+  }
+}

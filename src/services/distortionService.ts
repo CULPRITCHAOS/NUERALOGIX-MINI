@@ -529,3 +529,80 @@ export function computeAllDistortionMetrics(
   
   return metrics;
 }
+
+/**
+ * Compute stratified distortion: separate local vs global neighborhoods
+ * 
+ * Local distortion: measures distortion for k_local nearest neighbors
+ * Global distortion: measures distortion for neighbors k_local+1 to k_global
+ * 
+ * This allows testing hypothesis H1: "Boundary-aware optimizes local geometry, sacrifices global"
+ */
+export function computeStratifiedDistortion(
+  original: EmbeddingMap,
+  compressed: EmbeddingMap,
+  k_local: number = 10,
+  k_global: number = 100
+): { local_distortion: number; global_distortion: number } {
+  const items = Array.from(original.keys());
+  const n = items.length;
+  
+  if (n < k_global + 1) {
+    return { local_distortion: 0, global_distortion: 0 };
+  }
+  
+  let totalLocalDistortion = 0;
+  let totalGlobalDistortion = 0;
+  
+  items.forEach(item => {
+    const origVec = original.get(item)!;
+    const compVec = compressed.get(item)!;
+    
+    // Find k_global nearest neighbors in original space
+    const origNeighbors = items
+      .filter(other => other !== item)
+      .map(other => ({
+        item: other,
+        dist: euclideanDistance(origVec, original.get(other)!)
+      }))
+      .sort((a, b) => a.dist - b.dist)
+      .slice(0, k_global);
+    
+    // Compute distortion for local neighbors (first k_local)
+    let localDistortion = 0;
+    for (let i = 0; i < k_local && i < origNeighbors.length; i++) {
+      const neighbor = origNeighbors[i];
+      const origDist = neighbor.dist;
+      const compDist = euclideanDistance(compVec, compressed.get(neighbor.item)!);
+      
+      if (origDist > 0) {
+        // Relative distortion
+        localDistortion += Math.abs(compDist - origDist) / origDist;
+      }
+    }
+    totalLocalDistortion += localDistortion / k_local;
+    
+    // Compute distortion for global neighbors (k_local+1 to k_global)
+    let globalDistortion = 0;
+    let globalCount = 0;
+    for (let i = k_local; i < k_global && i < origNeighbors.length; i++) {
+      const neighbor = origNeighbors[i];
+      const origDist = neighbor.dist;
+      const compDist = euclideanDistance(compVec, compressed.get(neighbor.item)!);
+      
+      if (origDist > 0) {
+        globalDistortion += Math.abs(compDist - origDist) / origDist;
+        globalCount++;
+      }
+    }
+    
+    if (globalCount > 0) {
+      totalGlobalDistortion += globalDistortion / globalCount;
+    }
+  });
+  
+  return {
+    local_distortion: totalLocalDistortion / n,
+    global_distortion: totalGlobalDistortion / n
+  };
+}
