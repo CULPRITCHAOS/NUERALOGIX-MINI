@@ -1,0 +1,26 @@
+{
+  "analyses": [
+    {
+      "method": "lattice-hybrid",
+      "num_centroids": 15,
+      "min_centroid_distance": 0.9000000000000001,
+      "max_centroid_distance": 5.862593282839942,
+      "avg_centroid_distance": 3.0071286287761936,
+      "close_pairs_count": 0,
+      "close_pairs_percentage": 0,
+      "spatial_clustering_coefficient": 0.46691983542973486,
+      "accessible": true
+    },
+    {
+      "method": "boundary-aware",
+      "num_centroids": 30,
+      "min_centroid_distance": 0.07071067811865482,
+      "max_centroid_distance": 5.862593282839942,
+      "avg_centroid_distance": 2.896386274869519,
+      "close_pairs_count": 3,
+      "close_pairs_percentage": 0.6896551724137931,
+      "spatial_clustering_coefficient": 0.5097104075744967,
+      "accessible": true
+    }
+  ]
+}
