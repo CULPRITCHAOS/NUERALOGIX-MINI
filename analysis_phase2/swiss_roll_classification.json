@@ -1,0 +1,2173 @@
+{
+  "swiss_roll_metrics": [
+    {
+      "dataset": "swiss_roll_500",
+      "method": "lattice-hybrid",
+      "recall_10": 0.0502,
+      "recall_100": 0.4835,
+      "ratio": 0.10382626680455016,
+      "mse": 1.4685537749827604
+    },
+    {
+      "dataset": "swiss_roll_500",
+      "method": "lattice-hybrid",
+      "recall_10": 0.1626,
+      "recall_100": 0.7323999999999999,
+      "ratio": 0.22200983069361005,
+      "mse": 0.4128447151455302
+    },
+    {
+      "dataset": "swiss_roll_500",
+      "method": "lattice-hybrid",
+      "recall_10": 0.2136,
+      "recall_100": 0.82594,
+      "ratio": 0.25861442719810157,
+      "mse": 0.20386267737483457
+    },
+    {
+      "dataset": "swiss_roll_500",
+      "method": "lattice-hybrid",
+      "recall_10": 0.0502,
+      "recall_100": 0.48229999999999995,
+      "ratio": 0.1040845946506324,
+      "mse": 1.4686882128038692
+    },
+    {
+      "dataset": "swiss_roll_500",
+      "method": "lattice-hybrid",
+      "recall_10": 0.1628,
+      "recall_100": 0.7183400000000002,
+      "ratio": 0.22663362753013888,
+      "mse": 0.41306225792954127
+    },
+    {
+      "dataset": "swiss_roll_500",
+      "method": "lattice-hybrid",
+      "recall_10": 0.21740000000000004,
+      "recall_100": 0.82224,
+      "ratio": 0.2643996886553805,
+      "mse": 0.20402375935246536
+    },
+    {
+      "dataset": "swiss_roll_500",
+      "method": "lattice-hybrid",
+      "recall_10": 0.0502,
+      "recall_100": 0.48302,
+      "ratio": 0.10392944391536582,
+      "mse": 1.4707711843179925
+    },
+    {
+      "dataset": "swiss_roll_500",
+      "method": "lattice-hybrid",
+      "recall_10": 0.15940000000000001,
+      "recall_100": 0.72842,
+      "ratio": 0.21882979599681507,
+      "mse": 0.4146468179333321
+    },
+    {
+      "dataset": "swiss_roll_500",
+      "method": "lattice-hybrid",
+      "recall_10": 0.218,
+      "recall_100": 0.8226400000000001,
+      "ratio": 0.26500048623942424,
+      "mse": 0.2052433864456058
+    },
+    {
+      "dataset": "swiss_roll_500",
+      "method": "lattice-hybrid",
+      "recall_10": 0.0502,
+      "recall_100": 0.48424,
+      "ratio": 0.10366760284156616,
+      "mse": 1.4732794629325974
+    },
+    {
+      "dataset": "swiss_roll_500",
+      "method": "lattice-hybrid",
+      "recall_10": 0.1606,
+      "recall_100": 0.7266,
+      "ratio": 0.22102945224332507,
+      "mse": 0.4206678969090029
+    },
+    {
+      "dataset": "swiss_roll_500",
+      "method": "lattice-hybrid",
+      "recall_10": 0.21860000000000002,
+      "recall_100": 0.8307199999999999,
+      "ratio": 0.2631452234206472,
+      "mse": 0.20680838814795485
+    },
+    {
+      "dataset": "swiss_roll_500",
+      "method": "lattice-hybrid",
+      "recall_10": 0.05,
+      "recall_100": 0.47808000000000006,
+      "ratio": 0.10458500669344042,
+      "mse": 1.4691128755558676
+    },
+    {
+      "dataset": "swiss_roll_500",
+      "method": "lattice-hybrid",
+      "recall_10": 0.15719999999999998,
+      "recall_100": 0.70716,
+      "ratio": 0.22229764126930251,
+      "mse": 0.41613286617189554
+    },
+    {
+      "dataset": "swiss_roll_500",
+      "method": "lattice-hybrid",
+      "recall_10": 0.233,
+      "recall_100": 0.80798,
+      "ratio": 0.28837347459095525,
+      "mse": 0.2053003522017483
+    },
+    {
+      "dataset": "swiss_roll_500",
+      "method": "boundary-aware",
+      "recall_10": 0.0866,
+      "recall_100": 0.44612,
+      "ratio": 0.1941181744822021,
+      "mse": 1.468670386160069
+    },
+    {
+      "dataset": "swiss_roll_500",
+      "method": "boundary-aware",
+      "recall_10": 0.18419999999999997,
+      "recall_100": 0.72284,
+      "ratio": 0.25482817774334565,
+      "mse": 0.41285690878129855
+    },
+    {
+      "dataset": "swiss_roll_500",
+      "method": "boundary-aware",
+      "recall_10": 0.2468,
+      "recall_100": 0.81628,
+      "ratio": 0.30234723379232614,
+      "mse": 0.20385597911610287
+    },
+    {
+      "dataset": "swiss_roll_500",
+      "method": "boundary-aware",
+      "recall_10": 0.0996,
+      "recall_100": 0.44682,
+      "ratio": 0.22290855378004565,
+      "mse": 1.4685339935073745
+    },
+    {
+      "dataset": "swiss_roll_500",
+      "method": "boundary-aware",
+      "recall_10": 0.183,
+      "recall_100": 0.7179200000000001,
+      "ratio": 0.2549030532649877,
+      "mse": 0.41266731241377513
+    },
+    {
+      "dataset": "swiss_roll_500",
+      "method": "boundary-aware",
+      "recall_10": 0.24639999999999998,
+      "recall_100": 0.81162,
+      "ratio": 0.30359035016386976,
+      "mse": 0.20396465151231755
+    },
+    {
+      "dataset": "swiss_roll_500",
+      "method": "boundary-aware",
+      "recall_10": 0.087,
+      "recall_100": 0.44234,
+      "ratio": 0.1966812858886829,
+      "mse": 1.4600027878468123
+    },
+    {
+      "dataset": "swiss_roll_500",
+      "method": "boundary-aware",
+      "recall_10": 0.1784,
+      "recall_100": 0.723,
+      "ratio": 0.2467496542185339,
+      "mse": 0.41438250025852086
+    },
+    {
+      "dataset": "swiss_roll_500",
+      "method": "boundary-aware",
+      "recall_10": 0.23460000000000003,
+      "recall_100": 0.80922,
+      "ratio": 0.28990880106769484,
+      "mse": 0.20541671045002968
+    },
+    {
+      "dataset": "swiss_roll_500",
+      "method": "boundary-aware",
+      "recall_10": 0.1014,
+      "recall_100": 0.44256,
+      "ratio": 0.22912147505422994,
+      "mse": 1.470899356021973
+    },
+    {
+      "dataset": "swiss_roll_500",
+      "method": "boundary-aware",
+      "recall_10": 0.182,
+      "recall_100": 0.71478,
+      "ratio": 0.2546238003301715,
+      "mse": 0.42065075643584054
+    },
+    {
+      "dataset": "swiss_roll_500",
+      "method": "boundary-aware",
+      "recall_10": 0.23840000000000003,
+      "recall_100": 0.8148200000000001,
+      "ratio": 0.29257995630936895,
+      "mse": 0.20690181154854462
+    },
+    {
+      "dataset": "swiss_roll_500",
+      "method": "boundary-aware",
+      "recall_10": 0.0996,
+      "recall_100": 0.44612,
+      "ratio": 0.22325831614812156,
+      "mse": 1.4751578392188454
+    },
+    {
+      "dataset": "swiss_roll_500",
+      "method": "boundary-aware",
+      "recall_10": 0.1666,
+      "recall_100": 0.70428,
+      "ratio": 0.23655364343726926,
+      "mse": 0.41825510297524837
+    },
+    {
+      "dataset": "swiss_roll_500",
+      "method": "boundary-aware",
+      "recall_10": 0.242,
+      "recall_100": 0.81056,
+      "ratio": 0.29855902092380576,
+      "mse": 0.20597051961032495
+    },
+    {
+      "dataset": "swiss_roll_500",
+      "method": "lattice-hybrid",
+      "recall_10": 0.054200000000000005,
+      "recall_100": 0.48556,
+      "ratio": 0.11162369223165007,
+      "mse": 1.467927881794356
+    },
+    {
+      "dataset": "swiss_roll_500",
+      "method": "lattice-hybrid",
+      "recall_10": 0.166,
+      "recall_100": 0.7503,
+      "ratio": 0.2212448353991737,
+      "mse": 0.43794463490945695
+    },
+    {
+      "dataset": "swiss_roll_500",
+      "method": "lattice-hybrid",
+      "recall_10": 0.19019999999999998,
+      "recall_100": 0.822,
+      "ratio": 0.2313868613138686,
+      "mse": 0.28594113792700965
+    },
+    {
+      "dataset": "swiss_roll_500",
+      "method": "lattice-hybrid",
+      "recall_10": 0.054,
+      "recall_100": 0.48361999999999994,
+      "ratio": 0.11165791323766595,
+      "mse": 1.4678184012746598
+    },
+    {
+      "dataset": "swiss_roll_500",
+      "method": "lattice-hybrid",
+      "recall_10": 0.164,
+      "recall_100": 0.7502000000000001,
+      "ratio": 0.2186083711010397,
+      "mse": 0.4382833712493335
+    },
+    {
+      "dataset": "swiss_roll_500",
+      "method": "lattice-hybrid",
+      "recall_10": 0.191,
+      "recall_100": 0.82258,
+      "ratio": 0.23219626054608672,
+      "mse": 0.2850781214583627
+    },
+    {
+      "dataset": "swiss_roll_500",
+      "method": "lattice-hybrid",
+      "recall_10": 0.054,
+      "recall_100": 0.48434,
+      "ratio": 0.11149192715860759,
+      "mse": 1.469880751138706
+    },
+    {
+      "dataset": "swiss_roll_500",
+      "method": "lattice-hybrid",
+      "recall_10": 0.1676,
+      "recall_100": 0.76698,
+      "ratio": 0.21851938772849358,
+      "mse": 0.43681505039114843
+    },
+    {
+      "dataset": "swiss_roll_500",
+      "method": "lattice-hybrid",
+      "recall_10": 0.19260000000000002,
+      "recall_100": 0.8203199999999999,
+      "ratio": 0.23478642480983036,
+      "mse": 0.28701156128244454
+    },
+    {
+      "dataset": "swiss_roll_500",
+      "method": "lattice-hybrid",
+      "recall_10": 0.054200000000000005,
+      "recall_100": 0.48556,
+      "ratio": 0.11162369223165007,
+      "mse": 1.472252411321551
+    },
+    {
+      "dataset": "swiss_roll_500",
+      "method": "lattice-hybrid",
+      "recall_10": 0.1686,
+      "recall_100": 0.7539199999999999,
+      "ratio": 0.22363115449915114,
+      "mse": 0.4420498745801067
+    },
+    {
+      "dataset": "swiss_roll_500",
+      "method": "lattice-hybrid",
+      "recall_10": 0.192,
+      "recall_100": 0.7874,
+      "ratio": 0.24384048768097538,
+      "mse": 0.2903569034067535
+    },
+    {
+      "dataset": "swiss_roll_500",
+      "method": "lattice-hybrid",
+      "recall_10": 0.054200000000000005,
+      "recall_100": 0.48556,
+      "ratio": 0.11162369223165007,
+      "mse": 1.4728840068437568
+    },
+    {
+      "dataset": "swiss_roll_500",
+      "method": "lattice-hybrid",
+      "recall_10": 0.161,
+      "recall_100": 0.748,
+      "ratio": 0.21524064171122995,
+      "mse": 0.4443516742921846
+    },
+    {
+      "dataset": "swiss_roll_500",
+      "method": "lattice-hybrid",
+      "recall_10": 0.18980000000000002,
+      "recall_100": 0.81726,
+      "ratio": 0.23223943420698434,
+      "mse": 0.29338169573020423
+    },
+    {
+      "dataset": "swiss_roll_500",
+      "method": "boundary-aware",
+      "recall_10": 0.07280000000000002,
+      "recall_100": 0.43789999999999996,
+      "ratio": 0.16624800182690117,
+      "mse": 1.4679313675553427
+    },
+    {
+      "dataset": "swiss_roll_500",
+      "method": "boundary-aware",
+      "recall_10": 0.1886,
+      "recall_100": 0.7548199999999999,
+      "ratio": 0.24986089398797065,
+      "mse": 0.4379205620679694
+    },
+    {
+      "dataset": "swiss_roll_500",
+      "method": "boundary-aware",
+      "recall_10": 0.20959999999999998,
+      "recall_100": 0.7885599999999999,
+      "ratio": 0.26580095363700923,
+      "mse": 0.285966666279864
+    },
+    {
+      "dataset": "swiss_roll_500",
+      "method": "boundary-aware",
+      "recall_10": 0.0964,
+      "recall_100": 0.44709999999999994,
+      "ratio": 0.2156117199731604,
+      "mse": 1.4668463370976463
+    },
+    {
+      "dataset": "swiss_roll_500",
+      "method": "boundary-aware",
+      "recall_10": 0.18819999999999998,
+      "recall_100": 0.7501,
+      "ratio": 0.25089988001599783,
+      "mse": 0.43840775710309926
+    },
+    {
+      "dataset": "swiss_roll_500",
+      "method": "boundary-aware",
+      "recall_10": 0.205,
+      "recall_100": 0.79208,
+      "ratio": 0.2588122411877588,
+      "mse": 0.28520517981344645
+    },
+    {
+      "dataset": "swiss_roll_500",
+      "method": "boundary-aware",
+      "recall_10": 0.0976,
+      "recall_100": 0.44983999999999996,
+      "ratio": 0.21696603236706388,
+      "mse": 1.4567972625718224
+    },
+    {
+      "dataset": "swiss_roll_500",
+      "method": "boundary-aware",
+      "recall_10": 0.18959999999999996,
+      "recall_100": 0.7662,
+      "ratio": 0.2474549725920125,
+      "mse": 0.43682288226077637
+    },
+    {
+      "dataset": "swiss_roll_500",
+      "method": "boundary-aware",
+      "recall_10": 0.21,
+      "recall_100": 0.7996800000000001,
+      "ratio": 0.2626050420168067,
+      "mse": 0.2864574342550923
+    },
+    {
+      "dataset": "swiss_roll_500",
+      "method": "boundary-aware",
+      "recall_10": 0.10060000000000001,
+      "recall_100": 0.44362,
+      "ratio": 0.22677065957350886,
+      "mse": 1.4693869320868416
+    },
+    {
+      "dataset": "swiss_roll_500",
+      "method": "boundary-aware",
+      "recall_10": 0.18919999999999998,
+      "recall_100": 0.7514200000000001,
+      "ratio": 0.251789944371989,
+      "mse": 0.44345685965988846
+    },
+    {
+      "dataset": "swiss_roll_500",
+      "method": "boundary-aware",
+      "recall_10": 0.218,
+      "recall_100": 0.8022,
+      "ratio": 0.2717526801296435,
+      "mse": 0.2892298170157245
+    },
+    {
+      "dataset": "swiss_roll_500",
+      "method": "boundary-aware",
+      "recall_10": 0.10060000000000001,
+      "recall_100": 0.44074,
+      "ratio": 0.2282524844579571,
+      "mse": 1.4852256125500738
+    },
+    {
+      "dataset": "swiss_roll_500",
+      "method": "boundary-aware",
+      "recall_10": 0.1848,
+      "recall_100": 0.74664,
+      "ratio": 0.24750883960141434,
+      "mse": 0.44676687230234374
+    },
+    {
+      "dataset": "swiss_roll_500",
+      "method": "boundary-aware",
+      "recall_10": 0.20660000000000003,
+      "recall_100": 0.8076,
+      "ratio": 0.25581971272907383,
+      "mse": 0.29469115540469887
+    },
+    {
+      "dataset": "swiss_roll_500",
+      "method": "lattice-hybrid",
+      "recall_10": 0.055,
+      "recall_100": 0.4315,
+      "ratio": 0.12746234067207415,
+      "mse": 1.5944862352640365
+    },
+    {
+      "dataset": "swiss_roll_500",
+      "method": "lattice-hybrid",
+      "recall_10": 0.1562,
+      "recall_100": 0.74308,
+      "ratio": 0.21020616891855523,
+      "mse": 0.38715715059728734
+    },
+    {
+      "dataset": "swiss_roll_500",
+      "method": "lattice-hybrid",
+      "recall_10": 0.2106,
+      "recall_100": 0.8369,
+      "ratio": 0.2516429680965468,
+      "mse": 0.19967384727419735
+    },
+    {
+      "dataset": "swiss_roll_500",
+      "method": "lattice-hybrid",
+      "recall_10": 0.055799999999999995,
+      "recall_100": 0.43428,
+      "ratio": 0.12848853274385189,
+      "mse": 1.5941793668816575
+    },
+    {
+      "dataset": "swiss_roll_500",
+      "method": "lattice-hybrid",
+      "recall_10": 0.155,
+      "recall_100": 0.74256,
+      "ratio": 0.20873734109028227,
+      "mse": 0.3880220824906491
+    },
+    {
+      "dataset": "swiss_roll_500",
+      "method": "lattice-hybrid",
+      "recall_10": 0.208,
+      "recall_100": 0.83496,
+      "ratio": 0.24911372999904186,
+      "mse": 0.20057946509938496
+    },
+    {
+      "dataset": "swiss_roll_500",
+      "method": "lattice-hybrid",
+      "recall_10": 0.056799999999999996,
+      "recall_100": 0.42422000000000004,
+      "ratio": 0.13389279147612085,
+      "mse": 1.59573587406774
+    },
+    {
+      "dataset": "swiss_roll_500",
+      "method": "lattice-hybrid",
+      "recall_10": 0.15919999999999998,
+      "recall_100": 0.7448999999999999,
+      "ratio": 0.2137199624110619,
+      "mse": 0.38850596706337576
+    },
+    {
+      "dataset": "swiss_roll_500",
+      "method": "lattice-hybrid",
+      "recall_10": 0.21,
+      "recall_100": 0.83808,
+      "ratio": 0.25057273768613975,
+      "mse": 0.20016371872077524
+    },
+    {
+      "dataset": "swiss_roll_500",
+      "method": "lattice-hybrid",
+      "recall_10": 0.0566,
+      "recall_100": 0.42152000000000006,
+      "ratio": 0.13427595369140252,
+      "mse": 1.5977871877930843
+    },
+    {
+      "dataset": "swiss_roll_500",
+      "method": "lattice-hybrid",
+      "recall_10": 0.16319999999999998,
+      "recall_100": 0.74794,
+      "ratio": 0.21819932080113374,
+      "mse": 0.39185490861803024
+    },
+    {
+      "dataset": "swiss_roll_500",
+      "method": "lattice-hybrid",
+      "recall_10": 0.22080000000000002,
+      "recall_100": 0.8160799999999999,
+      "ratio": 0.2705617096363102,
+      "mse": 0.20074079340685003
+    },
+    {
+      "dataset": "swiss_roll_500",
+      "method": "lattice-hybrid",
+      "recall_10": 0.0572,
+      "recall_100": 0.45176,
+      "ratio": 0.12661590224898175,
+      "mse": 1.595028487569282
+    },
+    {
+      "dataset": "swiss_roll_500",
+      "method": "lattice-hybrid",
+      "recall_10": 0.1684,
+      "recall_100": 0.74884,
+      "ratio": 0.22488114951124408,
+      "mse": 0.3933947386795048
+    },
+    {
+      "dataset": "swiss_roll_500",
+      "method": "lattice-hybrid",
+      "recall_10": 0.21259999999999998,
+      "recall_100": 0.8075399999999999,
+      "ratio": 0.2632686925725041,
+      "mse": 0.20385750862874125
+    },
+    {
+      "dataset": "swiss_roll_500",
+      "method": "boundary-aware",
+      "recall_10": 0.063,
+      "recall_100": 0.44344,
+      "ratio": 0.1420710806422515,
+      "mse": 1.5943086383840979
+    },
+    {
+      "dataset": "swiss_roll_500",
+      "method": "boundary-aware",
+      "recall_10": 0.175,
+      "recall_100": 0.7398399999999999,
+      "ratio": 0.23653762975778547,
+      "mse": 0.3871341358305292
+    },
+    {
+      "dataset": "swiss_roll_500",
+      "method": "boundary-aware",
+      "recall_10": 0.2368,
+      "recall_100": 0.8009200000000001,
+      "ratio": 0.2956599910103381,
+      "mse": 0.1996858408038518
+    },
+    {
+      "dataset": "swiss_roll_500",
+      "method": "boundary-aware",
+      "recall_10": 0.0702,
+      "recall_100": 0.45589999999999997,
+      "ratio": 0.15398113621408205,
+      "mse": 1.5934393224017487
+    },
+    {
+      "dataset": "swiss_roll_500",
+      "method": "boundary-aware",
+      "recall_10": 0.181,
+      "recall_100": 0.7424400000000001,
+      "ratio": 0.24379074403318782,
+      "mse": 0.38771736680109986
+    },
+    {
+      "dataset": "swiss_roll_500",
+      "method": "boundary-aware",
+      "recall_10": 0.23720000000000002,
+      "recall_100": 0.799,
+      "ratio": 0.2968710888610764,
+      "mse": 0.20078041723027332
+    },
+    {
+      "dataset": "swiss_roll_500",
+      "method": "boundary-aware",
+      "recall_10": 0.0628,
+      "recall_100": 0.44876,
+      "ratio": 0.13994117122738212,
+      "mse": 1.6007639965489615
+    },
+    {
+      "dataset": "swiss_roll_500",
+      "method": "boundary-aware",
+      "recall_10": 0.18180000000000002,
+      "recall_100": 0.73844,
+      "ratio": 0.24619468067818648,
+      "mse": 0.38916433677318896
+    },
+    {
+      "dataset": "swiss_roll_500",
+      "method": "boundary-aware",
+      "recall_10": 0.235,
+      "recall_100": 0.82096,
+      "ratio": 0.28625024361722856,
+      "mse": 0.19986470550478547
+    },
+    {
+      "dataset": "swiss_roll_500",
+      "method": "boundary-aware",
+      "recall_10": 0.0762,
+      "recall_100": 0.45538,
+      "ratio": 0.16733277702138874,
+      "mse": 1.5976843685763347
+    },
+    {
+      "dataset": "swiss_roll_500",
+      "method": "boundary-aware",
+      "recall_10": 0.178,
+      "recall_100": 0.74248,
+      "ratio": 0.23973709729555004,
+      "mse": 0.39293041859123107
+    },
+    {
+      "dataset": "swiss_roll_500",
+      "method": "boundary-aware",
+      "recall_10": 0.23740000000000003,
+      "recall_100": 0.8194600000000001,
+      "ratio": 0.2897029751299636,
+      "mse": 0.2014758343930291
+    },
+    {
+      "dataset": "swiss_roll_500",
+      "method": "boundary-aware",
+      "recall_10": 0.06680000000000001,
+      "recall_100": 0.42856,
+      "ratio": 0.15587082322195261,
+      "mse": 1.6083892605922003
+    },
+    {
+      "dataset": "swiss_roll_500",
+      "method": "boundary-aware",
+      "recall_10": 0.18139999999999998,
+      "recall_100": 0.7360599999999999,
+      "ratio": 0.2464473004918077,
+      "mse": 0.39499111445266005
+    },
+    {
+      "dataset": "swiss_roll_500",
+      "method": "boundary-aware",
+      "recall_10": 0.24080000000000001,
+      "recall_100": 0.81124,
+      "ratio": 0.296829544894236,
+      "mse": 0.20434143072584413
+    }
+  ],
+  "clusters_metrics": [
+    {
+      "dataset": "clusters_500",
+      "method": "lattice-hybrid",
+      "recall_10": 0.05680000000000001,
+      "recall_100": 0.5768199999999999,
+      "ratio": 0.0984709268055893,
+      "mse": 0.4688978725814993
+    },
+    {
+      "dataset": "clusters_500",
+      "method": "lattice-hybrid",
+      "recall_10": 0.136,
+      "recall_100": 0.8997,
+      "ratio": 0.15116149827720352,
+      "mse": 0.2271660336711136
+    },
+    {
+      "dataset": "clusters_500",
+      "method": "lattice-hybrid",
+      "recall_10": 0.1772,
+      "recall_100": 0.89312,
+      "ratio": 0.19840558939448225,
+      "mse": 0.21093888359851248
+    },
+    {
+      "dataset": "clusters_500",
+      "method": "lattice-hybrid",
+      "recall_10": 0.05680000000000001,
+      "recall_100": 0.5768199999999999,
+      "ratio": 0.0984709268055893,
+      "mse": 0.47057034542092824
+    },
+    {
+      "dataset": "clusters_500",
+      "method": "lattice-hybrid",
+      "recall_10": 0.13319999999999999,
+      "recall_100": 0.8999400000000001,
+      "ratio": 0.14800986732448826,
+      "mse": 0.22834777498015368
+    },
+    {
+      "dataset": "clusters_500",
+      "method": "lattice-hybrid",
+      "recall_10": 0.16979999999999998,
+      "recall_100": 0.89376,
+      "ratio": 0.18998388829215895,
+      "mse": 0.21228185142540038
+    },
+    {
+      "dataset": "clusters_500",
+      "method": "lattice-hybrid",
+      "recall_10": 0.05680000000000001,
+      "recall_100": 0.5768199999999999,
+      "ratio": 0.0984709268055893,
+      "mse": 0.47460478640600284
+    },
+    {
+      "dataset": "clusters_500",
+      "method": "lattice-hybrid",
+      "recall_10": 0.13,
+      "recall_100": 0.90022,
+      "ratio": 0.1444091444313612,
+      "mse": 0.2313652105066524
+    },
+    {
+      "dataset": "clusters_500",
+      "method": "lattice-hybrid",
+      "recall_10": 0.15680000000000002,
+      "recall_100": 0.89716,
+      "ratio": 0.1747737304382719,
+      "mse": 0.2160191742307574
+    },
+    {
+      "dataset": "clusters_500",
+      "method": "lattice-hybrid",
+      "recall_10": 0.05580000000000001,
+      "recall_100": 0.57886,
+      "ratio": 0.09639636526966798,
+      "mse": 0.4795798158423803
+    },
+    {
+      "dataset": "clusters_500",
+      "method": "lattice-hybrid",
+      "recall_10": 0.1312,
+      "recall_100": 0.8994800000000001,
+      "ratio": 0.14586205363098678,
+      "mse": 0.2354290763447481
+    },
+    {
+      "dataset": "clusters_500",
+      "method": "lattice-hybrid",
+      "recall_10": 0.1722,
+      "recall_100": 0.8943999999999999,
+      "ratio": 0.19253130590339895,
+      "mse": 0.2185404695715892
+    },
+    {
+      "dataset": "clusters_500",
+      "method": "lattice-hybrid",
+      "recall_10": 0.05680000000000001,
+      "recall_100": 0.5768199999999999,
+      "ratio": 0.0984709268055893,
+      "mse": 0.4859672533553256
+    },
+    {
+      "dataset": "clusters_500",
+      "method": "lattice-hybrid",
+      "recall_10": 0.1326,
+      "recall_100": 0.8978600000000001,
+      "ratio": 0.14768449424186397,
+      "mse": 0.2472311559970719
+    },
+    {
+      "dataset": "clusters_500",
+      "method": "lattice-hybrid",
+      "recall_10": 0.16319999999999998,
+      "recall_100": 0.8926399999999999,
+      "ratio": 0.18282846388241622,
+      "mse": 0.22626057623182436
+    },
+    {
+      "dataset": "clusters_500",
+      "method": "boundary-aware",
+      "recall_10": 0.0702,
+      "recall_100": 0.5885,
+      "ratio": 0.11928632115548003,
+      "mse": 0.4690007993213451
+    },
+    {
+      "dataset": "clusters_500",
+      "method": "boundary-aware",
+      "recall_10": 0.1358,
+      "recall_100": 0.9017999999999999,
+      "ratio": 0.15058771346196498,
+      "mse": 0.22716936980637242
+    },
+    {
+      "dataset": "clusters_500",
+      "method": "boundary-aware",
+      "recall_10": 0.179,
+      "recall_100": 0.89378,
+      "ratio": 0.20027299782944347,
+      "mse": 0.21095660648023046
+    },
+    {
+      "dataset": "clusters_500",
+      "method": "boundary-aware",
+      "recall_10": 0.0702,
+      "recall_100": 0.5876999999999999,
+      "ratio": 0.11944869831546709,
+      "mse": 0.4705184366728751
+    },
+    {
+      "dataset": "clusters_500",
+      "method": "boundary-aware",
+      "recall_10": 0.1328,
+      "recall_100": 0.8986600000000001,
+      "ratio": 0.14777557697015556,
+      "mse": 0.22830319079756722
+    },
+    {
+      "dataset": "clusters_500",
+      "method": "boundary-aware",
+      "recall_10": 0.16540000000000002,
+      "recall_100": 0.89548,
+      "ratio": 0.18470540938937777,
+      "mse": 0.21235681118272393
+    },
+    {
+      "dataset": "clusters_500",
+      "method": "boundary-aware",
+      "recall_10": 0.0796,
+      "recall_100": 0.5876399999999999,
+      "ratio": 0.1354570825675584,
+      "mse": 0.4733520972593425
+    },
+    {
+      "dataset": "clusters_500",
+      "method": "boundary-aware",
+      "recall_10": 0.1328,
+      "recall_100": 0.8985599999999999,
+      "ratio": 0.1477920227920228,
+      "mse": 0.23244929109902682
+    },
+    {
+      "dataset": "clusters_500",
+      "method": "boundary-aware",
+      "recall_10": 0.1686,
+      "recall_100": 0.8945599999999999,
+      "ratio": 0.18847254516186732,
+      "mse": 0.21629294404022334
+    },
+    {
+      "dataset": "clusters_500",
+      "method": "boundary-aware",
+      "recall_10": 0.07260000000000001,
+      "recall_100": 0.58842,
+      "ratio": 0.12338125828489856,
+      "mse": 0.47730577601834434
+    },
+    {
+      "dataset": "clusters_500",
+      "method": "boundary-aware",
+      "recall_10": 0.13660000000000003,
+      "recall_100": 0.8970799999999999,
+      "ratio": 0.15227181522272265,
+      "mse": 0.23576201803614164
+    },
+    {
+      "dataset": "clusters_500",
+      "method": "boundary-aware",
+      "recall_10": 0.18,
+      "recall_100": 0.8941600000000001,
+      "ratio": 0.20130625391428825,
+      "mse": 0.21825828163925756
+    },
+    {
+      "dataset": "clusters_500",
+      "method": "boundary-aware",
+      "recall_10": 0.0632,
+      "recall_100": 0.58848,
+      "ratio": 0.10739532354540512,
+      "mse": 0.48353933556612055
+    },
+    {
+      "dataset": "clusters_500",
+      "method": "boundary-aware",
+      "recall_10": 0.1336,
+      "recall_100": 0.9018399999999999,
+      "ratio": 0.14814157721990598,
+      "mse": 0.24501249359921387
+    },
+    {
+      "dataset": "clusters_500",
+      "method": "boundary-aware",
+      "recall_10": 0.15900000000000003,
+      "recall_100": 0.89302,
+      "ratio": 0.1780475241315984,
+      "mse": 0.22589491541131784
+    },
+    {
+      "dataset": "clusters_500",
+      "method": "lattice-hybrid",
+      "recall_10": 0.066,
+      "recall_100": 0.55086,
+      "ratio": 0.11981265657335802,
+      "mse": 0.5401338918138581
+    },
+    {
+      "dataset": "clusters_500",
+      "method": "lattice-hybrid",
+      "recall_10": 0.14440000000000003,
+      "recall_100": 0.8929400000000001,
+      "ratio": 0.16171299303424644,
+      "mse": 0.21873127326492442
+    },
+    {
+      "dataset": "clusters_500",
+      "method": "lattice-hybrid",
+      "recall_10": 0.18280000000000002,
+      "recall_100": 0.89242,
+      "ratio": 0.20483628784652969,
+      "mse": 0.19804726324878008
+    },
+    {
+      "dataset": "clusters_500",
+      "method": "lattice-hybrid",
+      "recall_10": 0.066,
+      "recall_100": 0.55086,
+      "ratio": 0.11981265657335802,
+      "mse": 0.5415928988034445
+    },
+    {
+      "dataset": "clusters_500",
+      "method": "lattice-hybrid",
+      "recall_10": 0.1414,
+      "recall_100": 0.8925400000000001,
+      "ratio": 0.15842427230152148,
+      "mse": 0.2201817612761503
+    },
+    {
+      "dataset": "clusters_500",
+      "method": "lattice-hybrid",
+      "recall_10": 0.1726,
+      "recall_100": 0.89262,
+      "ratio": 0.19336335730770093,
+      "mse": 0.1992620940867763
+    },
+    {
+      "dataset": "clusters_500",
+      "method": "lattice-hybrid",
+      "recall_10": 0.06620000000000001,
+      "recall_100": 0.5522400000000001,
+      "ratio": 0.11987541648558597,
+      "mse": 0.544589871644877
+    },
+    {
+      "dataset": "clusters_500",
+      "method": "lattice-hybrid",
+      "recall_10": 0.13240000000000002,
+      "recall_100": 0.89188,
+      "ratio": 0.14845046418800736,
+      "mse": 0.22383522741439965
+    },
+    {
+      "dataset": "clusters_500",
+      "method": "lattice-hybrid",
+      "recall_10": 0.16760000000000003,
+      "recall_100": 0.89192,
+      "ratio": 0.1879092295273119,
+      "mse": 0.20228929215486413
+    },
+    {
+      "dataset": "clusters_500",
+      "method": "lattice-hybrid",
+      "recall_10": 0.06520000000000001,
+      "recall_100": 0.54784,
+      "ratio": 0.11901285046728974,
+      "mse": 0.5530404992268002
+    },
+    {
+      "dataset": "clusters_500",
+      "method": "lattice-hybrid",
+      "recall_10": 0.1312,
+      "recall_100": 0.8915799999999999,
+      "ratio": 0.14715448978218446,
+      "mse": 0.2299422807326506
+    },
+    {
+      "dataset": "clusters_500",
+      "method": "lattice-hybrid",
+      "recall_10": 0.18140000000000003,
+      "recall_100": 0.89036,
+      "ratio": 0.2037378139179658,
+      "mse": 0.20613815911507777
+    },
+    {
+      "dataset": "clusters_500",
+      "method": "lattice-hybrid",
+      "recall_10": 0.06680000000000001,
+      "recall_100": 0.54972,
+      "ratio": 0.12151640835334354,
+      "mse": 0.5705427547735975
+    },
+    {
+      "dataset": "clusters_500",
+      "method": "lattice-hybrid",
+      "recall_10": 0.131,
+      "recall_100": 0.8896200000000001,
+      "ratio": 0.14725388368067263,
+      "mse": 0.23835536956873174
+    },
+    {
+      "dataset": "clusters_500",
+      "method": "lattice-hybrid",
+      "recall_10": 0.16879999999999998,
+      "recall_100": 0.8914000000000001,
+      "ratio": 0.18936504375140226,
+      "mse": 0.21554513746882656
+    },
+    {
+      "dataset": "clusters_500",
+      "method": "boundary-aware",
+      "recall_10": 0.0614,
+      "recall_100": 0.5614799999999999,
+      "ratio": 0.10935385053786424,
+      "mse": 0.5401659212814502
+    },
+    {
+      "dataset": "clusters_500",
+      "method": "boundary-aware",
+      "recall_10": 0.15080000000000002,
+      "recall_100": 0.89612,
+      "ratio": 0.1682810337901174,
+      "mse": 0.2187145571520087
+    },
+    {
+      "dataset": "clusters_500",
+      "method": "boundary-aware",
+      "recall_10": 0.1742,
+      "recall_100": 0.89098,
+      "ratio": 0.19551505084289209,
+      "mse": 0.1980460231875077
+    },
+    {
+      "dataset": "clusters_500",
+      "method": "boundary-aware",
+      "recall_10": 0.0614,
+      "recall_100": 0.5614799999999999,
+      "ratio": 0.10935385053786424,
+      "mse": 0.5400906770422409
+    },
+    {
+      "dataset": "clusters_500",
+      "method": "boundary-aware",
+      "recall_10": 0.15380000000000002,
+      "recall_100": 0.8935799999999999,
+      "ratio": 0.1721166543566329,
+      "mse": 0.21989611623256097
+    },
+    {
+      "dataset": "clusters_500",
+      "method": "boundary-aware",
+      "recall_10": 0.18819999999999998,
+      "recall_100": 0.8905,
+      "ratio": 0.21134194272880402,
+      "mse": 0.19948861215905192
+    },
+    {
+      "dataset": "clusters_500",
+      "method": "boundary-aware",
+      "recall_10": 0.0614,
+      "recall_100": 0.5614399999999999,
+      "ratio": 0.10936164149330295,
+      "mse": 0.5434722218272816
+    },
+    {
+      "dataset": "clusters_500",
+      "method": "boundary-aware",
+      "recall_10": 0.1322,
+      "recall_100": 0.8944200000000001,
+      "ratio": 0.14780528163502604,
+      "mse": 0.22404128418515348
+    },
+    {
+      "dataset": "clusters_500",
+      "method": "boundary-aware",
+      "recall_10": 0.176,
+      "recall_100": 0.89052,
+      "ratio": 0.19763733548937698,
+      "mse": 0.20236370898437053
+    },
+    {
+      "dataset": "clusters_500",
+      "method": "boundary-aware",
+      "recall_10": 0.0614,
+      "recall_100": 0.5614399999999999,
+      "ratio": 0.10936164149330295,
+      "mse": 0.5528843138750801
+    },
+    {
+      "dataset": "clusters_500",
+      "method": "boundary-aware",
+      "recall_10": 0.13460000000000003,
+      "recall_100": 0.89588,
+      "ratio": 0.15024333616109303,
+      "mse": 0.23017401793303321
+    },
+    {
+      "dataset": "clusters_500",
+      "method": "boundary-aware",
+      "recall_10": 0.17840000000000003,
+      "recall_100": 0.89098,
+      "ratio": 0.20022896136838092,
+      "mse": 0.2068444615672592
+    },
+    {
+      "dataset": "clusters_500",
+      "method": "boundary-aware",
+      "recall_10": 0.0614,
+      "recall_100": 0.5614399999999999,
+      "ratio": 0.10936164149330295,
+      "mse": 0.5692278510806337
+    },
+    {
+      "dataset": "clusters_500",
+      "method": "boundary-aware",
+      "recall_10": 0.13760000000000003,
+      "recall_100": 0.8920800000000001,
+      "ratio": 0.15424625594117122,
+      "mse": 0.23813366118189752
+    },
+    {
+      "dataset": "clusters_500",
+      "method": "boundary-aware",
+      "recall_10": 0.18280000000000002,
+      "recall_100": 0.89178,
+      "ratio": 0.20498329184327974,
+      "mse": 0.21510386599999265
+    },
+    {
+      "dataset": "clusters_500",
+      "method": "lattice-hybrid",
+      "recall_10": 0.051,
+      "recall_100": 0.58328,
+      "ratio": 0.08743656562885749,
+      "mse": 0.686167625814812
+    },
+    {
+      "dataset": "clusters_500",
+      "method": "lattice-hybrid",
+      "recall_10": 0.1506,
+      "recall_100": 0.9580599999999999,
+      "ratio": 0.1571926601674217,
+      "mse": 0.2296867393608001
+    },
+    {
+      "dataset": "clusters_500",
+      "method": "lattice-hybrid",
+      "recall_10": 0.1452,
+      "recall_100": 0.76676,
+      "ratio": 0.1893682508216391,
+      "mse": 0.4714989356074474
+    },
+    {
+      "dataset": "clusters_500",
+      "method": "lattice-hybrid",
+      "recall_10": 0.051,
+      "recall_100": 0.58328,
+      "ratio": 0.08743656562885749,
+      "mse": 0.6887411633273828
+    },
+    {
+      "dataset": "clusters_500",
+      "method": "lattice-hybrid",
+      "recall_10": 0.1476,
+      "recall_100": 0.9581000000000001,
+      "ratio": 0.15405490032355704,
+      "mse": 0.23121182268995086
+    },
+    {
+      "dataset": "clusters_500",
+      "method": "lattice-hybrid",
+      "recall_10": 0.1462,
+      "recall_100": 0.7666799999999999,
+      "ratio": 0.19069233578546463,
+      "mse": 0.4728692875430366
+    },
+    {
+      "dataset": "clusters_500",
+      "method": "lattice-hybrid",
+      "recall_10": 0.051,
+      "recall_100": 0.58328,
+      "ratio": 0.08743656562885749,
+      "mse": 0.6919176524949688
+    },
+    {
+      "dataset": "clusters_500",
+      "method": "lattice-hybrid",
+      "recall_10": 0.1454,
+      "recall_100": 0.95816,
+      "ratio": 0.15174918593971778,
+      "mse": 0.23450912168143734
+    },
+    {
+      "dataset": "clusters_500",
+      "method": "lattice-hybrid",
+      "recall_10": 0.14239999999999997,
+      "recall_100": 0.76654,
+      "ratio": 0.1857698228402953,
+      "mse": 0.47568320886033644
+    },
+    {
+      "dataset": "clusters_500",
+      "method": "lattice-hybrid",
+      "recall_10": 0.051,
+      "recall_100": 0.58328,
+      "ratio": 0.08743656562885749,
+      "mse": 0.7023488224233068
+    },
+    {
+      "dataset": "clusters_500",
+      "method": "lattice-hybrid",
+      "recall_10": 0.138,
+      "recall_100": 0.9581600000000001,
+      "ratio": 0.14402604992903065,
+      "mse": 0.23942704701545198
+    },
+    {
+      "dataset": "clusters_500",
+      "method": "lattice-hybrid",
+      "recall_10": 0.1542,
+      "recall_100": 0.76682,
+      "ratio": 0.20109021673926086,
+      "mse": 0.47968978556064445
+    },
+    {
+      "dataset": "clusters_500",
+      "method": "lattice-hybrid",
+      "recall_10": 0.051,
+      "recall_100": 0.58328,
+      "ratio": 0.08743656562885749,
+      "mse": 0.7071163292135789
+    },
+    {
+      "dataset": "clusters_500",
+      "method": "lattice-hybrid",
+      "recall_10": 0.13340000000000005,
+      "recall_100": 0.9583599999999999,
+      "ratio": 0.13919612671647405,
+      "mse": 0.244023939339786
+    },
+    {
+      "dataset": "clusters_500",
+      "method": "lattice-hybrid",
+      "recall_10": 0.14079999999999998,
+      "recall_100": 0.76816,
+      "ratio": 0.1832951468444074,
+      "mse": 0.48964325556444144
+    },
+    {
+      "dataset": "clusters_500",
+      "method": "boundary-aware",
+      "recall_10": 0.0682,
+      "recall_100": 0.5845,
+      "ratio": 0.1166809238665526,
+      "mse": 0.6862364560662759
+    },
+    {
+      "dataset": "clusters_500",
+      "method": "boundary-aware",
+      "recall_10": 0.145,
+      "recall_100": 0.9582400000000001,
+      "ratio": 0.15131908498914676,
+      "mse": 0.22967208337262088
+    },
+    {
+      "dataset": "clusters_500",
+      "method": "boundary-aware",
+      "recall_10": 0.15280000000000002,
+      "recall_100": 0.7673000000000001,
+      "ratio": 0.19913984100091228,
+      "mse": 0.4714946475711122
+    },
+    {
+      "dataset": "clusters_500",
+      "method": "boundary-aware",
+      "recall_10": 0.06559999999999999,
+      "recall_100": 0.59558,
+      "ratio": 0.11014473286544207,
+      "mse": 0.6913277352434319
+    },
+    {
+      "dataset": "clusters_500",
+      "method": "boundary-aware",
+      "recall_10": 0.13460000000000003,
+      "recall_100": 0.9582400000000001,
+      "ratio": 0.1404658540657873,
+      "mse": 0.2310067390885528
+    },
+    {
+      "dataset": "clusters_500",
+      "method": "boundary-aware",
+      "recall_10": 0.15859999999999996,
+      "recall_100": 0.7667999999999999,
+      "ratio": 0.2068335941575378,
+      "mse": 0.4729266272680978
+    },
+    {
+      "dataset": "clusters_500",
+      "method": "boundary-aware",
+      "recall_10": 0.0684,
+      "recall_100": 0.5955,
+      "ratio": 0.11486146095717883,
+      "mse": 0.6955132881938594
+    },
+    {
+      "dataset": "clusters_500",
+      "method": "boundary-aware",
+      "recall_10": 0.149,
+      "recall_100": 0.9583600000000001,
+      "ratio": 0.15547393463834047,
+      "mse": 0.23423433968618845
+    },
+    {
+      "dataset": "clusters_500",
+      "method": "boundary-aware",
+      "recall_10": 0.15960000000000002,
+      "recall_100": 0.76674,
+      "ratio": 0.2081540026606151,
+      "mse": 0.4754833455711919
+    },
+    {
+      "dataset": "clusters_500",
+      "method": "boundary-aware",
+      "recall_10": 0.0676,
+      "recall_100": 0.5955199999999999,
+      "ratio": 0.11351423965609887,
+      "mse": 0.6987994915355046
+    },
+    {
+      "dataset": "clusters_500",
+      "method": "boundary-aware",
+      "recall_10": 0.1494,
+      "recall_100": 0.9583400000000002,
+      "ratio": 0.15589456768996388,
+      "mse": 0.23963300241846827
+    },
+    {
+      "dataset": "clusters_500",
+      "method": "boundary-aware",
+      "recall_10": 0.158,
+      "recall_100": 0.76724,
+      "ratio": 0.2059329544862103,
+      "mse": 0.4799449107778231
+    },
+    {
+      "dataset": "clusters_500",
+      "method": "boundary-aware",
+      "recall_10": 0.0654,
+      "recall_100": 0.58458,
+      "ratio": 0.11187519244585857,
+      "mse": 0.7024166448206841
+    },
+    {
+      "dataset": "clusters_500",
+      "method": "boundary-aware",
+      "recall_10": 0.15020000000000003,
+      "recall_100": 0.9582999999999999,
+      "ratio": 0.15673588646561623,
+      "mse": 0.24389338513631822
+    },
+    {
+      "dataset": "clusters_500",
+      "method": "boundary-aware",
+      "recall_10": 0.15719999999999998,
+      "recall_100": 0.7677200000000001,
+      "ratio": 0.20476215286823315,
+      "mse": 0.48984640642153054
+    }
+  ],
+  "rings_metrics": [
+    {
+      "dataset": "rings_500",
+      "method": "lattice-hybrid",
+      "recall_10": 0.056,
+      "recall_100": 0.5030600000000001,
+      "ratio": 0.11131872937621753,
+      "mse": 0.03951120042967393
+    },
+    {
+      "dataset": "rings_500",
+      "method": "lattice-hybrid",
+      "recall_10": 0.1692,
+      "recall_100": 0.76592,
+      "ratio": 0.22091080008355962,
+      "mse": 0.007544173136364159
+    },
+    {
+      "dataset": "rings_500",
+      "method": "lattice-hybrid",
+      "recall_10": 0.204,
+      "recall_100": 0.7646400000000001,
+      "ratio": 0.26679221594475827,
+      "mse": 0.007100012692079889
+    },
+    {
+      "dataset": "rings_500",
+      "method": "lattice-hybrid",
+      "recall_10": 0.057,
+      "recall_100": 0.50278,
+      "ratio": 0.11336966466446557,
+      "mse": 0.039813899816504614
+    },
+    {
+      "dataset": "rings_500",
+      "method": "lattice-hybrid",
+      "recall_10": 0.1698,
+      "recall_100": 0.7715799999999999,
+      "ratio": 0.2200679125949351,
+      "mse": 0.0076406450302100755
+    },
+    {
+      "dataset": "rings_500",
+      "method": "lattice-hybrid",
+      "recall_10": 0.194,
+      "recall_100": 0.7694,
+      "ratio": 0.2521445282037952,
+      "mse": 0.007416515822121068
+    },
+    {
+      "dataset": "rings_500",
+      "method": "lattice-hybrid",
+      "recall_10": 0.057,
+      "recall_100": 0.50352,
+      "ratio": 0.11320305052430887,
+      "mse": 0.04035142642507253
+    },
+    {
+      "dataset": "rings_500",
+      "method": "lattice-hybrid",
+      "recall_10": 0.1688,
+      "recall_100": 0.7536,
+      "ratio": 0.22399150743099788,
+      "mse": 0.008240148048163412
+    },
+    {
+      "dataset": "rings_500",
+      "method": "lattice-hybrid",
+      "recall_10": 0.18359999999999999,
+      "recall_100": 0.7764000000000001,
+      "ratio": 0.23647604327666147,
+      "mse": 0.0076276470863436575
+    },
+    {
+      "dataset": "rings_500",
+      "method": "lattice-hybrid",
+      "recall_10": 0.057,
+      "recall_100": 0.50074,
+      "ratio": 0.11383152933658187,
+      "mse": 0.03995204770557925
+    },
+    {
+      "dataset": "rings_500",
+      "method": "lattice-hybrid",
+      "recall_10": 0.16839999999999997,
+      "recall_100": 0.75298,
+      "ratio": 0.22364471831921162,
+      "mse": 0.009985480208723146
+    },
+    {
+      "dataset": "rings_500",
+      "method": "lattice-hybrid",
+      "recall_10": 0.1832,
+      "recall_100": 0.75698,
+      "ratio": 0.24201432006129622,
+      "mse": 0.010191055655786752
+    },
+    {
+      "dataset": "rings_500",
+      "method": "lattice-hybrid",
+      "recall_10": 0.0564,
+      "recall_100": 0.50398,
+      "ratio": 0.11190920274614072,
+      "mse": 0.04516149321425462
+    },
+    {
+      "dataset": "rings_500",
+      "method": "lattice-hybrid",
+      "recall_10": 0.16539999999999996,
+      "recall_100": 0.75972,
+      "ratio": 0.21771178855367765,
+      "mse": 0.010459155295476396
+    },
+    {
+      "dataset": "rings_500",
+      "method": "lattice-hybrid",
+      "recall_10": 0.1682,
+      "recall_100": 0.7524399999999999,
+      "ratio": 0.2235394184253894,
+      "mse": 0.00971745367172031
+    },
+    {
+      "dataset": "rings_500",
+      "method": "boundary-aware",
+      "recall_10": 0.0974,
+      "recall_100": 0.5227,
+      "ratio": 0.18634015687775013,
+      "mse": 0.03950605558934947
+    },
+    {
+      "dataset": "rings_500",
+      "method": "boundary-aware",
+      "recall_10": 0.18180000000000002,
+      "recall_100": 0.7596600000000001,
+      "ratio": 0.2393175894479109,
+      "mse": 0.007539770051487372
+    },
+    {
+      "dataset": "rings_500",
+      "method": "boundary-aware",
+      "recall_10": 0.20920000000000002,
+      "recall_100": 0.76682,
+      "ratio": 0.272815002216948,
+      "mse": 0.007100480699559329
+    },
+    {
+      "dataset": "rings_500",
+      "method": "boundary-aware",
+      "recall_10": 0.0936,
+      "recall_100": 0.5159600000000001,
+      "ratio": 0.18140941158229318,
+      "mse": 0.04017983496114421
+    },
+    {
+      "dataset": "rings_500",
+      "method": "boundary-aware",
+      "recall_10": 0.1852,
+      "recall_100": 0.76682,
+      "ratio": 0.24151691400850267,
+      "mse": 0.0077966352632601234
+    },
+    {
+      "dataset": "rings_500",
+      "method": "boundary-aware",
+      "recall_10": 0.2088,
+      "recall_100": 0.7608800000000001,
+      "ratio": 0.2744190936810009,
+      "mse": 0.00740713252446314
+    },
+    {
+      "dataset": "rings_500",
+      "method": "boundary-aware",
+      "recall_10": 0.085,
+      "recall_100": 0.5205599999999999,
+      "ratio": 0.16328569233133552,
+      "mse": 0.040208775712223824
+    },
+    {
+      "dataset": "rings_500",
+      "method": "boundary-aware",
+      "recall_10": 0.174,
+      "recall_100": 0.7419,
+      "ratio": 0.23453295592397896,
+      "mse": 0.008281354112167981
+    },
+    {
+      "dataset": "rings_500",
+      "method": "boundary-aware",
+      "recall_10": 0.1992,
+      "recall_100": 0.7725799999999999,
+      "ratio": 0.25783737606461465,
+      "mse": 0.007823594797836958
+    },
+    {
+      "dataset": "rings_500",
+      "method": "boundary-aware",
+      "recall_10": 0.057,
+      "recall_100": 0.50074,
+      "ratio": 0.11383152933658187,
+      "mse": 0.03995204770557925
+    },
+    {
+      "dataset": "rings_500",
+      "method": "boundary-aware",
+      "recall_10": 0.17920000000000003,
+      "recall_100": 0.74868,
+      "ratio": 0.239354597424801,
+      "mse": 0.0098257306041248
+    },
+    {
+      "dataset": "rings_500",
+      "method": "boundary-aware",
+      "recall_10": 0.2026,
+      "recall_100": 0.7564,
+      "ratio": 0.2678476996298255,
+      "mse": 0.009947584210153178
+    },
+    {
+      "dataset": "rings_500",
+      "method": "boundary-aware",
+      "recall_10": 0.093,
+      "recall_100": 0.5254000000000001,
+      "ratio": 0.17700799390940233,
+      "mse": 0.04488440692331081
+    },
+    {
+      "dataset": "rings_500",
+      "method": "boundary-aware",
+      "recall_10": 0.1754,
+      "recall_100": 0.75622,
+      "ratio": 0.23194308534553437,
+      "mse": 0.010339914640788844
+    },
+    {
+      "dataset": "rings_500",
+      "method": "boundary-aware",
+      "recall_10": 0.17760000000000004,
+      "recall_100": 0.75188,
+      "ratio": 0.23620790551683785,
+      "mse": 0.009567312990211923
+    },
+    {
+      "dataset": "rings_500",
+      "method": "lattice-hybrid",
+      "recall_10": 0.056,
+      "recall_100": 0.5030600000000001,
+      "ratio": 0.11131872937621753,
+      "mse": 0.03951120042967393
+    },
+    {
+      "dataset": "rings_500",
+      "method": "lattice-hybrid",
+      "recall_10": 0.1692,
+      "recall_100": 0.76592,
+      "ratio": 0.22091080008355962,
+      "mse": 0.007544173136364159
+    },
+    {
+      "dataset": "rings_500",
+      "method": "lattice-hybrid",
+      "recall_10": 0.204,
+      "recall_100": 0.7646400000000001,
+      "ratio": 0.26679221594475827,
+      "mse": 0.007100012692079889
+    },
+    {
+      "dataset": "rings_500",
+      "method": "lattice-hybrid",
+      "recall_10": 0.057,
+      "recall_100": 0.50278,
+      "ratio": 0.11336966466446557,
+      "mse": 0.039813899816504614
+    },
+    {
+      "dataset": "rings_500",
+      "method": "lattice-hybrid",
+      "recall_10": 0.1698,
+      "recall_100": 0.7715799999999999,
+      "ratio": 0.2200679125949351,
+      "mse": 0.0076406450302100755
+    },
+    {
+      "dataset": "rings_500",
+      "method": "lattice-hybrid",
+      "recall_10": 0.194,
+      "recall_100": 0.7694,
+      "ratio": 0.2521445282037952,
+      "mse": 0.007416515822121068
+    },
+    {
+      "dataset": "rings_500",
+      "method": "lattice-hybrid",
+      "recall_10": 0.057,
+      "recall_100": 0.50352,
+      "ratio": 0.11320305052430887,
+      "mse": 0.04035142642507253
+    },
+    {
+      "dataset": "rings_500",
+      "method": "lattice-hybrid",
+      "recall_10": 0.1688,
+      "recall_100": 0.7536,
+      "ratio": 0.22399150743099788,
+      "mse": 0.008240148048163412
+    },
+    {
+      "dataset": "rings_500",
+      "method": "lattice-hybrid",
+      "recall_10": 0.18359999999999999,
+      "recall_100": 0.7764000000000001,
+      "ratio": 0.23647604327666147,
+      "mse": 0.0076276470863436575
+    },
+    {
+      "dataset": "rings_500",
+      "method": "lattice-hybrid",
+      "recall_10": 0.057,
+      "recall_100": 0.50074,
+      "ratio": 0.11383152933658187,
+      "mse": 0.03995204770557925
+    },
+    {
+      "dataset": "rings_500",
+      "method": "lattice-hybrid",
+      "recall_10": 0.16839999999999997,
+      "recall_100": 0.75298,
+      "ratio": 0.22364471831921162,
+      "mse": 0.009985480208723146
+    },
+    {
+      "dataset": "rings_500",
+      "method": "lattice-hybrid",
+      "recall_10": 0.1832,
+      "recall_100": 0.75698,
+      "ratio": 0.24201432006129622,
+      "mse": 0.010191055655786752
+    },
+    {
+      "dataset": "rings_500",
+      "method": "lattice-hybrid",
+      "recall_10": 0.0564,
+      "recall_100": 0.50398,
+      "ratio": 0.11190920274614072,
+      "mse": 0.04516149321425462
+    },
+    {
+      "dataset": "rings_500",
+      "method": "lattice-hybrid",
+      "recall_10": 0.16539999999999996,
+      "recall_100": 0.75972,
+      "ratio": 0.21771178855367765,
+      "mse": 0.010459155295476396
+    },
+    {
+      "dataset": "rings_500",
+      "method": "lattice-hybrid",
+      "recall_10": 0.1682,
+      "recall_100": 0.7524399999999999,
+      "ratio": 0.2235394184253894,
+      "mse": 0.00971745367172031
+    },
+    {
+      "dataset": "rings_500",
+      "method": "boundary-aware",
+      "recall_10": 0.0974,
+      "recall_100": 0.5227,
+      "ratio": 0.18634015687775013,
+      "mse": 0.03950605558934947
+    },
+    {
+      "dataset": "rings_500",
+      "method": "boundary-aware",
+      "recall_10": 0.18180000000000002,
+      "recall_100": 0.7596600000000001,
+      "ratio": 0.2393175894479109,
+      "mse": 0.007539770051487372
+    },
+    {
+      "dataset": "rings_500",
+      "method": "boundary-aware",
+      "recall_10": 0.20920000000000002,
+      "recall_100": 0.76682,
+      "ratio": 0.272815002216948,
+      "mse": 0.007100480699559329
+    },
+    {
+      "dataset": "rings_500",
+      "method": "boundary-aware",
+      "recall_10": 0.0936,
+      "recall_100": 0.5159600000000001,
+      "ratio": 0.18140941158229318,
+      "mse": 0.04017983496114421
+    },
+    {
+      "dataset": "rings_500",
+      "method": "boundary-aware",
+      "recall_10": 0.1852,
+      "recall_100": 0.76682,
+      "ratio": 0.24151691400850267,
+      "mse": 0.0077966352632601234
+    },
+    {
+      "dataset": "rings_500",
+      "method": "boundary-aware",
+      "recall_10": 0.2088,
+      "recall_100": 0.7608800000000001,
+      "ratio": 0.2744190936810009,
+      "mse": 0.00740713252446314
+    },
+    {
+      "dataset": "rings_500",
+      "method": "boundary-aware",
+      "recall_10": 0.085,
+      "recall_100": 0.5205599999999999,
+      "ratio": 0.16328569233133552,
+      "mse": 0.040208775712223824
+    },
+    {
+      "dataset": "rings_500",
+      "method": "boundary-aware",
+      "recall_10": 0.174,
+      "recall_100": 0.7419,
+      "ratio": 0.23453295592397896,
+      "mse": 0.008281354112167981
+    },
+    {
+      "dataset": "rings_500",
+      "method": "boundary-aware",
+      "recall_10": 0.1992,
+      "recall_100": 0.7725799999999999,
+      "ratio": 0.25783737606461465,
+      "mse": 0.007823594797836958
+    },
+    {
+      "dataset": "rings_500",
+      "method": "boundary-aware",
+      "recall_10": 0.057,
+      "recall_100": 0.50074,
+      "ratio": 0.11383152933658187,
+      "mse": 0.03995204770557925
+    },
+    {
+      "dataset": "rings_500",
+      "method": "boundary-aware",
+      "recall_10": 0.17920000000000003,
+      "recall_100": 0.74868,
+      "ratio": 0.239354597424801,
+      "mse": 0.0098257306041248
+    },
+    {
+      "dataset": "rings_500",
+      "method": "boundary-aware",
+      "recall_10": 0.2026,
+      "recall_100": 0.7564,
+      "ratio": 0.2678476996298255,
+      "mse": 0.009947584210153178
+    },
+    {
+      "dataset": "rings_500",
+      "method": "boundary-aware",
+      "recall_10": 0.093,
+      "recall_100": 0.5254000000000001,
+      "ratio": 0.17700799390940233,
+      "mse": 0.04488440692331081
+    },
+    {
+      "dataset": "rings_500",
+      "method": "boundary-aware",
+      "recall_10": 0.1754,
+      "recall_100": 0.75622,
+      "ratio": 0.23194308534553437,
+      "mse": 0.010339914640788844
+    },
+    {
+      "dataset": "rings_500",
+      "method": "boundary-aware",
+      "recall_10": 0.17760000000000004,
+      "recall_100": 0.75188,
+      "ratio": 0.23620790551683785,
+      "mse": 0.009567312990211923
+    },
+    {
+      "dataset": "rings_500",
+      "method": "lattice-hybrid",
+      "recall_10": 0.056,
+      "recall_100": 0.5030600000000001,
+      "ratio": 0.11131872937621753,
+      "mse": 0.03951120042967393
+    },
+    {
+      "dataset": "rings_500",
+      "method": "lattice-hybrid",
+      "recall_10": 0.1692,
+      "recall_100": 0.76592,
+      "ratio": 0.22091080008355962,
+      "mse": 0.007544173136364159
+    },
+    {
+      "dataset": "rings_500",
+      "method": "lattice-hybrid",
+      "recall_10": 0.204,
+      "recall_100": 0.7646400000000001,
+      "ratio": 0.26679221594475827,
+      "mse": 0.007100012692079889
+    },
+    {
+      "dataset": "rings_500",
+      "method": "lattice-hybrid",
+      "recall_10": 0.057,
+      "recall_100": 0.50278,
+      "ratio": 0.11336966466446557,
+      "mse": 0.039813899816504614
+    },
+    {
+      "dataset": "rings_500",
+      "method": "lattice-hybrid",
+      "recall_10": 0.1698,
+      "recall_100": 0.7715799999999999,
+      "ratio": 0.2200679125949351,
+      "mse": 0.0076406450302100755
+    },
+    {
+      "dataset": "rings_500",
+      "method": "lattice-hybrid",
+      "recall_10": 0.194,
+      "recall_100": 0.7694,
+      "ratio": 0.2521445282037952,
+      "mse": 0.007416515822121068
+    },
+    {
+      "dataset": "rings_500",
+      "method": "lattice-hybrid",
+      "recall_10": 0.057,
+      "recall_100": 0.50352,
+      "ratio": 0.11320305052430887,
+      "mse": 0.04035142642507253
+    },
+    {
+      "dataset": "rings_500",
+      "method": "lattice-hybrid",
+      "recall_10": 0.1688,
+      "recall_100": 0.7536,
+      "ratio": 0.22399150743099788,
+      "mse": 0.008240148048163412
+    },
+    {
+      "dataset": "rings_500",
+      "method": "lattice-hybrid",
+      "recall_10": 0.18359999999999999,
+      "recall_100": 0.7764000000000001,
+      "ratio": 0.23647604327666147,
+      "mse": 0.0076276470863436575
+    },
+    {
+      "dataset": "rings_500",
+      "method": "lattice-hybrid",
+      "recall_10": 0.057,
+      "recall_100": 0.50074,
+      "ratio": 0.11383152933658187,
+      "mse": 0.03995204770557925
+    },
+    {
+      "dataset": "rings_500",
+      "method": "lattice-hybrid",
+      "recall_10": 0.16839999999999997,
+      "recall_100": 0.75298,
+      "ratio": 0.22364471831921162,
+      "mse": 0.009985480208723146
+    },
+    {
+      "dataset": "rings_500",
+      "method": "lattice-hybrid",
+      "recall_10": 0.1832,
+      "recall_100": 0.75698,
+      "ratio": 0.24201432006129622,
+      "mse": 0.010191055655786752
+    },
+    {
+      "dataset": "rings_500",
+      "method": "lattice-hybrid",
+      "recall_10": 0.0564,
+      "recall_100": 0.50398,
+      "ratio": 0.11190920274614072,
+      "mse": 0.04516149321425462
+    },
+    {
+      "dataset": "rings_500",
+      "method": "lattice-hybrid",
+      "recall_10": 0.16539999999999996,
+      "recall_100": 0.75972,
+      "ratio": 0.21771178855367765,
+      "mse": 0.010459155295476396
+    },
+    {
+      "dataset": "rings_500",
+      "method": "lattice-hybrid",
+      "recall_10": 0.1682,
+      "recall_100": 0.7524399999999999,
+      "ratio": 0.2235394184253894,
+      "mse": 0.00971745367172031
+    },
+    {
+      "dataset": "rings_500",
+      "method": "boundary-aware",
+      "recall_10": 0.0974,
+      "recall_100": 0.5227,
+      "ratio": 0.18634015687775013,
+      "mse": 0.03950605558934947
+    },
+    {
+      "dataset": "rings_500",
+      "method": "boundary-aware",
+      "recall_10": 0.18180000000000002,
+      "recall_100": 0.7596600000000001,
+      "ratio": 0.2393175894479109,
+      "mse": 0.007539770051487372
+    },
+    {
+      "dataset": "rings_500",
+      "method": "boundary-aware",
+      "recall_10": 0.20920000000000002,
+      "recall_100": 0.76682,
+      "ratio": 0.272815002216948,
+      "mse": 0.007100480699559329
+    },
+    {
+      "dataset": "rings_500",
+      "method": "boundary-aware",
+      "recall_10": 0.0936,
+      "recall_100": 0.5159600000000001,
+      "ratio": 0.18140941158229318,
+      "mse": 0.04017983496114421
+    },
+    {
+      "dataset": "rings_500",
+      "method": "boundary-aware",
+      "recall_10": 0.1852,
+      "recall_100": 0.76682,
+      "ratio": 0.24151691400850267,
+      "mse": 0.0077966352632601234
+    },
+    {
+      "dataset": "rings_500",
+      "method": "boundary-aware",
+      "recall_10": 0.2088,
+      "recall_100": 0.7608800000000001,
+      "ratio": 0.2744190936810009,
+      "mse": 0.00740713252446314
+    },
+    {
+      "dataset": "rings_500",
+      "method": "boundary-aware",
+      "recall_10": 0.085,
+      "recall_100": 0.5205599999999999,
+      "ratio": 0.16328569233133552,
+      "mse": 0.040208775712223824
+    },
+    {
+      "dataset": "rings_500",
+      "method": "boundary-aware",
+      "recall_10": 0.174,
+      "recall_100": 0.7419,
+      "ratio": 0.23453295592397896,
+      "mse": 0.008281354112167981
+    },
+    {
+      "dataset": "rings_500",
+      "method": "boundary-aware",
+      "recall_10": 0.1992,
+      "recall_100": 0.7725799999999999,
+      "ratio": 0.25783737606461465,
+      "mse": 0.007823594797836958
+    },
+    {
+      "dataset": "rings_500",
+      "method": "boundary-aware",
+      "recall_10": 0.057,
+      "recall_100": 0.50074,
+      "ratio": 0.11383152933658187,
+      "mse": 0.03995204770557925
+    },
+    {
+      "dataset": "rings_500",
+      "method": "boundary-aware",
+      "recall_10": 0.17920000000000003,
+      "recall_100": 0.74868,
+      "ratio": 0.239354597424801,
+      "mse": 0.0098257306041248
+    },
+    {
+      "dataset": "rings_500",
+      "method": "boundary-aware",
+      "recall_10": 0.2026,
+      "recall_100": 0.7564,
+      "ratio": 0.2678476996298255,
+      "mse": 0.009947584210153178
+    },
+    {
+      "dataset": "rings_500",
+      "method": "boundary-aware",
+      "recall_10": 0.093,
+      "recall_100": 0.5254000000000001,
+      "ratio": 0.17700799390940233,
+      "mse": 0.04488440692331081
+    },
+    {
+      "dataset": "rings_500",
+      "method": "boundary-aware",
+      "recall_10": 0.1754,
+      "recall_100": 0.75622,
+      "ratio": 0.23194308534553437,
+      "mse": 0.010339914640788844
+    },
+    {
+      "dataset": "rings_500",
+      "method": "boundary-aware",
+      "recall_10": 0.17760000000000004,
+      "recall_100": 0.75188,
+      "ratio": 0.23620790551683785,
+      "mse": 0.009567312990211923
+    }
+  ],
+  "swiss_roll_mean_ratio": 0.21850982755062115,
+  "clusters_mean_ratio": 0.15163453076487507,
+  "rings_mean_ratio": 0.20695308109464383,
+  "verdict": "swiss_roll behaves like rings",
+  "justification": "Mean ratio 0.2185 falls within rings range [0.21, 0.23]\nDistance to clusters: 0.0669, distance to rings: 0.0116\nClusters mean ratio: 0.1516\nRings mean ratio: 0.2070"
+}
