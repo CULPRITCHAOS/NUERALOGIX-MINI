@@ -17,6 +17,9 @@ import { Embedding } from '../src/types';
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 
+// Analysis constants
+const DEGENERACY_THRESHOLD = 0.1;  // Centroid pairs closer than this are considered degenerate
+
 interface CentroidDegeneracyAnalysis {
   method: string;
   num_centroids: number;
@@ -33,7 +36,7 @@ interface CentroidDegeneracyAnalysis {
 function analyzeCentroids(
   centroids: Embedding[],
   method: string,
-  threshold: number = 0.1
+  threshold: number = DEGENERACY_THRESHOLD
 ): CentroidDegeneracyAnalysis {
   if (centroids.length < 2) {
     return {

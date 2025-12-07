@@ -8,6 +8,11 @@
 import { EmbeddingMap, CompressionOptions, Embedding } from '../types';
 import { euclideanDistance, extractUniqueVectors } from './mathService';
 
+// Compression constants
+const KMEANS_MAX_ITERATIONS = 10;  // Fixed iteration count for predictable performance
+const BOUNDARY_PERCENTILE = 0.10;  // Bottom 10% by ambiguity score classified as boundary
+const BOUNDARY_GRID_MULTIPLIER = 0.5;  // Finer grid for boundary vectors (50% of base step)
+
 export interface InstrumentedCompressionMetrics {
   k: number;
   grid_step: number;
@@ -40,7 +45,7 @@ const runKMeansLiteInstrumented = (
   
   // Handle edge cases
   if (k <= 0) {
-    k = 1;
+    throw new Error('Invalid k value: must be positive');
   }
   if (vectors.length <= k) {
     return {
@@ -55,10 +60,9 @@ const runKMeansLiteInstrumented = (
   let centroids = vectors.slice(0, k).map(v => [...v]);
   let assignments = new Array(vectors.length).fill(0);
   
-  const KMEANS_ITERATIONS = 10;
   let actualIterations = 0;
 
-  for (let iter = 0; iter < KMEANS_ITERATIONS; iter++) {
+  for (let iter = 0; iter < KMEANS_MAX_ITERATIONS; iter++) {
     actualIterations++;
     
     // Assign vectors to nearest centroid
@@ -127,7 +131,7 @@ const classifyBoundaryVectors = (
 
   const sortedScores = [...ambiguityScores].sort((a, b) => a - b);
   const n = sortedScores.length;
-  const q10Position = (n - 1) * 0.10;
+  const q10Position = (n - 1) * BOUNDARY_PERCENTILE;
   const lower = Math.floor(q10Position);
   const upper = Math.ceil(q10Position);
   const weight = q10Position - lower;
@@ -198,7 +202,7 @@ export function compressEmbeddingsInstrumented(
       const startBoundary = performance.now();
       
       const boundaryIndices = new Set(classifyBoundaryVectors(originalVectors, idealCentroids));
-      const boundaryStep = step * 0.5;
+      const boundaryStep = step * BOUNDARY_GRID_MULTIPLIER;
       const boundaryCentroids = idealCentroids.map(centroid => snapToGrid(centroid, boundaryStep));
       const uniqueBoundaryCentroids = extractUniqueVectors(boundaryCentroids);
       

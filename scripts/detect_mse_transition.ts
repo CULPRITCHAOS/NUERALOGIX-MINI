@@ -17,6 +17,9 @@ import { EmbeddingMap, Embedding } from '../src/types';
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 
+// Analysis constants
+const MSE_TRANSITION_MULTIPLIER = 2.0;  // Transition detected when slope exceeds 2× median
+
 interface SweepPoint {
   grid_step: number;
   mse: number;
@@ -161,8 +164,8 @@ function detectTransition(data: SweepPoint[]): TransitionAnalysis {
     ? sortedDerivatives[medianIdx] 
     : 0;
   
-  // Find transition point: where derivative exceeds 2× median
-  const threshold = 2 * baselineSlope;
+  // Find transition point: where derivative exceeds MSE_TRANSITION_MULTIPLIER × median
+  const threshold = MSE_TRANSITION_MULTIPLIER * baselineSlope;
   let transitionIdx: number | null = null;
   let transitionSlope: number | null = null;
   
